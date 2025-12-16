@@ -1,9 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HeroSlider from "@/components/react/HeroSlider";
-import ExperienceGallery from "@/components/react/ExperienceGallery";
 import EditorialIntro from "@/components/astro/EditorialIntro.astro";
-import ImageTextBlock from "@/components/astro/ImageTextBlock.astro";
+import ActivitiesSection from "@/components/astro/ActivitiesSection.astro";
 import SignatureBlock from "@/components/astro/SignatureBlock.astro";
 import CTA from "@/components/astro/CTA.astro";
 
@@ -61,24 +60,7 @@ const structuredData = {
 
   <EditorialIntro id="maison" />
 
-  <ImageTextBlock
-    title="Suites ouvertes sur la canopée"
-    text="Murs en chaux, draps de lin, voilages qui laissent entrer l'aube et ventilations silencieuses. Chaque suite dispose d'un patio privé pour lire, respirer, étirer le temps. Les matières sont brutes, la domotique invisible, l'ombre vient des arbres."
-    image="/images/gallery-3.webp"
-    id="suites"
-  />
-
-  <ImageTextBlock
-    title="Piscines lentes et terrasses d'argile"
-    text="L'eau circule entre bassins chauffés et zones fraîches, les terrasses en terre cuite gardent la chaleur du soleil couchant. On s'y retrouve après la plage, on y reste pour dîner. Quelques tables, des lampes en rotin, des playlists choisies avec soin."
-    image="/images/gallery-5.webp"
-    reverse
-    id="piscines"
-  />
-
-  <section class="py-14 sm:py-16 lg:py-20">
-    <ExperienceGallery id="galerie" client:idle />
-  </section>
+  <ActivitiesSection id="activities" />
 
   <SignatureBlock />
   <CTA id="contact" />
