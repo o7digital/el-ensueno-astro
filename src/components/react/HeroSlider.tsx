@@ -44,7 +44,7 @@ const SLIDE_DURATION = 6500;
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Suites", href: "#suites" },
-  { label: "Gallery", href: "#gallery" },
+  { label: "Activities", href: "#activities" },
   { label: "Contact", href: "#contact" },
 ];
 

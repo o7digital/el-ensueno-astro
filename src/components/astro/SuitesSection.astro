@@ -1,0 +1,81 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props as Props;
+
+const suites = [
+  {
+    title: "Garden Suite",
+    image: "/images/suites/garden-suite/garden-1.jpg",
+    description: "Immerse yourself in nature with our Garden Suite, featuring a private terrace and lush tropical views.",
+    size: "45 m²",
+    guests: "2 guests",
+  },
+  {
+    title: "Junior Suite Señorita Surena",
+    image: "/images/suites/junior-suite-senerata-surena/surena-1.jpg",
+    description: "Elegant and spacious junior suite with modern amenities and stunning ocean glimpses.",
+    size: "38 m²",
+    guests: "2 guests",
+  },
+  {
+    title: "Junior Suite Señorita Sonrisa",
+    image: "/images/suites/junior-suite-senorita-sonrisa/sonrisa-1.jpg",
+    description: "A bright and welcoming suite designed for comfort and relaxation.",
+    size: "40 m²",
+    guests: "2 guests",
+  },
+  {
+    title: "Sra. Tentación",
+    image: "/images/suites/sra-tentacion/tentacion-1.jpg",
+    description: "The ultimate luxury suite with premium finishes and exclusive amenities.",
+    size: "55 m²",
+    guests: "2-3 guests",
+  },
+];
+---
+
+<section id={id} class="py-16 sm:py-20 lg:py-28 bg-sand">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <p class="text-sm uppercase tracking-[0.14em] text-dusk/70 mb-4">Our Suites</p>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-serif text-dusk">Where Comfort Meets Elegance</h2>
+      <p class="mt-4 text-lg text-ink/80 max-w-2xl mx-auto">
+        Each suite is carefully designed to provide an unforgettable stay experience
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {suites.map((suite) => (
+        <a
+          href={`/suites/${suite.title.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '')}`}
+          class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
+        >
+          <div class="aspect-[3/4] relative overflow-hidden">
+            <img
+              src={suite.image}
+              alt={suite.title}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-90"></div>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 text-sand">
+            <h3 class="text-2xl font-serif mb-2">{suite.title}</h3>
+            <div class="flex gap-4 text-sm text-sand/80 mb-3">
+              <span>{suite.size}</span>
+              <span>•</span>
+              <span>{suite.guests}</span>
+            </div>
+            <p class="text-sm text-sand/90 line-clamp-2">{suite.description}</p>
+            <div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-amber-400 group-hover:gap-3 transition-all">
+              View Details
+              <span>→</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
