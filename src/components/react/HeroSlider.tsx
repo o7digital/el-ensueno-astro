@@ -43,9 +43,36 @@ const slides: Slide[] = [
 const SLIDE_DURATION = 6500;
 const navLinks = [
   { label: "Home", href: "#home" },
-  { label: "Suites", href: "#suites" },
+  { label: "Suites", href: "#suites", hasMegamenu: true },
   { label: "Activities", href: "#activities" },
   { label: "Contact", href: "#contact" },
+];
+
+const suites = [
+  {
+    title: "Sra. Tentación",
+    image: "/images/suites/sra-tentacion/exclusive-boutique-villa-hotel-zihuatanejo-ixtapa-mexico-01.jpg",
+    size: "55 m²",
+    guests: "2-3 guests",
+  },
+  {
+    title: "Garden Suite",
+    image: "/images/suites/garden-suite/garden-1.jpg",
+    size: "45 m²",
+    guests: "2 guests",
+  },
+  {
+    title: "Junior Suite Señorita Surena",
+    image: "/images/suites/junior-suite-senerata-surena/junior-suite1.jpg",
+    size: "38 m²",
+    guests: "2 guests",
+  },
+  {
+    title: "Junior Suite Señorita Sonrisa",
+    image: "/images/suites/junior-suite-senorita-sonrisa/suite-1.jpg",
+    size: "40 m²",
+    guests: "2 guests",
+  },
 ];
 
 export default function HeroSlider() {
@@ -54,6 +81,7 @@ export default function HeroSlider() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showSuitesMegamenu, setShowSuitesMegamenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -116,14 +144,54 @@ export default function HeroSlider() {
             />
             <nav className="hidden items-center gap-8 text-sm font-bold lg:flex ml-20">
               {navLinks.map((link) => (
-                <a
+                <div
                   key={link.href}
-                  href={link.href}
-                  className="group relative pb-1 uppercase tracking-wider transition-colors text-ink hover:text-ink/70"
+                  className="relative"
+                  onMouseEnter={() => link.hasMegamenu && setShowSuitesMegamenu(true)}
+                  onMouseLeave={() => link.hasMegamenu && setShowSuitesMegamenu(false)}
                 >
-                  {link.label}
-                  <span className="absolute inset-x-0 -bottom-1 h-[1px] scale-x-0 transition group-hover:scale-x-100 bg-ink/70"></span>
-                </a>
+                  <a
+                    href={link.href}
+                    className="group relative pb-1 uppercase tracking-wider transition-colors text-ink hover:text-ink/70"
+                  >
+                    {link.label}
+                    <span className="absolute inset-x-0 -bottom-1 h-[1px] scale-x-0 transition group-hover:scale-x-100 bg-ink/70"></span>
+                  </a>
+                  
+                  {/* Megamenu pour Suites */}
+                  {link.hasMegamenu && showSuitesMegamenu && (
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-screen max-w-[1600px]">
+                      <div className="bg-white rounded-2xl shadow-2xl p-12 mx-6 border border-dusk/10">
+                        <div className="grid grid-cols-4 gap-8">
+                          {suites.map((suite) => (
+                            <a
+                              key={suite.title}
+                              href={`/suites/${suite.title.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '')}`}
+                              className="group relative overflow-hidden rounded-2xl bg-ink shadow-lg"
+                            >
+                              <div className="aspect-[4/3] relative overflow-hidden">
+                                <img
+                                  src={suite.image}
+                                  alt={suite.title}
+                                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
+                              </div>
+                              <div className="absolute bottom-0 left-0 right-0 p-6 text-sand">
+                                <h3 className="text-xl font-serif mb-2 uppercase">{suite.title}</h3>
+                                <div className="flex gap-3 text-sm text-sand/80">
+                                  <span>{suite.size}</span>
+                                  <span>•</span>
+                                  <span>{suite.guests}</span>
+                                </div>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </nav>
           </div>
