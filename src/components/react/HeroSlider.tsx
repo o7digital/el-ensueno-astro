@@ -52,6 +52,15 @@ export default function HeroSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
@@ -81,9 +90,11 @@ export default function HeroSlider() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Header - Logo et Menu en haut à gauche */}
-      <div className="absolute inset-x-0 top-0 z-20 px-6 py-6 sm:px-10 sm:py-8">
-        <header className="flex items-center justify-between bg-white/95 backdrop-blur-sm px-6 py-4 rounded-lg shadow-sm">
+      {/* Header - Transparent avec effet au scroll comme Zotela */}
+      <div className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-white/95 backdrop-blur-sm shadow-md" : "bg-transparent"
+      }`}>
+        <header className="container mx-auto flex items-center justify-between px-6 py-4 sm:px-10 sm:py-5">
           {/* Logo et Navigation - Alignés à gauche */}
           <div className="flex items-center gap-10">
             <div className="flex items-center gap-3">
@@ -93,19 +104,27 @@ export default function HeroSlider() {
                 className="h-12 w-12 rounded-full object-cover"
               />
               <div className="leading-tight">
-                <p className="text-base uppercase tracking-[0.18em] text-ink font-semibold">Murmullo</p>
-                <p className="text-xs text-ink/70">Casa entre jungle & mer</p>
+                <p className={`text-base uppercase tracking-[0.18em] font-semibold transition-colors ${
+                  scrolled ? "text-ink" : "text-white"
+                }`}>Murmullo</p>
+                <p className={`text-xs transition-colors ${
+                  scrolled ? "text-ink/70" : "text-white/70"
+                }`}>Casa entre jungle & mer</p>
               </div>
             </div>
-            <nav className="hidden items-center gap-8 text-sm font-medium text-ink/85 lg:flex">
+            <nav className="hidden items-center gap-8 text-sm font-medium lg:flex">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="group relative pb-1 transition hover:text-ink uppercase tracking-wider"
+                  className={`group relative pb-1 uppercase tracking-wider transition-colors ${
+                    scrolled ? "text-ink/85 hover:text-ink" : "text-white/85 hover:text-white"
+                  }`}
                 >
                   {link.label}
-                  <span className="absolute inset-x-0 -bottom-1 h-[1px] scale-x-0 bg-ink/70 transition group-hover:scale-x-100"></span>
+                  <span className={`absolute inset-x-0 -bottom-1 h-[1px] scale-x-0 transition group-hover:scale-x-100 ${
+                    scrolled ? "bg-ink/70" : "bg-white/70"
+                  }`}></span>
                 </a>
               ))}
             </nav>
@@ -114,7 +133,11 @@ export default function HeroSlider() {
           {/* Bouton Contact à droite */}
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-ink/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+              scrolled 
+                ? "bg-ink text-white hover:bg-ink/90 focus-visible:outline-ink" 
+                : "bg-white text-ink hover:bg-white/90 focus-visible:outline-white"
+            }`}
           >
             Book Now
           </a>
