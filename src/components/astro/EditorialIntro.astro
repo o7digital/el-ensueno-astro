@@ -1,4 +1,6 @@
 ---
+import AboutSlider from "@/components/react/AboutSlider";
+
 interface Props {
   id?: string;
 }
@@ -7,46 +9,24 @@ const { id } = Astro.props as Props;
 ---
 
 <section id={id} class="section-shell py-16 sm:py-20 lg:py-28">
-  <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+  <div class="grid gap-16 lg:grid-cols-[1fr,1.2fr] lg:gap-20 items-center">
     <!-- Texte à gauche -->
-    <div class="space-y-6">
-      <p class="text-sm uppercase tracking-[0.14em] text-dusk/70">Maison Murmullo</p>
+    <div class="space-y-6 lg:pr-8">
+      <p class="text-sm uppercase tracking-[0.14em] text-dusk/70">About Murmullo</p>
       <h2 class="text-4xl leading-[1.05] sm:text-5xl lg:text-6xl font-serif">
-        Un refuge qui chuchote, entre jungle et mer.
+        A sanctuary that whispers, between jungle and sea.
       </h2>
       <p class="text-lg leading-relaxed text-ink/80">
-        Murmullo est une maison-hôtel cachée entre la jungle et la mer, pensée pour les voyageurs qui cherchent le calme
-        sans renoncer à la beauté. Chaque suite ouvre sur une lumière douce, des matières minérales et des gestes discrets
-        du service.
+        Murmullo is a hidden boutique hotel nestled between the jungle and the sea, designed for travelers seeking tranquility without compromising beauty. Each suite opens onto soft light, mineral textures, and discreet service.
       </p>
       <p class="text-lg leading-relaxed text-ink/80">
-        On se réveille avec le souffle de l'océan, on déjeune dans un patio parfumé, on s'abandonne à la
-        piscine quand le soleil ralentit. Ici, tout murmure : un rythme lent, une cuisine attentive, des soirées éclairées
-        à la bougie. Rien de spectaculaire, seulement la sensation d'être attendu.
+        Wake up to the ocean's breath, dine on a fragrant patio, surrender to the pool as the sun slows down. Here, everything whispers: a slow rhythm, attentive cuisine, candlelit evenings. Nothing spectacular, just the feeling of being awaited.
       </p>
     </div>
 
-    <!-- Images à droite -->
-    <div class="grid gap-6 grid-cols-2">
-      <div class="space-y-6">
-        <img 
-          src="/images/hero/sous-hero/el-murmullo1.jpg" 
-          alt="Murmullo interior" 
-          class="w-full h-64 object-cover rounded-lg shadow-md"
-        />
-        <img 
-          src="/images/hero/sous-hero/el-murmullo2.jpg" 
-          alt="Murmullo details" 
-          class="w-full h-80 object-cover rounded-lg shadow-md"
-        />
-      </div>
-      <div class="pt-12">
-        <img 
-          src="/images/hero/sous-hero/el-murmullo3.jpg" 
-          alt="Murmullo architecture" 
-          class="w-full h-96 object-cover rounded-lg shadow-md"
-        />
-      </div>
+    <!-- Slider à droite -->
+    <div>
+      <AboutSlider client:visible />
     </div>
   </div>
 
@@ -54,18 +34,18 @@ const { id } = Astro.props as Props;
   <div class="mt-16 grid gap-6 sm:grid-cols-3">
     <div class="rounded-2xl bg-mist/60 p-8 shadow-soft hover:shadow-md transition-shadow">
       <p class="text-sm uppercase tracking-[0.12em] text-dusk/70">Suites</p>
-      <p class="mt-3 text-2xl font-semibold text-dusk">10 suites avec patios privés</p>
-      <p class="mt-3 text-sm leading-relaxed text-ink/70">Literie en lin, ventilation naturelle, silence garanti.</p>
+      <p class="mt-3 text-2xl font-semibold text-dusk">10 suites with private patios</p>
+      <p class="mt-3 text-sm leading-relaxed text-ink/70">Linen bedding, natural ventilation, guaranteed silence.</p>
     </div>
     <div class="rounded-2xl bg-mist/60 p-8 shadow-soft hover:shadow-md transition-shadow">
       <p class="text-sm uppercase tracking-[0.12em] text-dusk/70">Cuisine</p>
-      <p class="mt-3 text-2xl font-semibold text-dusk">Table solaire</p>
-      <p class="mt-3 text-sm leading-relaxed text-ink/70">Menu du jour, produits locaux, vins légers servis en jardin.</p>
+      <p class="mt-3 text-2xl font-semibold text-dusk">Solar table</p>
+      <p class="mt-3 text-sm leading-relaxed text-ink/70">Daily menu, local products, light wines served in the garden.</p>
     </div>
     <div class="rounded-2xl bg-mist/60 p-8 shadow-soft hover:shadow-md transition-shadow">
-      <p class="text-sm uppercase tracking-[0.12em] text-dusk/70">Bien-être</p>
-      <p class="mt-3 text-2xl font-semibold text-dusk">Rituels d'eau</p>
-      <p class="mt-3 text-sm leading-relaxed text-ink/70">Piscine chauffée, bain vapeur d'agrumes, massages en plein air.</p>
+      <p class="text-sm uppercase tracking-[0.12em] text-dusk/70">Wellness</p>
+      <p class="mt-3 text-2xl font-semibold text-dusk">Water rituals</p>
+      <p class="mt-3 text-sm leading-relaxed text-ink/70">Heated pool, citrus steam bath, open-air massages.</p>
     </div>
   </div>
 </section>
