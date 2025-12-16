@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import Footer from "@/components/astro/Footer.astro";
 
 interface Props {
   title: string;
@@ -60,5 +61,6 @@ const canonical = Astro.site
     <main id="contenu" class="relative isolate overflow-hidden">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
