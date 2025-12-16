@@ -9,22 +9,70 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    src: "/images/hero-1.webp",
-    title: "Murmullo, maison-hôtel en équilibre entre jungle et mer.",
-    caption: "Suites calmes, lumière lente, service discret pour ceux qui voyagent pour ressentir.",
-    alt: "Piscine immobile entourée de végétation tropicale et de pierre claire.",
+    src: "/images/hero/el-murmullo0.jpg",
+    title: "Luxury Living In Every Detail",
+    caption: "Experience unmatched comfort with our exclusive luxurious stays",
+    alt: "Murmullo luxury hotel view",
   },
   {
-    src: "/images/hero-2.webp",
-    title: "Lumière du matin, draps frais, horizon dégagé.",
-    caption: "Chaque chambre ouvre sur la brise saline et la douceur des matériaux naturels.",
-    alt: "Suite minimaliste avec fenêtres ouvertes sur la canopée.",
+    src: "/images/hero/el-murmullo1.jpg",
+    title: "The Essence Of Hospitality",
+    caption: "Immerse yourself in the finest hospitality, with special deals on our luxury suites",
+    alt: "Murmullo hotel architecture",
   },
   {
-    src: "/images/hero-3.webp",
-    title: "La nuit tombe, les voix se font murmure.",
-    caption: "Les bougies, l'eau tiède, le bruissement des feuilles signent la fin de journée.",
-    alt: "Salon tamisé avec bougies et fauteuils en lin.",
+    src: "/images/hero/el-murmullo2.jpg",
+    title: "Rooted In Timeless Traditions",
+    caption: "Limited-time offers on premium rooms and suites",
+    alt: "Murmullo hotel interior",
+  },
+  {
+    src: "/images/hero/el-murmullo3.jpg",
+    title: "Exceptional Care Awaiting",
+    caption: "Book now and immerse yourself in the finest hospitality",
+    alt: "Murmullo hotel experience",
+  },
+  {
+    src: "/images/hero/el-murmullo4.jpg",
+    title: "The Heart Of Hospitality",
+    caption: "Experience unmatched comfort with our exclusive stays",
+    alt: "Murmullo hotel luxury",
+  },
+  {
+    src: "/images/hero/el-murmullo5.jpg",
+    title: "Luxury Living In Every Detail",
+    caption: "Discover the perfect blend of luxury and comfort",
+    alt: "Murmullo hotel view",
+  },
+  {
+    src: "/images/hero/el-murmullo6.jpg",
+    title: "The Essence Of Hospitality",
+    caption: "Your haven for relaxation and rejuvenation",
+    alt: "Murmullo hotel relaxation",
+  },
+  {
+    src: "/images/hero/el-murmullo7.jpg",
+    title: "Rooted In Timeless Traditions",
+    caption: "Experience the finest luxury hospitality",
+    alt: "Murmullo hotel tradition",
+  },
+  {
+    src: "/images/hero/el-murmullo8.jpg",
+    title: "Exceptional Care Awaiting",
+    caption: "Limited-time offers on premium rooms",
+    alt: "Murmullo hotel rooms",
+  },
+  {
+    src: "/images/hero/el-murmullo9.jpg",
+    title: "The Heart Of Hospitality",
+    caption: "Immerse yourself in luxury and comfort",
+    alt: "Murmullo hotel hospitality",
+  },
+  {
+    src: "/images/hero/el-murmullo10.jpg",
+    title: "Luxury Living In Every Detail",
+    caption: "Book now for exclusive deals on luxury suites",
+    alt: "Murmullo hotel luxury suites",
   },
 ];
 
