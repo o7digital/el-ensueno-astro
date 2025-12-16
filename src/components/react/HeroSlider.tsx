@@ -65,42 +65,49 @@ export default function HeroSlider() {
 
   return (
     <div
-      className="relative h-full w-full overflow-hidden rounded-b-[28px] bg-ink/80 text-sand"
+      className="relative h-full w-full overflow-hidden bg-ink/80 text-sand"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
+      {/* Header - Logo et Menu en haut à gauche */}
       <div className="absolute inset-x-0 top-0 z-20 px-6 py-6 sm:px-10 sm:py-8">
-        <header className="flex items-center justify-between rounded-full bg-black/35 px-5 py-3 backdrop-blur-md ring-1 ring-white/10">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sand text-ink font-semibold tracking-[0.14em]">
-              M
+        <header className="flex items-center justify-between">
+          {/* Logo et Navigation - Alignés à gauche */}
+          <div className="flex items-center gap-10">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-ink font-semibold tracking-[0.14em] text-lg">
+                M
+              </div>
+              <div className="leading-tight">
+                <p className="text-base uppercase tracking-[0.18em] text-sand font-semibold">Murmullo</p>
+                <p className="text-xs text-sand/70">Casa entre jungle & mer</p>
+              </div>
             </div>
-            <div className="leading-tight">
-              <p className="text-sm uppercase tracking-[0.18em] text-sand/80">Murmullo</p>
-              <p className="text-xs text-sand/70">Casa entre jungle & mer</p>
-            </div>
+            <nav className="hidden items-center gap-8 text-sm font-medium text-sand/85 lg:flex">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="group relative pb-1 transition hover:text-sand uppercase tracking-wider"
+                >
+                  {link.label}
+                  <span className="absolute inset-x-0 -bottom-1 h-[1px] scale-x-0 bg-sand/70 transition group-hover:scale-x-100"></span>
+                </a>
+              ))}
+            </nav>
           </div>
-          <nav className="hidden items-center gap-6 text-sm font-medium text-sand/85 md:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="group relative pb-1 transition hover:text-sand"
-              >
-                {link.label}
-                <span className="absolute inset-x-0 -bottom-1 h-[1px] scale-x-0 bg-sand/70 transition group-hover:scale-x-100"></span>
-              </a>
-            ))}
-          </nav>
+          
+          {/* Bouton Contact à droite */}
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-sand px-4 py-2 text-sm font-semibold text-ink shadow-soft transition hover:-translate-y-0.5 hover:bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand"
+            className="inline-flex items-center gap-2 rounded-full bg-sand px-5 py-2.5 text-sm font-semibold text-ink shadow-soft transition hover:-translate-y-0.5 hover:bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand"
           >
             Réserver
           </a>
         </header>
       </div>
 
+      {/* Images du slider */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
           <picture
@@ -119,39 +126,36 @@ export default function HeroSlider() {
             />
           </picture>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-ink/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
       </div>
 
-      <div className="relative z-10 flex h-full flex-col justify-center px-6 py-16 sm:px-10 lg:px-16">
-        <div className="max-w-3xl space-y-6">
-          <div className="flex items-center gap-3 text-sm uppercase tracking-[0.18em] text-sand/80">
-            <span className="h-px w-10 bg-sand/40" aria-hidden="true" />
-            Riviera Maya — Mexico
-          </div>
-          <h2 className="text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">{slides[activeIndex].title}</h2>
-          <p className="max-w-2xl text-base sm:text-lg text-sand/85">{slides[activeIndex].caption}</p>
-          <div className="flex flex-wrap items-center gap-4">
+      {/* Texte du slider - En bas à gauche comme Zotela */}
+      <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 sm:px-10 sm:pb-24 lg:px-16 lg:pb-28">
+        <div className="max-w-4xl space-y-4">
+          <h1 className="text-5xl leading-[1.1] sm:text-6xl lg:text-7xl xl:text-8xl font-display font-medium">
+            {slides[activeIndex].title}
+          </h1>
+          <p className="max-w-xl text-base sm:text-lg text-sand/90 font-light leading-relaxed">
+            {slides[activeIndex].caption}
+          </p>
+          <div className="pt-4 flex flex-wrap items-center gap-4">
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-sand px-5 py-3 text-base font-semibold text-ink shadow-soft transition hover:-translate-y-0.5 hover:bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand"
+              className="inline-flex items-center gap-2 rounded-none border border-sand/30 bg-transparent px-6 py-3 text-sm font-medium text-sand uppercase tracking-wider transition hover:bg-sand hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand"
             >
-              Réserver votre séjour
-            </a>
-            <a
-              href="#galerie"
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-base font-semibold text-sand ring-1 ring-white/30 transition hover:-translate-y-0.5 hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand"
-            >
-              Découvrir la maison
+              View Rooms
             </a>
           </div>
         </div>
-        <div className="mt-10 flex items-center gap-3">
+        
+        {/* Navigation dots en bas */}
+        <div className="mt-8 flex items-center gap-2">
           {slides.map((slide, index) => (
             <button
               key={slide.src}
               onClick={() => handleSelect(index)}
-              className={`h-2.5 w-2.5 rounded-full transition-all ${
-                index === activeIndex ? "bg-sand w-10" : "bg-sand/50 w-2.5"
+              className={`h-1.5 rounded-full transition-all ${
+                index === activeIndex ? "bg-sand w-12" : "bg-sand/40 w-1.5"
               }`}
               aria-label={`Voir le visuel ${index + 1}`}
             />
