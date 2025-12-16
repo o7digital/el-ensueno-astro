@@ -1,0 +1,18 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props as Props;
+---
+
+<section id={id} class="section-shell py-16 sm:py-20">
+  <div class="overflow-hidden rounded-[28px] bg-dusk px-8 py-12 text-sand shadow-soft sm:px-12 lg:px-16 lg:py-14">
+    <p class="text-sm uppercase tracking-[0.14em] text-sand/70">Manifeste</p>
+    <blockquote class="mt-6 text-3xl leading-tight sm:text-4xl">
+      Nous croyons au pouvoir du silence, au temps offert sans agenda et à la lumière qui se déplace lentement sur les
+      murs. Murmullo n'est pas un hôtel de passage mais une maison à habiter, un lieu où l'on respire autrement.
+    </blockquote>
+    <p class="mt-6 text-base text-sand/80">— L'équipe Murmullo</p>
+  </div>
+</section>

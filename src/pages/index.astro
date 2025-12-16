@@ -1,16 +1,85 @@
 ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HeroSlider from "@/components/react/HeroSlider";
+import ExperienceGallery from "@/components/react/ExperienceGallery";
+import EditorialIntro from "@/components/astro/EditorialIntro.astro";
+import ImageTextBlock from "@/components/astro/ImageTextBlock.astro";
+import SignatureBlock from "@/components/astro/SignatureBlock.astro";
+import CTA from "@/components/astro/CTA.astro";
 
+const title = "Murmullo Casa • Maison-hôtel entre jungle et mer";
+const description =
+  "Maison-hôtel intimiste sur la Riviera Maya : suites baignées de lumière, piscines lentes, cuisine solaire et hospitalité discrète.";
+const ogImage = "/images/hero-1.webp";
+const preloadImages = ["/images/hero-1.webp", "/images/hero-2.webp", "/images/hero-3.webp"];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  name: "Murmullo Casa",
+  url: "https://murmullo.studio",
+  description,
+  telephone: "+52 984 000 2024",
+  image: [
+    "https://murmullo.studio/images/hero-1.webp",
+    "https://murmullo.studio/images/hero-2.webp",
+    "https://murmullo.studio/images/gallery-1.webp",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Carretera Tulum-Boca Paila KM 7",
+    addressLocality: "Tulum",
+    addressRegion: "Quintana Roo",
+    postalCode: "77780",
+    addressCountry: "MX",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 20.121,
+    longitude: -87.461,
+  },
+  amenityFeature: [
+    { "@type": "LocationFeatureSpecification", name: "Piscine chauffée", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Restauration sur place", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Bien-être et massages", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Wi-Fi haute vitesse", value: true },
+  ],
+  sameAs: ["https://www.instagram.com", "https://www.pinterest.com"],
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  preloadImages={preloadImages}
+  structuredData={structuredData}
+>
+  <section class="relative h-screen">
+    <HeroSlider client:visible />
+  </section>
+
+  <EditorialIntro id="maison" />
+
+  <ImageTextBlock
+    title="Suites ouvertes sur la canopée"
+    text="Murs en chaux, draps de lin, voilages qui laissent entrer l'aube et ventilations silencieuses. Chaque suite dispose d'un patio privé pour lire, respirer, étirer le temps. Les matières sont brutes, la domotique invisible, l'ombre vient des arbres."
+    image="/images/gallery-3.webp"
+    id="suites"
+  />
+
+  <ImageTextBlock
+    title="Piscines lentes et terrasses d'argile"
+    text="L'eau circule entre bassins chauffés et zones fraîches, les terrasses en terre cuite gardent la chaleur du soleil couchant. On s'y retrouve après la plage, on y reste pour dîner. Quelques tables, des lampes en rotin, des playlists choisies avec soin."
+    image="/images/gallery-5.webp"
+    reverse
+    id="piscines"
+  />
+
+  <section class="py-14 sm:py-16 lg:py-20">
+    <ExperienceGallery id="galerie" client:idle />
+  </section>
+
+  <SignatureBlock />
+  <CTA id="contact" />
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  preloadImages?: string[];
+  structuredData?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  ogImage = "/images/hero-1.webp",
+  preloadImages = [],
+  structuredData,
+} = Astro.props as Props;
+
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0f1411" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {preloadImages.map((src) => (
+      <link rel="preload" as="image" href={src} />
+    ))}
+    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {structuredData && (
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+    )}
+  </head>
+  <body class="min-h-screen bg-sand text-ink">
+    <a
+      class="absolute left-4 top-4 z-50 rounded-full bg-ink px-4 py-2 text-sm font-medium text-sand transition hover:bg-dusk focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+      href="#contenu"
+    >
+      Passer au contenu
+    </a>
+    <main id="contenu" class="relative isolate overflow-hidden">
+      <slot />
+    </main>
+  </body>
+</html>

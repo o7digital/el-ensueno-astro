@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+@layer base {
+  body {
+    @apply bg-sand text-ink font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-dusk tracking-tight;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  .section-shell {
+    @apply max-w-6xl mx-auto px-6 sm:px-10;
+  }
+
+  .fade-border {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(12, 17, 14, 0.12) 50%, rgba(0, 0, 0, 0) 100%);
+  }
+}

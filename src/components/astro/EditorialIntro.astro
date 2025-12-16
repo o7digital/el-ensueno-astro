@@ -1,0 +1,40 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props as Props;
+---
+
+<section id={id} class="section-shell py-16 sm:py-20 lg:py-24">
+  <div class="max-w-5xl space-y-6">
+    <p class="text-sm uppercase tracking-[0.14em] text-dusk/70">Maison Murmullo</p>
+    <h1 class="text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+      Un refuge qui chuchote, entre jungle et mer.
+    </h1>
+    <p class="text-lg leading-relaxed text-ink/80">
+      Murmullo est une maison-hôtel cachée entre la jungle et la mer, pensée pour les voyageurs qui cherchent le calme
+      sans renoncer à la beauté. Chaque suite ouvre sur une lumière douce, des matières minérales et des gestes discrets
+      du service. On se réveille avec le souffle de l'océan, on déjeune dans un patio parfumé, on s'abandonne à la
+      piscine quand le soleil ralentit. Ici, tout murmure : un rythme lent, une cuisine attentive, des soirées éclairées
+      à la bougie. Rien de spectaculaire, seulement la sensation d'être attendu.
+    </p>
+  </div>
+  <div class="mt-12 grid gap-6 sm:grid-cols-3">
+    <div class="rounded-2xl bg-mist/60 p-6 shadow-soft">
+      <p class="text-sm uppercase tracking-[0.12em] text-dusk/70">Suites</p>
+      <p class="mt-2 text-2xl font-semibold text-dusk">10 suites avec patios privés</p>
+      <p class="mt-2 text-sm text-ink/70">Literie en lin, ventilation naturelle, silence garanti.</p>
+    </div>
+    <div class="rounded-2xl bg-mist/60 p-6 shadow-soft">
+      <p class="text-sm uppercase tracking-[0.12em] text-dusk/70">Cuisine</p>
+      <p class="mt-2 text-2xl font-semibold text-dusk">Table solaire</p>
+      <p class="mt-2 text-sm text-ink/70">Menu du jour, produits locaux, vins légers servis en jardin.</p>
+    </div>
+    <div class="rounded-2xl bg-mist/60 p-6 shadow-soft">
+      <p class="text-sm uppercase tracking-[0.12em] text-dusk/70">Bien-être</p>
+      <p class="mt-2 text-2xl font-semibold text-dusk">Rituels d'eau</p>
+      <p class="mt-2 text-sm text-ink/70">Piscine chauffée, bain vapeur d'agrumes, massages en plein air.</p>
+    </div>
+  </div>
+</section>
