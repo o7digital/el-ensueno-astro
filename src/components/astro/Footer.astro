@@ -8,13 +8,15 @@ const { id } = Astro.props as Props;
 
 <footer id={id} class="bg-sand py-12 border-t border-dusk/10">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-      <!-- El Murmullo Links avec logo -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <!-- Logo -->
+      <div class="flex justify-center md:justify-start">
+        <img src="/logo/logo.jpg" alt="Murmullo" class="w-48 h-48 object-contain" />
+      </div>
+
+      <!-- El Murmullo Links -->
       <div>
-        <div class="flex items-center gap-4 mb-4">
-          <img src="/logo/logo.jpg" alt="Murmullo" class="w-16 h-16 object-contain" />
-          <h3 class="text-lg font-semibold text-dusk">El Murmullo</h3>
-        </div>
+        <h3 class="text-lg font-semibold text-dusk mb-4">El Murmullo</h3>
         <ul class="space-y-2">
           <li><a href="/" class="text-ink/70 hover:text-dusk transition">Home</a></li>
           <li><a href="#suites" class="text-ink/70 hover:text-dusk transition">Suites</a></li>
