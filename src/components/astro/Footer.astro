@@ -6,12 +6,12 @@ interface Props {
 const { id } = Astro.props as Props;
 ---
 
-<footer id={id} class="bg-sand py-16 border-t border-dusk/10">
+<footer id={id} class="bg-sand py-12 border-t border-dusk/10">
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
       <!-- Logo centré en haut sur mobile, colonne 1 sur desktop -->
       <div class="flex justify-center md:justify-start">
-        <div class="w-48 h-48 flex items-center justify-center">
+        <div class="w-72 h-72 flex items-center justify-center">
           <img src="/logo/logo.jpg" alt="Murmullo" class="w-full h-full object-contain" />
         </div>
       </div>
@@ -82,16 +82,6 @@ const { id } = Astro.props as Props;
             →
           </button>
         </form>
-      </div>
-    </div>
-
-    <!-- Copyright -->
-    <div class="mt-12 pt-8 border-t border-dusk/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink/60">
-      <p>Designed by O7 DIGITAL</p>
-      <div class="flex gap-6">
-        <a href="/license" class="hover:text-dusk transition">License</a>
-        <a href="/changelog" class="hover:text-dusk transition">Changelog</a>
-        <a href="/style-guide" class="hover:text-dusk transition">Style Guide</a>
       </div>
     </div>
   </div>
