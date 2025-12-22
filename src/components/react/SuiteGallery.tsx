@@ -37,7 +37,7 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
     }
     
     setSelectedImage(images[newIndex]);
-    setZoom(1);
+    setZoom(2.5);
     setPosition({ x: 0, y: 0 });
   };
 
