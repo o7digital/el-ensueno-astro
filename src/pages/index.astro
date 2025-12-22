@@ -2,8 +2,8 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HeroSlider from "@/components/react/HeroSlider";
 import EditorialIntro from "@/components/astro/EditorialIntro.astro";
-import EmbracedBySeaSection from "@/components/astro/EmbracedBySeaSection.astro";
-import FusionCuisineSection from "@/components/astro/FusionCuisineSection.astro";
+import EmbracedBySeaSlider from "@/components/react/EmbracedBySeaSlider";
+import FusionCuisineSlider from "@/components/react/FusionCuisineSlider";
 import ActivitiesSection from "@/components/astro/ActivitiesSection.astro";
 
 const title = "Murmullo Casa • Maison-hôtel entre jungle et mer";
@@ -60,9 +60,9 @@ const structuredData = {
 
   <EditorialIntro id="maison" />
 
-  <EmbracedBySeaSection />
+  <EmbracedBySeaSlider client:visible />
 
-  <FusionCuisineSection />
+  <FusionCuisineSlider client:visible />
 
   <ActivitiesSection id="activities" />
 </BaseLayout>
