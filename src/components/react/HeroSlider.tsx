@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { slugify } from "@/utils/slugify";
 
 type Slide = {
   src: string;
@@ -168,7 +169,7 @@ export default function HeroSlider() {
                           {suites.map((suite) => (
                             <a
                               key={suite.title}
-                              href={`/suites/${suite.title.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '')}`}
+                              href={`/suites/${slugify(suite.title)}`}
                               className="group relative overflow-hidden rounded-2xl bg-ink shadow-lg"
                             >
                               <div className="aspect-[4/3] relative overflow-hidden">

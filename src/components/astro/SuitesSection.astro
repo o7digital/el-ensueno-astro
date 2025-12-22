@@ -1,4 +1,6 @@
 ---
+import { slugify } from "@/utils/slugify";
+
 interface Props {
   id?: string;
 }
@@ -50,7 +52,7 @@ const suites = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {suites.map((suite) => (
         <a
-          href={`/suites/${suite.title.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '')}`}
+          href={`/suites/${slugify(suite.title)}`}
           class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
         >
           <div class="aspect-[3/4] relative overflow-hidden">
@@ -62,7 +64,9 @@ const suites = [
             <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-90"></div>
           </div>
           <div class="absolute bottom-0 left-0 right-0 p-6">
-            <h3 class="text-2xl font-serif mb-2 text-white">{suite.title}</h3>
+            <div class="h-14 mb-2 flex items-end">
+              <h3 class="text-lg font-serif text-white line-clamp-2">{suite.title}</h3>
+            </div>
             <div class="flex gap-4 text-sm text-white/90 mb-3">
               <span>{suite.size}</span>
               <span>•</span>
