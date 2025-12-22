@@ -8,13 +8,21 @@ interface SuiteGalleryProps {
 export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [mainImage, setMainImage] = useState(images[0]);
+  const [zoom, setZoom] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   const openLightbox = (image: string) => {
     setSelectedImage(image);
+    setZoom(2.5);
+    setPosition({ x: 0, y: 0 });
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
   };
 
   const navigateLightbox = (direction: "prev" | "next") => {
@@ -29,6 +37,51 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
     }
     
     setSelectedImage(images[newIndex]);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleZoomIn = () => {
+    setZoom(prev => Math.min(prev + 0.5, 4));
+  };
+
+  const handleZoomOut = () => {
+    setZoom(prev => {
+      const newZoom = Math.max(prev - 0.5, 1);
+      if (newZoom === 1) {
+        setPosition({ x: 0, y: 0 });
+      }
+      return newZoom;
+    });
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      handleZoomIn();
+    } else {
+      handleZoomOut();
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom > 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoom > 1) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
   };
 
   return (
@@ -45,17 +98,62 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
       {/* Lightbox */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center overflow-hidden"
           onClick={closeLightbox}
+          onWheel={handleWheel}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
         >
-          {/* Bouton fermer */}
+          {/* Bouton fermer avec croix visible */}
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white text-4xl hover:text-gray-300 z-10"
+            className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold z-20 transition-all"
             aria-label="Close"
           >
-            ×
+            ✕
           </button>
+
+          {/* Barre de zoom verticale à droite */}
+          <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full p-3 z-10">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomIn();
+              }}
+              className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
+              aria-label="Zoom in"
+            >
+              +
+            </button>
+            
+            <div className="flex flex-col items-center gap-2">
+              <div className="h-32 w-1 bg-white/20 rounded-full relative">
+                <div 
+                  className="absolute bottom-0 w-full bg-white rounded-full transition-all"
+                  style={{ height: `${((zoom - 1) / 3) * 100}%` }}
+                />
+                <div 
+                  className="absolute w-4 h-4 bg-white rounded-full -left-1.5 transition-all"
+                  style={{ bottom: `calc(${((zoom - 1) / 3) * 100}% - 8px)` }}
+                />
+              </div>
+              <div className="text-white text-xs font-semibold bg-white/20 px-2 py-1 rounded">
+                {Math.round(zoom * 100)}%
+              </div>
+            </div>
+            
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomOut();
+              }}
+              className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
+              aria-label="Zoom out"
+            >
+              −
+            </button>
+          </div>
 
           {/* Bouton précédent */}
           <button
@@ -63,19 +161,30 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
               e.stopPropagation();
               navigateLightbox("prev");
             }}
-            className="absolute left-6 text-white text-4xl hover:text-gray-300 z-10"
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10"
             aria-label="Previous"
           >
             ‹
           </button>
 
           {/* Image */}
-          <img
-            src={selectedImage}
-            alt={title}
-            className="max-w-[90%] max-h-[90%] object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <div 
+            className="flex items-center justify-center w-full h-full"
+            style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
+          >
+            <img
+              src={selectedImage}
+              alt={title}
+              className="max-w-[90%] max-h-[90%] object-contain transition-transform"
+              style={{
+                transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                transformOrigin: 'center center'
+              }}
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={handleMouseDown}
+              draggable={false}
+            />
+          </div>
 
           {/* Bouton suivant */}
           <button
@@ -83,7 +192,7 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
               e.stopPropagation();
               navigateLightbox("next");
             }}
-            className="absolute right-6 text-white text-4xl hover:text-gray-300 z-10"
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10"
             aria-label="Next"
           >
             ›
