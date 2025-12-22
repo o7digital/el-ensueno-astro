@@ -1,0 +1,248 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const title = "Contact | El Murmullo";
+const description =
+  "Plan your stay at El Murmullo. Reach our reservations team for suites, rates, and bespoke experiences.";
+const heroImage = "/images/hero/el-murmullo4.webp";
+const preloadImages = [heroImage, "/images/hero/contact/el-murmullo-mapa.webp"];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={heroImage}
+  preloadImages={preloadImages}
+>
+  <div class="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+    <header class="container mx-auto flex items-center justify-between px-6 py-4 sm:px-10 sm:py-5">
+      <a href="/">
+        <img
+          src="/logo/logo.webp"
+          alt="Murmullo Logo"
+          class="h-12 w-auto object-contain"
+        />
+      </a>
+      <nav class="hidden items-center gap-8 text-sm font-bold lg:flex">
+        <a href="/#home" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Home</a>
+        <a href="/#suites" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Suites</a>
+        <a href="/#embraced-sea" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Embraced by the Sea</a>
+        <a href="/#fusion-cuisine" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Fusion Cuisine</a>
+        <a href="/contact" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Contact</a>
+      </nav>
+      <a
+        href="#contact-form"
+        class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-white text-ink hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white border border-ink/20"
+      >
+        Book Now
+      </a>
+    </header>
+  </div>
+
+  <section class="pt-32 pb-16 bg-sand">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10">
+      <div class="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] items-center">
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-ink/50">Contact</p>
+          <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-serif text-dusk">
+            Lets craft your stay at El Murmullo
+          </h1>
+          <p class="mt-4 text-base sm:text-lg text-ink/70 max-w-xl">
+            From suite selection to personalized rituals, our team helps you create a slow,
+            sunlit escape. Reach us by phone, email, or request a callback.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.2em] text-ink/60">
+            <span class="rounded-full border border-ink/10 bg-white px-4 py-2">Reservations: +52 755 555 7000</span>
+            <span class="rounded-full border border-ink/10 bg-white px-4 py-2">WhatsApp: +52 55 2564 1838</span>
+            <span class="rounded-full border border-ink/10 bg-white px-4 py-2">Front Desk 24/7</span>
+          </div>
+        </div>
+        <div class="relative overflow-hidden rounded-[28px] shadow-soft">
+          <img
+            src={heroImage}
+            alt="El Murmullo sea view"
+            class="h-full w-full object-cover"
+            loading="eager"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8 sm:p-10 text-white">
+            <p class="text-xs uppercase tracking-[0.3em] text-white/70">Zihuatanejo, Mexico</p>
+            <h2 class="mt-3 text-2xl sm:text-3xl font-serif">A quiet address by the bay</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-mist/40">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr,1.1fr]">
+        <div class="space-y-6">
+          <div class="rounded-[24px] border border-ink/10 bg-white p-6 sm:p-8 shadow-soft">
+            <p class="text-xs uppercase tracking-[0.3em] text-ink/50">Get in touch</p>
+            <h3 class="mt-3 text-2xl sm:text-3xl font-serif text-dusk">Reservations team</h3>
+            <p class="mt-4 text-sm text-ink/70">
+              Camino Escenico at Playa La Ropa S / N, La Ropa Beach, 40880 Zihuatanejo,
+              Guerrero, Mexico
+            </p>
+            <div class="mt-6 space-y-3 text-sm text-ink/70">
+              <p>
+                Reservations: <a href="tel:+527555557000" class="text-ink hover:text-dusk">+52 755 555 7000</a>
+              </p>
+              <p>
+                WhatsApp: <a href="tel:+525525641838" class="text-ink hover:text-dusk">+52 55 2564 1838</a>
+              </p>
+              <p>
+                Front Desk: <a href="tel:+527555557030" class="text-ink hover:text-dusk">+52 755 555 7030</a>
+              </p>
+              <p>
+                Email: <a href="mailto:sales.reservations@lacasaquecanta.com" class="text-ink hover:text-dusk">
+                  sales.reservations@lacasaquecanta.com
+                </a>
+              </p>
+            </div>
+            <div class="mt-6 rounded-2xl border border-ink/10 bg-sand px-4 py-4 text-xs uppercase tracking-[0.2em] text-ink/60">
+              9 AM to 6 PM (CST) - Closed Sundays
+            </div>
+          </div>
+
+          <div class="rounded-[24px] border border-ink/10 bg-white p-6 sm:p-8 shadow-soft">
+            <p class="text-xs uppercase tracking-[0.3em] text-ink/50">Directions</p>
+            <h3 class="mt-3 text-2xl sm:text-3xl font-serif text-dusk">Find us easily</h3>
+            <p class="mt-4 text-sm text-ink/70">
+              Tucked along the scenic coastline, El Murmullo is a short ride from Zihuatanejo International Airport.
+            </p>
+            <a
+              href="https://maps.app.goo.gl/nstPh6dN5pwWDLXB7"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-5 inline-flex items-center gap-2 rounded-full border border-ink/20 px-4 py-2 text-xs uppercase tracking-[0.2em] text-ink transition hover:border-ink"
+            >
+              Open in Maps
+            </a>
+          </div>
+        </div>
+
+        <div id="contact-form" class="rounded-[28px] border border-ink/10 bg-white p-6 sm:p-10 shadow-soft">
+          <p class="text-xs uppercase tracking-[0.3em] text-ink/50">Reservation request</p>
+          <h3 class="mt-3 text-2xl sm:text-3xl font-serif text-dusk">Tell us about your stay</h3>
+          <p class="mt-3 text-sm text-ink/70">
+            Share your preferred dates and details. We will reply within one business day.
+          </p>
+
+          <form class="mt-8 space-y-4">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <input
+                class="w-full rounded-xl border border-ink/10 bg-sand/70 px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ink/40 focus:outline-none"
+                type="text"
+                name="name"
+                placeholder="Name*"
+                required
+              />
+              <input
+                class="w-full rounded-xl border border-ink/10 bg-sand/70 px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ink/40 focus:outline-none"
+                type="email"
+                name="email"
+                placeholder="Email*"
+                required
+              />
+            </div>
+            <input
+              class="w-full rounded-xl border border-ink/10 bg-sand/70 px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ink/40 focus:outline-none"
+              type="tel"
+              name="phone"
+              placeholder="Phone*"
+              required
+            />
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="space-y-2">
+                <label class="text-xs uppercase tracking-[0.2em] text-ink/60" for="checkin">Check in</label>
+                <input
+                  id="checkin"
+                  class="w-full rounded-xl border border-ink/10 bg-sand/70 px-4 py-3 text-sm text-ink focus:border-ink/40 focus:outline-none"
+                  type="date"
+                  name="checkin"
+                />
+              </div>
+              <div class="space-y-2">
+                <label class="text-xs uppercase tracking-[0.2em] text-ink/60" for="checkout">Check out</label>
+                <input
+                  id="checkout"
+                  class="w-full rounded-xl border border-ink/10 bg-sand/70 px-4 py-3 text-sm text-ink focus:border-ink/40 focus:outline-none"
+                  type="date"
+                  name="checkout"
+                />
+              </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <input
+                class="w-full rounded-xl border border-ink/10 bg-sand/70 px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ink/40 focus:outline-none"
+                type="number"
+                min="1"
+                name="adults"
+                placeholder="Adults"
+              />
+              <input
+                class="w-full rounded-xl border border-ink/10 bg-sand/70 px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ink/40 focus:outline-none"
+                type="number"
+                min="0"
+                name="children"
+                placeholder="Children"
+              />
+            </div>
+            <textarea
+              class="w-full rounded-xl border border-ink/10 bg-sand/70 px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-ink/40 focus:outline-none"
+              rows="4"
+              name="message"
+              placeholder="Add a note"
+            ></textarea>
+            <label class="flex items-start gap-3 text-xs text-ink/60">
+              <input type="checkbox" required class="mt-1 h-4 w-4 rounded border-ink/30 text-ink" />
+              I accept the terms and conditions for this booking request.
+            </label>
+            <button
+              type="submit"
+              class="w-full rounded-full bg-ink px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-sand transition hover:-translate-y-0.5"
+            >
+              Submit Request
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-ink text-sand">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] items-center">
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-sand/60">On the map</p>
+          <h2 class="mt-3 text-3xl sm:text-4xl font-serif text-sand">
+            A coastal hideaway in Zihuatanejo
+          </h2>
+          <p class="mt-4 text-base text-sand/70 max-w-lg">
+            Arrive by private transfer or taxi. Our team can arrange airport pickup
+            and tailored itineraries upon request.
+          </p>
+        </div>
+        <div class="relative overflow-hidden rounded-[24px] border border-white/10">
+          <img
+            src="/images/hero/contact/el-murmullo-mapa.webp"
+            alt="Map to El Murmullo"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          <a
+            href="https://maps.app.goo.gl/nstPh6dN5pwWDLXB7"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="absolute bottom-6 left-6 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs uppercase tracking-[0.2em] text-ink shadow-soft"
+          >
+            Get Directions
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

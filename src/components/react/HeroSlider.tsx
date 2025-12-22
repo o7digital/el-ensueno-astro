@@ -47,7 +47,7 @@ const navLinks = [
   { label: "Suites", href: "#suites", hasMegamenu: true },
   { label: "Embraced by the Sea", href: "#embraced-sea" },
   { label: "Fusion Cuisine", href: "#fusion-cuisine" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const suites = [
@@ -202,7 +202,7 @@ export default function HeroSlider() {
           
           {/* Bouton Contact à droite */}
           <a
-            href="#contact"
+            href="/contact#contact-form"
             className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-white text-ink hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Book Now
@@ -243,7 +243,7 @@ export default function HeroSlider() {
           </p>
           <div className="pt-4 flex flex-wrap items-center gap-4">
             <a
-              href="#contact"
+              href="/#suites"
               className="inline-flex items-center gap-2 rounded-none border border-white/30 bg-transparent px-6 py-3 text-sm font-medium text-white uppercase tracking-wider transition hover:bg-white hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               View Rooms
