@@ -225,8 +225,8 @@ export default function HeroSlider() {
         {/* Menu Mobile */}
         <div className={`lg:hidden fixed inset-0 bg-white z-40 transition-transform duration-300 ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`} style={{ top: '72px' }}>
-          <nav className="flex flex-col p-6 gap-1">
+        }`} style={{ top: '68px' }}>
+          <nav className="flex flex-col p-6 gap-1 bg-white h-full overflow-y-auto">
             {navLinks.map((link) => (
               <div key={link.href} className="border-b border-ink/10">
                 <a
