@@ -34,6 +34,12 @@ const canonical = Astro.site
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Sora:wght@300;400;500;600&family=WindSong:wght@400&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
     {preloadImages.map((src) => (
       <link rel="preload" as="image" href={src} />
     ))}

@@ -76,7 +76,7 @@ const description = suite.description;
         {/* Photo à gauche - 67% de l'espace */}
         <div class="lg:sticky lg:top-24 self-start">
           <SuiteGallery 
-            client:load
+            client:visible
             images={[suite.heroImage, ...suite.details.map(d => d.image), ...suite.gallery]}
             title={suite.title}
           />
