@@ -84,6 +84,7 @@ export default function HeroSlider() {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showSuitesMegamenu, setShowSuitesMegamenu] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,13 +138,25 @@ export default function HeroSlider() {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}>
         <header className="container mx-auto flex items-center justify-between px-6 py-4 sm:px-10 sm:py-5">
-          {/* Logo et Navigation - Alignés à gauche */}
-          <div className="flex items-center gap-10">
+          {/* Menu Hamburger Mobile - À gauche */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center z-60"
+            aria-label="Menu"
+          >
+            <span className={`w-6 h-0.5 bg-ink transition-all ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`w-6 h-0.5 bg-ink transition-all ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`w-6 h-0.5 bg-ink transition-all ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          </button>
+
+          {/* Logo - Centre sur mobile, gauche sur desktop */}
+          <div className="flex items-center gap-10 lg:flex-1">
             <img 
               src="/logo/logo.webp" 
               alt="Murmullo Logo" 
-              className="h-12 w-auto object-contain"
+              className="h-10 sm:h-12 w-auto object-contain"
             />
+            {/* Navigation Desktop */}
             <nav className="hidden items-center gap-8 text-sm font-bold lg:flex ml-20">
               {navLinks.map((link) => (
                 <div
@@ -200,14 +213,56 @@ export default function HeroSlider() {
             </nav>
           </div>
           
-          {/* Bouton Contact à droite */}
+          {/* Bouton Book Now - Toujours visible à droite */}
           <a
             href="https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C"
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-white text-ink hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex items-center gap-2 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-ink text-white hover:bg-ink/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink whitespace-nowrap"
           >
             Book Now
           </a>
         </header>
+
+        {/* Menu Mobile */}
+        <div className={`lg:hidden fixed inset-0 bg-white z-40 transition-transform duration-300 ${
+          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`} style={{ top: '72px' }}>
+          <nav className="flex flex-col p-6 gap-1">
+            {navLinks.map((link) => (
+              <div key={link.href} className="border-b border-ink/10">
+                <a
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-4 text-lg font-semibold uppercase tracking-wider text-ink hover:text-ink/70 transition-colors"
+                >
+                  {link.label}
+                </a>
+                {/* Sous-menu Suites pour mobile */}
+                {link.hasMegamenu && (
+                  <div className="pl-4 pb-4 space-y-3">
+                    {suites.map((suite) => (
+                      <a
+                        key={suite.title}
+                        href={`/suites/${slugify(suite.title)}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-sand/30 transition-colors"
+                      >
+                        <img
+                          src={suite.image}
+                          alt={suite.title}
+                          className="w-16 h-12 object-cover rounded"
+                        />
+                        <div>
+                          <div className="text-sm font-medium text-ink">{suite.title}</div>
+                          <div className="text-xs text-ink/60">{suite.size} • {suite.guests}</div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
       </div>
 
       {/* Images du slider */}

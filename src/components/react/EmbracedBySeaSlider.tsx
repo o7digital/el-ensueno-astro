@@ -99,23 +99,23 @@ export default function EmbracedBySeaSlider() {
 
   return (
     <>
-      <section id="embraced-sea" className="relative py-6 md:py-8 bg-sand">
-        <div className="container mx-auto px-6">
+      <section id="embraced-sea" className="relative py-12 md:py-16 lg:py-20 bg-sand">
+        <div className="container mx-auto px-4 sm:px-6">
           {/* En-tête de section */}
-          <div className="max-w-4xl mx-auto text-center mb-8">
-            <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink/60 block mb-4">
+          <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
+            <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink/60 block mb-3 md:mb-4">
               Surrounded by the sea
             </span>
-            <h2 className="font-editorial text-4xl md:text-5xl lg:text-6xl text-ink mb-6">
+            <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink mb-4 md:mb-6">
               Embraced by the Sea
             </h2>
-            <p className="text-lg text-ink/70 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-ink/70 max-w-2xl mx-auto px-4">
               Experience the luxury of this Mexican home with Mediterranean nautical touches, ideal setting to admire the peaceful climate and panoramic views of the picturesque bay of Zihuatanejo.
             </p>
           </div>
 
           {/* Grille de contenu inspirée de Zotela */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {seaFeatures.map((feature, index) => (
               <div
                 key={index}
@@ -137,11 +137,11 @@ export default function EmbracedBySeaSlider() {
                 </div>
 
                 {/* Titre et description */}
-                <div className="text-center">
-                  <h3 className="font-editorial text-2xl text-ink mb-2">
+                <div className="text-center px-2">
+                  <h3 className="font-editorial text-xl sm:text-2xl text-ink mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-ink/70 text-sm leading-relaxed">
+                  <p className="text-ink/70 text-sm sm:text-base leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -150,8 +150,8 @@ export default function EmbracedBySeaSlider() {
           </div>
 
           {/* Texte additionnel */}
-          <div className="mt-8 max-w-3xl mx-auto text-center">
-            <p className="text-ink/70 leading-relaxed">
+          <div className="mt-8 md:mt-12 max-w-3xl mx-auto text-center px-4">
+            <p className="text-sm sm:text-base text-ink/70 leading-relaxed">
               Our privileged location offers direct access to pristine beaches and stunning ocean vistas. 
               Wake up to the sound of waves and enjoy breathtaking sunsets from your private terrace.
             </p>
@@ -172,14 +172,14 @@ export default function EmbracedBySeaSlider() {
           {/* Bouton fermer avec croix visible */}
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold z-20 transition-all"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/30 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold z-20 transition-all"
             aria-label="Close"
           >
             ✕
           </button>
 
-          {/* Barre de zoom verticale à droite */}
-          <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full p-3 z-10">
+          {/* Barre de zoom verticale à droite - cachée sur mobile */}
+          <div className="hidden sm:flex absolute right-4 md:right-6 top-1/2 -translate-y-1/2 flex-col items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full p-3 z-10">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -225,7 +225,7 @@ export default function EmbracedBySeaSlider() {
               e.stopPropagation();
               navigateLightbox("prev");
             }}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10"
+            className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl hover:text-gray-300 z-10 bg-white/10 hover:bg-white/20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
             aria-label="Previous"
           >
             ‹
@@ -256,18 +256,18 @@ export default function EmbracedBySeaSlider() {
               e.stopPropagation();
               navigateLightbox("next");
             }}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10"
+            className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl hover:text-gray-300 z-10 bg-white/10 hover:bg-white/20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
             aria-label="Next"
           >
             ›
           </button>
 
           {/* Miniatures en bas */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
             {seaFeatures.map((feature, index) => (
               <div
                 key={index}
-                className={`w-16 h-16 cursor-pointer rounded overflow-hidden ${
+                className={`w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded overflow-hidden ${
                   lightboxImage === feature.url ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
                 }`}
                 onClick={(e) => {

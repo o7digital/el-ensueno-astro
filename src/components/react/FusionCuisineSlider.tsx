@@ -16,29 +16,29 @@ export default function FusionCuisineSlider() {
   const allDishes = [...dishes, ...dishes];
 
   return (
-    <section id="fusion-cuisine" className="relative py-20 md:py-32 bg-white overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section id="fusion-cuisine" className="relative py-12 md:py-20 lg:py-32 bg-white overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Grid Layout: Texte à gauche, Slider à droite */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Texte à gauche */}
-          <div className="max-w-xl -ml-24 lg:-ml-40">
-            <span className="font-editorial text-5xl md:text-6xl lg:text-7xl italic text-ink/20 block mb-2">
+          <div className="max-w-xl px-4 sm:px-0 lg:-ml-40">
+            <span className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl italic text-ink/20 block mb-2">
               Fusion Cuisine
             </span>
-            <h2 className="font-editorial text-4xl md:text-5xl lg:text-6xl text-ink mb-6 leading-tight">
+            <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink mb-4 md:mb-6 leading-tight">
               Harvest Inspired
               <br />
               Fine Dining
             </h2>
-            <p className="text-base text-ink/70 leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-ink/70 leading-relaxed mb-6 md:mb-8">
               Savor the fresh regional dishes prepared instantly with high quality products illustrating our Mexican gastronomy with European influences.
             </p>
           </div>
 
           {/* Slider horizontal à droite */}
-          <div className="relative -ml-56 -mr-64 lg:-ml-80 lg:-mr-96 overflow-hidden">
+          <div className="relative -mx-4 sm:-mx-6 md:-ml-12 md:-mr-16 lg:-ml-80 lg:-mr-96 overflow-hidden">
             <div
-              className="flex gap-6"
+              className="flex gap-3 sm:gap-4 md:gap-6"
               style={{ animation: isPaused ? 'none' : 'scroll 10s linear infinite' }}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
@@ -46,9 +46,9 @@ export default function FusionCuisineSlider() {
               {allDishes.map((dish, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[340px] md:w-[400px] lg:w-[450px] group"
+                  className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[450px] group"
                 >
-                  <div className="relative h-[500px] md:h-[600px] overflow-hidden rounded-lg shadow-xl">
+                  <div className="relative h-[380px] sm:h-[450px] md:h-[550px] lg:h-[600px] overflow-hidden rounded-lg shadow-xl">
                     <img
                       src={dish.image}
                       alt={dish.name}
@@ -57,8 +57,8 @@ export default function FusionCuisineSlider() {
                       loading="lazy"
                     />
                     {/* Overlay avec titre */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent flex items-end p-8">
-                      <h3 className="font-editorial text-3xl md:text-4xl text-sand">
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent flex items-end p-4 sm:p-6 md:p-8">
+                      <h3 className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-sand">
                         {dish.name}
                       </h3>
                     </div>
