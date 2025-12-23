@@ -12,8 +12,8 @@ const dishes = [
 export default function FusionCuisineSlider() {
   const [isPaused, setIsPaused] = useState(false);
 
-  // Duplicate dishes EXACTLY 2 times for seamless infinite loop
-  const allDishes = [...dishes, ...dishes];
+  // Duplicate dishes 3 times for seamless infinite loop
+  const allDishes = [...dishes, ...dishes, ...dishes];
 
   return (
     <section id="fusion-cuisine" className="relative py-12 md:py-20 lg:py-32 bg-white overflow-hidden">
@@ -76,7 +76,7 @@ export default function FusionCuisineSlider() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(-33.333%);
           }
         }
       `}</style>
