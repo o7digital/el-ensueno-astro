@@ -111,6 +111,7 @@ export default function Header() {
                 >
                   <a
                     href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="group relative pb-1 uppercase tracking-wider transition-colors text-ink hover:text-ink/70"
                   >
                     {link.label}
