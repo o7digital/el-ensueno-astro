@@ -15,6 +15,9 @@ export function getStaticPaths() {
 const { suite } = Astro.props as { suite: (typeof suites)[number] };
 const title = `${suite.title} | El Murmullo`;
 const description = suite.description;
+const defaultBookingUrl =
+  "https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C";
+const bookingUrl = suite.bookingUrl ?? defaultBookingUrl;
 ---
 
 <BaseLayout
@@ -40,7 +43,7 @@ const description = suite.description;
         <a href="/contact" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Contact</a>
       </nav>
       <a
-        href="https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C"
+        href={bookingUrl}
         class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-white text-ink hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white border border-ink/20"
       >
         Book Now
@@ -112,7 +115,7 @@ const description = suite.description;
           {/* Bouton Book Now */}
           <div class="mt-12">
             <a
-              href="https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C"
+              href={bookingUrl}
               class="inline-block bg-[#0096C7] hover:bg-[#0096C7]/90 text-white font-semibold px-12 py-4 rounded transition-all"
             >
               BOOK NOW
