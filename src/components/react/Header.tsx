@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { slugify } from "@/utils/slugify";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Suites", href: "#suites", hasMegamenu: true },
-  { label: "Embraced by the Sea", href: "#embraced-sea" },
-  { label: "Fusion Cuisine", href: "#fusion-cuisine" },
+  { label: "Home", href: "/#home" },
+  { label: "Suites", href: "/#suites", hasMegamenu: true },
+  { label: "Embraced by the Sea", href: "/#embraced-sea" },
+  { label: "Fusion Cuisine", href: "/#fusion-cuisine" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -43,19 +43,25 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
+    const hashIndex = href.indexOf("#");
+    if (hashIndex === -1) {
       setMobileMenuOpen(false);
-      
-      setTimeout(() => {
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 300);
-    } else {
-      setMobileMenuOpen(false);
+      return;
     }
+
+    const hash = href.slice(hashIndex);
+    const element = document.querySelector(hash);
+    if (!element) {
+      setMobileMenuOpen(false);
+      return;
+    }
+
+    e.preventDefault();
+    setMobileMenuOpen(false);
+
+    setTimeout(() => {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
   };
 
   useEffect(() => {
