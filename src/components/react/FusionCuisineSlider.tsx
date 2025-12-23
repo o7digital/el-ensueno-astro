@@ -19,7 +19,7 @@ export default function FusionCuisineSlider() {
     
     let animationId: number;
     let currentPosition = 0;
-    const speed = 0.5; // pixels per frame
+    const speed = 2; // pixels per frame
     
     const animate = () => {
       if (!scrollContainer) return;
