@@ -86,8 +86,8 @@ const { id } = Astro.props as Props;
             </div>
           </div>
         </div>
-        <div class="mt-auto w-full flex items-center justify-between text-base sm:text-[17px] text-ink/70">
-          <div class="text-left">
+        <div class="mt-auto w-full text-base sm:text-[17px] text-ink/70">
+          <div class="mb-4">
             <p>© La Casa que Canta. All CopyRights.</p>
             <a
               href="https://www.o7digital.com/index-digital-agency"
@@ -98,16 +98,18 @@ const { id } = Astro.props as Props;
               Made by o7 Digital
             </a>
           </div>
-          <button
-            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-            class="flex items-center gap-2 px-4 py-2 rounded-full bg-dusk text-sand hover:bg-ink transition-colors"
-            aria-label="Back to top"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-            </svg>
-            <span class="hidden sm:inline">Back to Top</span>
-          </button>
+          <div class="flex justify-end">
+            <button
+              onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+              class="flex items-center gap-2 px-4 py-2 rounded-full bg-dusk text-sand hover:bg-ink transition-colors"
+              aria-label="Back to top"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+              </svg>
+              <span class="hidden sm:inline">Back to Top</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
