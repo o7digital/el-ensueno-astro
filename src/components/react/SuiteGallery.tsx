@@ -82,6 +82,17 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
     }
   }, [selectedImage]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedImage) {
+        closeLightbox();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage]);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     if (zoom > 1) {
       setIsDragging(true);
@@ -125,9 +136,13 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
         >
           {/* Bouton fermer avec croix visible */}
           <button
-            onClick={closeLightbox}
-            className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold z-20 transition-all"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeLightbox();
+            }}
+            className="absolute top-4 right-4 bg-white hover:bg-gray-200 text-black w-14 h-14 rounded-full flex items-center justify-center text-3xl font-bold z-20 transition-all shadow-lg hover:scale-110"
             aria-label="Close"
+            title="Fermer (Échap)"
           >
             ✕
           </button>

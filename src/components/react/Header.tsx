@@ -4,34 +4,34 @@ import { slugify } from "@/utils/slugify";
 const navLinks = [
   { label: "Home", href: "/#home" },
   { label: "Suites", href: "/#suites", hasMegamenu: true },
-  { label: "Embraced by the Sea", href: "/#embraced-sea" },
-  { label: "Fusion Cuisine", href: "/#fusion-cuisine" },
+  { label: "Palapa Beach Lounge", href: "/#palapa" },
+  { label: "Meal Plans", href: "/#meal-plans" },
   { label: "Contact", href: "/contact" },
 ];
 
 const suites = [
   {
-    title: "Sra. Tentación",
-    image: "/images/suites/sra-tentacion/exclusive-boutique-villa-hotel-zihuatanejo-ixtapa-mexico-01.webp",
-    size: "55 m²",
-    guests: "2-3 guests",
-  },
-  {
-    title: "Garden Suite",
-    image: "/images/suites/garden-suite/garden-1.webp",
-    size: "45 m²",
+    title: "Inspiración",
+    image: "/images/suites/Insp/1.jpg",
+    size: "285 m² / 3,045 ft²",
     guests: "2 guests",
   },
   {
-    title: "Junior Suite Señorita Surena",
-    image: "/images/suites/junior-suite-senerata-surena/junior-suite1.webp",
-    size: "38 m²",
+    title: "Romance",
+    image: "/images/suites/roma/1.jpg",
+    size: "165 m² / 1,775 ft²",
     guests: "2 guests",
   },
   {
-    title: "Junior Suite Señorita Sonrisa",
-    image: "/images/suites/junior-suite-senorita-sonrisa/suite-1.webp",
-    size: "40 m²",
+    title: "Crepúsculo",
+    image: "/images/suites/Crep/1.jpg",
+    size: "125 m² / 1,350 ft²",
+    guests: "2 guests",
+  },
+  {
+    title: "Talismán",
+    image: "/images/suites/Talis/1.jpg",
+    size: "110 m² / 1,170 ft²",
     guests: "2 guests",
   },
 ];
@@ -102,8 +102,8 @@ export default function Header() {
           {/* Logo - Centre sur mobile, gauche sur desktop */}
           <div className="flex items-center gap-10 lg:flex-1">
             <img 
-              src="/logo/logo.webp" 
-              alt="Murmullo Logo" 
+              src="/images/logo.jpg" 
+              alt="El Ensueño Logo" 
               className="h-10 sm:h-12 w-auto object-contain"
             />
             {/* Navigation Desktop */}

@@ -145,6 +145,17 @@ export default function ExperienceGallery({ id }: Props) {
     }
   }, [lightboxImage]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && lightboxImage) {
+        closeLightbox();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxImage]);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     if (zoom > 1) {
       setIsDragging(true);
@@ -245,9 +256,13 @@ export default function ExperienceGallery({ id }: Props) {
       >
         {/* Bouton fermer avec croix visible */}
         <button
-          onClick={closeLightbox}
-          className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/30 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold z-20 transition-all"
+          onClick={(e) => {
+            e.stopPropagation();
+            closeLightbox();
+          }}
+          className="absolute top-4 right-4 bg-white hover:bg-gray-200 text-black w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold z-20 transition-all shadow-lg hover:scale-110"
           aria-label="Close"
+          title="Fermer (Échap)"
         >
           ✕
         </button>
