@@ -149,48 +149,48 @@ export default function Header() {
             Book Now
           </a>
         </header>
+      </div>
 
-        {/* Menu Mobile */}
-        <div className={`lg:hidden fixed inset-0 bg-white z-40 transition-transform duration-300 ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`} style={{ top: '68px' }}>
-          <nav className="flex flex-col p-6 gap-1 bg-white h-full overflow-y-auto">
-            {navLinks.map((link) => (
-              <div key={link.href} className="border-b border-ink/10">
-                <a
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-4 text-lg font-semibold uppercase tracking-wider text-ink hover:text-ink/70 transition-colors"
-                >
-                  {link.label}
-                </a>
-                {/* Sous-menu Suites pour mobile */}
-                {link.hasMegamenu && (
-                  <div className="pl-4 pb-4 space-y-3">
-                    {suites.map((suite) => (
-                      <a
-                        key={suite.title}
-                        href={`/suites/${slugify(suite.title)}`}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-sand/30 transition-colors"
-                      >
-                        <img
-                          src={suite.image}
-                          alt={suite.title}
-                          className="w-16 h-12 object-cover rounded"
-                        />
-                        <div>
-                          <div className="text-sm font-medium text-ink">{suite.title}</div>
-                          <div className="text-xs text-ink/60">{suite.size} • {suite.guests}</div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        </div>
+      {/* Menu Mobile - En dehors du header */}
+      <div className={`lg:hidden fixed inset-0 bg-white z-[100] transition-transform duration-300 ${
+        mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      }`} style={{ top: '72px' }}>
+        <nav className="flex flex-col p-6 gap-1 bg-white h-full overflow-y-auto">
+          {navLinks.map((link) => (
+            <div key={link.href} className="border-b border-ink/10">
+              <a
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-4 text-lg font-semibold uppercase tracking-wider text-ink hover:text-ink/70 transition-colors"
+              >
+                {link.label}
+              </a>
+              {/* Sous-menu Suites pour mobile */}
+              {link.hasMegamenu && (
+                <div className="pl-4 pb-4 space-y-3">
+                  {suites.map((suite) => (
+                    <a
+                      key={suite.title}
+                      href={`/suites/${slugify(suite.title)}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-sand/30 transition-colors"
+                    >
+                      <img
+                        src={suite.image}
+                        alt={suite.title}
+                        className="w-16 h-12 object-cover rounded"
+                      />
+                      <div>
+                        <div className="text-sm font-medium text-ink">{suite.title}</div>
+                        <div className="text-xs text-ink/60">{suite.size} • {suite.guests}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
       </div>
     </>
   );
