@@ -1,6 +1,7 @@
 ---
 import "@/styles/global.css";
 import Footer from "@/components/astro/Footer.astro";
+import Header from "@/components/react/Header";
 
 interface Props {
   title: string;
@@ -64,6 +65,7 @@ const canonical = Astro.site
     )}
   </head>
   <body class="min-h-screen bg-sand text-ink">
+    <Header client:load />
     <main id="contenu" class="relative isolate overflow-hidden">
       <slot />
     </main>
