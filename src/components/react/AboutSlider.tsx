@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 
 const images = [
-  "/images/hero/sous-hero/el-murmullo1.webp",
-  "/images/hero/sous-hero/el-murmullo2.webp",
-  "/images/hero/sous-hero/el-murmullo3.webp",
-  "/images/hero/sous-hero/el-murmullo4.webp",
-  "/images/hero/sous-hero/el-murmullo5.webp",
-  "/images/hero/sous-hero/el-murmullo6.webp",
-  "/images/hero/sous-hero/el-murmullo7.webp",
-  "/images/hero/sous-hero/el-murmullo8.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-1.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-2.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-3.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-4.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-5.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-6.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-7.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-8.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-9.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-10.jpg",
 ];
 
 const SLIDE_DURATION = 5000;
