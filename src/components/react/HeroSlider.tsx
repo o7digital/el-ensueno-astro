@@ -10,34 +10,40 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    src: "/images/home/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-1.jpg",
+    src: "/images/hero/1.jpg",
     title: "Haven Of Peace On The Beach",
     caption: "Stunning oceanfront boutique villa at La Ropa beach",
     alt: "El Ensueño luxury beach villa",
   },
   {
-    src: "/images/home/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-2.jpg",
+    src: "/images/hero/2.jpg",
     title: "Personalized Meal Plans",
     caption: "Local food prepared by our chef with caring attention",
     alt: "El Ensueño dining experience",
   },
   {
-    src: "/images/home/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-3.jpg",
+    src: "/images/hero/3.jpg",
     title: "Plunge Pool Suites",
     caption: "Take a long siesta in one of our 4 plunge pool suites",
     alt: "El Ensueño suite with plunge pool",
   },
   {
-    src: "/images/home/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-4.jpg",
+    src: "/images/hero/4.jpg",
     title: "Palapa Beach Lounge",
     caption: "Have dinner in the palapa beach lounge",
     alt: "El Ensueño palapa lounge",
   },
   {
-    src: "/images/home/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-5.jpg",
+    src: "/images/hero/5.jpg",
     title: "Infinity Pool Dreams",
     caption: "Day dream in our stunning infinity pool",
     alt: "El Ensueño infinity pool",
+  },
+  {
+    src: "/images/hero/6.jpg",
+    title: "Luxury Experience",
+    caption: "Experience the ultimate beachfront luxury",
+    alt: "El Ensueño beachfront",
   },
 ];
 
