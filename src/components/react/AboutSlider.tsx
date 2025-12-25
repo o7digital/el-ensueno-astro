@@ -147,7 +147,7 @@ export default function AboutSlider() {
             key={src}
             src={src}
             alt={`Murmullo ${index + 1}`}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-1000 ${
               index === activeIndex ? "opacity-100" : "opacity-0"
             }`}
             loading={index === 0 ? "eager" : "lazy"}
