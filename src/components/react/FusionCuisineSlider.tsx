@@ -1,12 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 
 const dishes = [
-  { name: "Mushroom Arancini", image: "/images/cuisines/9.webp" },
-  { name: "Caviar Blinis", image: "/images/cuisines/10.webp" },
-  { name: "Lobster Bisque", image: "/images/cuisines/cuisine5.webp" },
-  { name: "Beef Carpaccio", image: "/images/cuisines/cuisine6.webp" },
-  { name: "Seared Sea Bass", image: "/images/cuisines/cusine2.webp" },
-  { name: "Filet Mignon", image: "/images/cuisines/luxury-hotel-ixtapa-zihuatanejo-mexico-1.webp" },
+  { name: "Local Breakfast", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-1.jpg" },
+  { name: "Fresh Ingredients", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-2.jpg" },
+  { name: "Local Specialties", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-3.jpg" },
+  { name: "Traditional Dishes", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-4.jpg" },
+  { name: "Local Cuisine", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-5.jpg" },
+  { name: "Fresh Seafood", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-6.jpg" },
+  { name: "Sunset Dinner", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-7.jpg" },
+  { name: "Beach Dining", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-8.jpg" },
+  { name: "Mexican Flavors", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-9.jpg" },
+  { name: "Local Desserts", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-10.jpg" },
 ];
 
 export default function FusionCuisineSlider() {
@@ -150,22 +154,22 @@ export default function FusionCuisineSlider() {
 
   return (
     <>
-    <section id="fusion-cuisine" className="relative py-12 md:py-20 lg:py-32 bg-white overflow-hidden">
+    <section id="local-kitchen" className="relative py-12 md:py-20 lg:py-32 bg-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6">
         {/* Grid Layout: Texte à gauche, Slider à droite */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Texte à gauche */}
           <div className="max-w-xl px-4 sm:px-0 lg:-ml-40">
             <span className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl italic text-ink/20 block mb-2">
-              Fusion Cuisine
+              Local Kitchen
             </span>
             <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink mb-4 md:mb-6 leading-tight">
-              Harvest Inspired
+              Traditional Mexican
               <br />
-              Fine Dining
+              Cuisine
             </h2>
             <p className="text-sm sm:text-base text-ink/70 leading-relaxed mb-6 md:mb-8">
-              Savor the fresh regional dishes prepared instantly with high quality products illustrating our Mexican gastronomy with European influences.
+              Begin your day with homemade bread and fresh tropical fruit. Enjoy local specialties and international food cooked with fresh selected ingredients, and savor Mexico's most enticing flavors at sunset.
             </p>
           </div>
 
