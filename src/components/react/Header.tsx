@@ -201,13 +201,13 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
             {/* Language Switcher */}
             <a
               href={getLanguageSwitchUrl()}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold uppercase transition-all hover:text-ink/70 text-ink whitespace-nowrap"
+              className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase transition-all hover:text-ink/70 text-ink whitespace-nowrap"
               aria-label={currentLang === "en" ? "Switch to Spanish" : "Cambiar a Inglés"}
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+              {currentLang === "en" ? "EN" : "ES"}
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-              {currentLang === "en" ? "ES" : "EN"}
             </a>
 
             {/* Bouton Book Now */}
