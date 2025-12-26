@@ -197,7 +197,7 @@ export const suitesEs: Suite[] = [
     view: "Vista al mar",
     rate: "$690",
     bookingUrl:
-      "https://be.synxis.com/?chain=22402&hotel=78821&locale=es-MX&src=24C&filter=HOTEL&Room=TAL",
+      "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=es-MX&productcurrency=USD&room=TAL&rooms=1&src=24C",
     heroImage: "/images/suites/Talis/1.webp",
     highlights: [
       "Ambiente tranquilo de suite con jardín",
