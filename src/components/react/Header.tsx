@@ -10,16 +10,16 @@ const getNavLinks = (lang: string) => {
     return [
       { label: "Inicio", href: "/es#home" },
       { label: "Suites", href: "/es#suites", hasMegamenu: true },
-      { label: "Palapa Beach Lounge", href: "/es#palapa" },
-      { label: "Planes de Comida", href: "/es#meal-plans" },
+      { label: "Palapa Beach Lounge", href: "/es#palapa-beach-lounge" },
+      { label: "Planes de Comida", href: "/es#local-kitchen" },
       { label: "Contacto", href: "/es/contact" },
     ];
   }
   return [
     { label: "Home", href: "/#home" },
     { label: "Suites", href: "/#suites", hasMegamenu: true },
-    { label: "Palapa Beach Lounge", href: "/#palapa" },
-    { label: "Meal Plans", href: "/#meal-plans" },
+    { label: "Palapa Beach Lounge", href: "/#palapa-beach-lounge" },
+    { label: "Meal Plans", href: "/#local-kitchen" },
     { label: "Contact", href: "/contact" },
   ];
 };
