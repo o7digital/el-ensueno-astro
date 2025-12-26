@@ -102,7 +102,7 @@ export default function Header() {
           {/* Logo - Centre sur mobile, gauche sur desktop */}
           <div className="flex items-center gap-10 lg:flex-1">
             <img 
-              src="/images/logo.jpg" 
+              src="/logo/el-ensueno-logo.jpg" 
               alt="El Ensueño Logo" 
               className="h-10 sm:h-12 w-auto object-contain"
             />
