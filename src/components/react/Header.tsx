@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { slugify } from "@/utils/slugify";
 
 interface HeaderProps {
@@ -62,6 +62,8 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
     currentLang === "es"
       ? "https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=es-MX&productcurrency=USD&room=MUR&rooms=1&src=24C"
       : "https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C";
+  const suiteBasePath = currentLang === "es" ? "/es/suites" : "/suites";
+  const closeTimeoutRef = useRef<number | null>(null);
 
   const getLanguageSwitchUrl = () => {
     if (typeof window === "undefined") return "/";
@@ -99,6 +101,32 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 300);
   };
+
+  const openSuitesMenu = () => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setShowSuitesMegamenu(true);
+  };
+
+  const scheduleCloseSuitesMenu = () => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = window.setTimeout(() => {
+      setShowSuitesMegamenu(false);
+      closeTimeoutRef.current = null;
+    }, 200);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        window.clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -148,8 +176,8 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
                 <div
                   key={link.href}
                   className="relative"
-                  onMouseEnter={() => link.hasMegamenu && setShowSuitesMegamenu(true)}
-                  onMouseLeave={() => link.hasMegamenu && setShowSuitesMegamenu(false)}
+                  onMouseEnter={link.hasMegamenu ? openSuitesMenu : undefined}
+                  onMouseLeave={link.hasMegamenu ? scheduleCloseSuitesMenu : undefined}
                 >
                   <a
                     href={link.href}
@@ -162,7 +190,11 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
                   
                   {/* Megamenu pour Suites */}
                   {link.hasMegamenu && showSuitesMegamenu && (
-                    <div className="fixed left-0 right-0 top-[88px] pt-4 flex justify-center">
+                    <div
+                      className="fixed left-0 right-0 top-[88px] pt-4 flex justify-center"
+                      onMouseEnter={openSuitesMenu}
+                      onMouseLeave={scheduleCloseSuitesMenu}
+                    >
                       <div className="bg-white rounded-2xl shadow-2xl p-12 mx-6 border border-dusk/10 max-w-[1200px] w-full">
                         <div className="grid grid-cols-4 gap-8">
                           {suites.map((suite) => {
@@ -177,7 +209,7 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
                             return (
                               <a
                                 key={suite.title}
-                                href={`/suites/${slugify(suite.title)}`}
+                                href={`${suiteBasePath}/${slugify(suite.title)}`}
                                 className="group relative overflow-hidden rounded-2xl bg-ink shadow-lg"
                               >
                                 <div className="aspect-[4/3] relative overflow-hidden">
@@ -264,7 +296,7 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
                     return (
                     <a
                       key={suite.title}
-                      href={`/suites/${slugify(suite.title)}`}
+                      href={`${suiteBasePath}/${slugify(suite.title)}`}
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center gap-3 p-2 rounded-lg hover:bg-sand/30 transition-colors"
                     >
