@@ -12,7 +12,7 @@ export const suitesEs: Suite[] = [
     view: "Vista al mar",
     rate: "$990",
     bookingUrl:
-      "https://be.synxis.com/?chain=22402&hotel=78821&locale=es-MX&src=24C&filter=HOTEL&Room=SNI",
+      "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=SNI&rooms=1&src=24C",
     heroImage: "/images/suites/Insp/1.webp",
     highlights: [
       "Terraza de dos niveles con sala de estar",
