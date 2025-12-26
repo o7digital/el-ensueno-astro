@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const title = "Contacto | El Ensueño";
 const description =
-  "Planifica tu estancia en El Ensueño. Contacta a nuestro equipo de reservaciones para suites, tarifas y experiencias personalizadas.";
+  "Planifica tu estancia en El Ensueño. Comunícate con nuestro equipo de reservaciones para suites, tarifas y experiencias a medida.";
 const heroImage = "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp";
 const mapImage = "/images/hero/contact/el-ensueno-map.webp";
 const preloadImages = [heroImage, mapImage];
@@ -21,7 +21,7 @@ const preloadImages = [heroImage, mapImage];
       <a href="/es">
         <img
           src="/logo/logo.svg"
-          alt="El Ensueño Logo"
+          alt="Logo de El Ensueño"
           class="h-12 w-auto object-contain"
         />
       </a>
@@ -74,7 +74,7 @@ const preloadImages = [heroImage, mapImage];
             </div>
           </div>
           <h1 class="mt-8 text-4xl sm:text-5xl lg:text-6xl font-display text-white leading-tight">
-            Planifica
+            Diseñemos
             <span class="block">tu estancia en</span>
             <span class="block">El Ensueño</span>
           </h1>
@@ -99,25 +99,19 @@ const preloadImages = [heroImage, mapImage];
                 <a href="tel:+527555557000" class="block text-white hover:text-white/80">
                   +52 755 555 7000
                 </a>
-                <a href="tel:+527555554222" class="block text-white hover:text-white/80">
-                  +52 755 555 4222
+                <a href="tel:+525525641838" class="block text-white hover:text-white/80">
+                  +52 55 2564 1838
                 </a>
-                <p class="text-sm text-white/60">
-                  Llamadas sin costo desde USA y Canadá:<br/>
-                  888.523.5050
-                </p>
               </div>
             </div>
             <div class="flex items-start gap-3">
               <svg class="h-6 w-6 text-[#d3a244]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 2.25c-4.97 0-9 4.03-9 9 0 6.75 9 12.75 9 12.75s9-6 9-12.75c0-4.97-4.03-9-9-9z" />
-                <circle cx="12" cy="11.25" r="2.25" />
+                <path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z" />
+                <circle cx="12" cy="10" r="2.5" />
               </svg>
-              <div class="text-white/85">
-                <p>Playa La Ropa S/N</p>
-                <p>Zihuatanejo, Guerrero 40880</p>
-                <p>México</p>
-              </div>
+              <p class="text-white/80 leading-relaxed">
+                Camino Escénico en Playa La Ropa S / N, Playa La Ropa, 40880 Zihuatanejo, Guerrero, México
+              </p>
             </div>
           </div>
         </div>
@@ -125,14 +119,78 @@ const preloadImages = [heroImage, mapImage];
     </div>
   </section>
 
-  <section class="py-0">
-    <div class="w-full h-[480px] sm:h-[600px]">
-      <img
-        src={mapImage}
-        alt="Ubicación de El Ensueño en Playa La Ropa"
-        class="w-full h-full object-cover"
-        loading="lazy"
-      />
+  <section class="bg-white">
+    <div class="flex flex-col lg:flex-row lg:items-stretch">
+      <div class="lg:w-1/2 px-6 sm:px-10 lg:px-16 py-12 lg:py-20">
+        <div class="space-y-10">
+          <div>
+            <h2 class="text-4xl sm:text-5xl font-display text-ink">¿Tienes alguna pregunta?</h2>
+            <p class="mt-4 text-base text-ink/70 max-w-xl">
+              Comparte algunos detalles sobre tu estancia. Te responderemos en un día hábil.
+            </p>
+          </div>
+
+          <form id="contact-form" class="space-y-8">
+            <div class="grid gap-8 sm:grid-cols-2">
+              <input
+                class="w-full border-b border-ink/30 bg-transparent py-4 text-base text-ink placeholder:text-ink/50 focus:border-ink focus:outline-none"
+                type="text"
+                name="name"
+                placeholder="Nombre"
+                required
+              />
+              <input
+                class="w-full border-b border-ink/30 bg-transparent py-4 text-base text-ink placeholder:text-ink/50 focus:border-ink focus:outline-none"
+                type="email"
+                name="email"
+                placeholder="Correo"
+                required
+              />
+            </div>
+            <div class="grid gap-8 sm:grid-cols-2">
+              <input
+                class="w-full border-b border-ink/30 bg-transparent py-4 text-base text-ink placeholder:text-ink/50 focus:border-ink focus:outline-none"
+                type="tel"
+                name="phone"
+                placeholder="Teléfono"
+                required
+              />
+              <input
+                class="w-full border-b border-ink/30 bg-transparent py-4 text-base text-ink placeholder:text-ink/50 focus:border-ink focus:outline-none"
+                type="text"
+                name="subject"
+                placeholder="Asunto"
+                required
+              />
+            </div>
+            <textarea
+              class="w-full border-b border-ink/30 bg-transparent py-4 text-base text-ink placeholder:text-ink/50 focus:border-ink focus:outline-none"
+              rows="6"
+              name="message"
+              placeholder="Mensaje"
+              required
+            ></textarea>
+            <button
+              type="submit"
+              class="w-full sm:w-auto rounded-none bg-ink px-12 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-sand transition hover:-translate-y-0.5"
+            >
+              Enviar
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="lg:w-1/2">
+        <div class="h-[340px] sm:h-[460px] lg:h-full lg:min-h-[680px] bg-sand/60">
+          <img
+            src={mapImage}
+            alt="Mapa de El Ensueño"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
     </div>
   </section>
+
 </BaseLayout>

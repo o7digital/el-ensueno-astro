@@ -1,9 +1,65 @@
 ---
 interface Props {
   id?: string;
+  currentLang?: "en" | "es";
 }
 
-const { id } = Astro.props as Props;
+const { id, currentLang = "en" } = Astro.props as Props;
+const isSpanish = currentLang === "es";
+const basePath = isSpanish ? "/es" : "";
+const links = {
+  home: basePath || "/",
+  suites: `${basePath}#suites`,
+  contact: isSpanish ? "/es/contact" : "/contact",
+  privacy: isSpanish ? "/es/privacy" : "/privacy",
+};
+
+const copy = {
+  en: {
+    navTitle: "El Ensueño",
+    home: "Home",
+    suites: "Suites",
+    contact: "Contact",
+    privacy: "Privacy Notice",
+    getInTouch: "Get In Touch",
+    address:
+      "Camino Escénico at Playa La Ropa S / N, La Ropa Beach, 40880 Zihuatanejo, Guerrero, México",
+    reservations: "Reservations",
+    salesWhatsapp: "Sales & Reservations Whatsapp",
+    frontDesk: "Front Desk",
+    frontDeskHours: "(24 hrs)",
+    businessHours: "Sales & Reservations Business Hours: 9 AM to 6 PM (CST) – Closed on Sundays",
+    dealsTitle: "Get Exclusive Deals!",
+    dealsSubtitle: "Stay updated with exclusive hotel offers",
+    emailPlaceholder: "Email address",
+    subscribe: "Subscribe",
+    rights: "© La Casa que Canta. All CopyRights.",
+    madeBy: "Made by o7 Digital",
+    backToTop: "Back to Top",
+  },
+  es: {
+    navTitle: "El Ensueño",
+    home: "Inicio",
+    suites: "Suites",
+    contact: "Contacto",
+    privacy: "Aviso de Privacidad",
+    getInTouch: "Ponte en contacto",
+    address:
+      "Camino Escénico en Playa La Ropa S / N, Playa La Ropa, 40880 Zihuatanejo, Guerrero, México",
+    reservations: "Reservaciones",
+    salesWhatsapp: "WhatsApp de ventas y reservaciones",
+    frontDesk: "Recepción",
+    frontDeskHours: "(24 h)",
+    businessHours: "Horario de ventas y reservaciones: 9:00 a 18:00 (CST) – Cerrado los domingos",
+    dealsTitle: "¡Recibe ofertas exclusivas!",
+    dealsSubtitle: "Recibe novedades y ofertas exclusivas del hotel",
+    emailPlaceholder: "Correo electrónico",
+    subscribe: "Suscribirse",
+    rights: "© La Casa que Canta. Todos los derechos reservados.",
+    madeBy: "Hecho por o7 Digital",
+    backToTop: "Volver arriba",
+  },
+}[isSpanish ? "es" : "en"];
 ---
 
 <footer id={id} class="bg-sand pt-10 pb-8 border-t border-dusk/10">
@@ -16,56 +72,56 @@ const { id } = Astro.props as Props;
 
       <!-- El Ensueño Links -->
       <div class="md:col-span-2">
-        <h3 class="text-lg font-semibold text-dusk mb-4">El Ensueño</h3>
+        <h3 class="text-lg font-semibold text-dusk mb-4">{copy.navTitle}</h3>
         <ul class="space-y-2">
-          <li><a href="/" class="text-ink/70 hover:text-dusk transition">Home</a></li>
-          <li><a href="#suites" class="text-ink/70 hover:text-dusk transition">Suites</a></li>
-          <li><a href="/contact" class="text-ink/70 hover:text-dusk transition">Contact</a></li>
-          <li><a href="/privacy" class="text-ink/70 hover:text-dusk transition">Privacy Notice</a></li>
+          <li><a href={links.home} class="text-ink/70 hover:text-dusk transition">{copy.home}</a></li>
+          <li><a href={links.suites} class="text-ink/70 hover:text-dusk transition">{copy.suites}</a></li>
+          <li><a href={links.contact} class="text-ink/70 hover:text-dusk transition">{copy.contact}</a></li>
+          <li><a href={links.privacy} class="text-ink/70 hover:text-dusk transition">{copy.privacy}</a></li>
         </ul>
       </div>
 
       <!-- Get In Touch -->
       <div class="md:col-span-3">
-        <h3 class="text-lg font-semibold text-dusk mb-4">Get In Touch</h3>
+        <h3 class="text-lg font-semibold text-dusk mb-4">{copy.getInTouch}</h3>
         <div class="space-y-3 text-ink/70 text-sm">
           <p>
             <a href="https://maps.app.goo.gl/nstPh6dN5pwWDLXB7" target="_blank" class="hover:text-dusk transition">
-              Camino Escénico at Playa La Ropa S / N, La Ropa Beach, 40880 Zihuatanejo, Guerrero, México
+              {copy.address}
             </a>
           </p>
           <p class="pt-2">
-            Reservations: <a href="tel:+527555557000" class="hover:text-dusk transition">+52 755 555 7000</a>
+            {copy.reservations}: <a href="tel:+527555557000" class="hover:text-dusk transition">+52 755 555 7000</a>
           </p>
           <p>
-            Sales & Reservations Whatsapp: <a href="tel:+525525641838" class="hover:text-dusk transition">+52 55 2564 1838</a>
+            {copy.salesWhatsapp}: <a href="tel:+525525641838" class="hover:text-dusk transition">+52 55 2564 1838</a>
           </p>
           <p>
-            Front Desk: <a href="tel:+527555557030" class="hover:text-dusk transition">+52 755 555 7030</a> (24 hrs)
+            {copy.frontDesk}: <a href="tel:+527555557030" class="hover:text-dusk transition">+52 755 555 7030</a> {copy.frontDeskHours}
           </p>
           <p class="pt-2">
             <a href="mailto:sales.reservations@lacasaquecanta.com" class="hover:text-dusk transition">sales.reservations@lacasaquecanta.com</a>
           </p>
-          <p class="text-xs">Sales & Reservations Business Hours: 9 AM to 6 PM (CST) – Closed on Sundays</p>
+          <p class="text-xs">{copy.businessHours}</p>
         </div>
       </div>
 
       <!-- Newsletter -->
       <div class="md:col-span-4 flex flex-col h-full">
         <div class="space-y-4">
-          <h3 class="text-lg font-semibold text-dusk">Get Exclusive Deals!</h3>
-          <p class="text-sm text-ink/70">Stay updated with exclusive hotel offers</p>
+          <h3 class="text-lg font-semibold text-dusk">{copy.dealsTitle}</h3>
+          <p class="text-sm text-ink/70">{copy.dealsSubtitle}</p>
           <div class="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
             <form class="flex flex-1 gap-2">
               <input
                 type="email"
-                placeholder="Email address"
+                placeholder={copy.emailPlaceholder}
                 class="flex-1 px-4 py-2 rounded-full border border-dusk/20 focus:outline-none focus:border-dusk/40 bg-white"
               />
               <button
                 type="submit"
                 class="px-4 py-2 rounded-full bg-dusk text-sand hover:bg-ink transition"
-                aria-label="Subscribe"
+                aria-label={copy.subscribe}
               >
                 →
               </button>
@@ -92,14 +148,14 @@ const { id } = Astro.props as Props;
     <!-- Copyright et Back to Top en dehors de la grille -->
     <div class="mt-8 flex items-center justify-between text-base sm:text-[17px] text-ink/70">
       <div>
-        <p>© La Casa que Canta. All CopyRights.</p>
+        <p>{copy.rights}</p>
         <a
           href="https://www.o7digital.com/index-digital-agency"
           target="_blank"
           rel="noopener noreferrer"
           class="hover:text-dusk transition"
         >
-          Made by o7 Digital
+          {copy.madeBy}
         </a>
       </div>
     </div>
@@ -108,11 +164,11 @@ const { id } = Astro.props as Props;
   <button
     onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
     class="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-4 py-2 rounded-full bg-dusk text-sand hover:bg-ink transition-colors"
-    aria-label="Back to top"
+    aria-label={copy.backToTop}
   >
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
     </svg>
-    <span class="hidden sm:inline">Back to Top</span>
+    <span class="hidden sm:inline">{copy.backToTop}</span>
   </button>
 </footer>

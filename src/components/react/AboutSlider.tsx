@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { ui } from "@/i18n/ui";
 
 const images = [
   "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-1.webp",
@@ -15,7 +16,13 @@ const images = [
 
 const SLIDE_DURATION = 5000;
 
-export default function AboutSlider() {
+interface AboutSliderProps {
+  lang?: "en" | "es";
+}
+
+export default function AboutSlider({ lang = "en" }: AboutSliderProps) {
+  const labels = ui[lang];
+  const slideAlt = lang === "es" ? "Imagen de El Ensueño" : "El Ensueño image";
   const defaultZoom = 2.5;
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -146,7 +153,7 @@ export default function AboutSlider() {
           <img
             key={src}
             src={src}
-            alt={`Murmullo ${index + 1}`}
+            alt={`${slideAlt} ${index + 1}`}
             className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-1000 ${
               index === activeIndex ? "opacity-100" : "opacity-0"
             }`}
@@ -164,7 +171,7 @@ export default function AboutSlider() {
             className={`h-2 rounded-full transition-all ${
               index === activeIndex ? "bg-white w-8" : "bg-white/50 w-2"
             }`}
-            aria-label={`Slide ${index + 1}`}
+            aria-label={`${labels["slider.slideLabel"]} ${index + 1}`}
           />
         ))}
       </div>
@@ -187,8 +194,8 @@ export default function AboutSlider() {
             closeLightbox();
           }}
           className="absolute top-4 right-4 bg-white hover:bg-gray-200 text-black w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold z-20 transition-all shadow-lg hover:scale-110"
-          aria-label="Close"
-          title="Fermer (Échap)"
+          aria-label={labels["lightbox.close"]}
+          title={labels["lightbox.closeTitle"]}
         >
           ✕
         </button>
@@ -201,7 +208,7 @@ export default function AboutSlider() {
               handleZoomIn();
             }}
             className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
-            aria-label="Zoom in"
+            aria-label={labels["lightbox.zoomIn"]}
           >
             +
           </button>
@@ -228,7 +235,7 @@ export default function AboutSlider() {
               handleZoomOut();
             }}
             className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
-            aria-label="Zoom out"
+            aria-label={labels["lightbox.zoomOut"]}
           >
             −
           </button>
@@ -241,7 +248,7 @@ export default function AboutSlider() {
             navigateLightbox("prev");
           }}
           className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl hover:text-gray-300 z-10 bg-white/10 hover:bg-white/20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
-          aria-label="Previous"
+          aria-label={labels["lightbox.previous"]}
         >
           ‹
         </button>
@@ -253,7 +260,7 @@ export default function AboutSlider() {
         >
           <img
             src={lightboxImage}
-            alt="Lightbox"
+            alt={labels["lightbox.imageAlt"]}
             className="max-w-[90%] max-h-[90%] object-contain transition-transform"
             style={{
               transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
@@ -272,7 +279,7 @@ export default function AboutSlider() {
             navigateLightbox("next");
           }}
           className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl hover:text-gray-300 z-10 bg-white/10 hover:bg-white/20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
-          aria-label="Next"
+          aria-label={labels["lightbox.next"]}
         >
           ›
         </button>
@@ -292,7 +299,7 @@ export default function AboutSlider() {
                 setPosition({ x: 0, y: 0 });
               }}
             >
-              <img src={img} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+              <img src={img} alt={`${labels["lightbox.thumbnail"]} ${index + 1}`} className="w-full h-full object-cover" />
             </div>
           ))}
         </div>

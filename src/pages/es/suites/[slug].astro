@@ -1,18 +1,18 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { suites } from "@/data/suites";
+import { suitesEs } from "@/data/suites-es";
 import { slugify } from "@/utils/slugify";
 import SuiteGallery from "@/components/react/SuiteGallery";
 
 
 export function getStaticPaths() {
-  return suites.map((suite) => ({
+  return suitesEs.map((suite) => ({
     params: { slug: slugify(suite.title) },
     props: { suite },
   }));
 }
 
-const { suite } = Astro.props as { suite: (typeof suites)[number] };
+const { suite } = Astro.props as { suite: (typeof suitesEs)[number] };
 const displayTitle = suite.displayTitle ?? suite.title;
 const title = `${displayTitle} | El Ensueño`;
 const description = suite.description;
@@ -33,7 +33,7 @@ const bookingUrl = suite.bookingUrl ?? defaultBookingUrl;
       <a href="/es">
         <img
           src="/logo/logo.webp"
-          alt="El Ensueño Logo"
+          alt="Logo de El Ensueño"
           class="h-12 w-auto object-contain"
         />
       </a>
@@ -84,6 +84,7 @@ const bookingUrl = suite.bookingUrl ?? defaultBookingUrl;
             client:visible
             images={[suite.heroImage, ...suite.details.map(d => d.image), ...suite.gallery]}
             title={displayTitle}
+            lang="es"
           />
         </div>
 
@@ -101,12 +102,12 @@ const bookingUrl = suite.bookingUrl ?? defaultBookingUrl;
 
           {/* Description principale */}
           <p class="text-base text-ink/70 leading-relaxed mb-10">
-            Discover the beautiful panoramic view from any corner of this spacious suite. The elegant décor with Mexican handcrafted furniture enhances the ambiance. Relax on the terrace or refresh in the private pool while enjoying breathtaking ocean vistas.
+            Descubre la hermosa vista panorámica desde cualquier rincón de esta amplia suite. La decoración elegante con mobiliario artesanal mexicano realza el ambiente. Relájate en la terraza o refréscate en la alberca privada mientras disfrutas de impresionantes vistas al océano.
           </p>
           
           {/* Amenities */}
           <div class="mb-10">
-            <h3 class="text-2xl font-serif text-[#4A90C4] mb-6 pb-2 border-b-2 border-[#4A90C4]">Amenities</h3>
+            <h3 class="text-2xl font-serif text-[#4A90C4] mb-6 pb-2 border-b-2 border-[#4A90C4]">Amenidades</h3>
             <ul class="space-y-3">
               {suite.amenities.map((amenity) => (
                 <li class="text-sm text-ink/80">{amenity}</li>
@@ -120,7 +121,7 @@ const bookingUrl = suite.bookingUrl ?? defaultBookingUrl;
               href={bookingUrl}
               class="inline-block bg-[#0096C7] hover:bg-[#0096C7]/90 text-white font-semibold px-12 py-4 rounded transition-all"
             >
-              BOOK NOW
+              RESERVAR
             </a>
           </div>
         </div>

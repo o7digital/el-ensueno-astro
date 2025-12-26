@@ -29,25 +29,25 @@ const suites = [
     title: "Inspiración",
     image: "/images/suites/Insp/1.webp",
     size: "285 m² / 3,045 ft²",
-    guests: "2 guests",
+    guests: 2,
   },
   {
     title: "Romance",
     image: "/images/suites/roma/1.webp",
     size: "165 m² / 1,775 ft²",
-    guests: "2 guests",
+    guests: 2,
   },
   {
     title: "Crepúsculo",
     image: "/images/suites/Crep/1.webp",
     size: "125 m² / 1,350 ft²",
-    guests: "2 guests",
+    guests: 2,
   },
   {
     title: "Talismán",
     image: "/images/suites/Talis/1.webp",
     size: "110 m² / 1,170 ft²",
-    guests: "2 guests",
+    guests: 2,
   },
 ];
 
@@ -58,6 +58,10 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = getNavLinks(currentLang);
+  const bookingUrl =
+    currentLang === "es"
+      ? "https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=es-MX&productcurrency=USD&room=MUR&rooms=1&src=24C"
+      : "https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C";
 
   const getLanguageSwitchUrl = () => {
     if (typeof window === "undefined") return "/";
@@ -124,7 +128,7 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center z-60"
-            aria-label="Menu"
+            aria-label={currentLang === "es" ? "Menú" : "Menu"}
           >
             <span className={`w-6 h-0.5 bg-ink transition-all ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
             <span className={`w-6 h-0.5 bg-ink transition-all ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
@@ -161,32 +165,42 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
                     <div className="fixed left-0 right-0 top-[88px] pt-4 flex justify-center">
                       <div className="bg-white rounded-2xl shadow-2xl p-12 mx-6 border border-dusk/10 max-w-[1200px] w-full">
                         <div className="grid grid-cols-4 gap-8">
-                          {suites.map((suite) => (
-                            <a
-                              key={suite.title}
-                              href={`/suites/${slugify(suite.title)}`}
-                              className="group relative overflow-hidden rounded-2xl bg-ink shadow-lg"
-                            >
-                              <div className="aspect-[4/3] relative overflow-hidden">
-                                <img
-                                  src={suite.image}
-                                  alt={suite.title}
-                                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
-                              </div>
-                              <div className="absolute bottom-0 left-0 right-0 p-6 text-white flex flex-col justify-end" style={{ minHeight: '120px' }}>
-                                <h3 className="text-[0.8rem] font-serif mb-2 uppercase text-white">
-                                  {suite.title}
-                                </h3>
-                                <div className="flex gap-3 text-[0.65rem] text-white/80">
-                                  <span>{suite.size}</span>
-                                  <span>•</span>
-                                  <span>{suite.guests}</span>
+                          {suites.map((suite) => {
+                            const guestLabel =
+                              currentLang === "es"
+                                ? suite.guests === 1
+                                  ? "huésped"
+                                  : "huéspedes"
+                                : suite.guests === 1
+                                ? "guest"
+                                : "guests";
+                            return (
+                              <a
+                                key={suite.title}
+                                href={`/suites/${slugify(suite.title)}`}
+                                className="group relative overflow-hidden rounded-2xl bg-ink shadow-lg"
+                              >
+                                <div className="aspect-[4/3] relative overflow-hidden">
+                                  <img
+                                    src={suite.image}
+                                    alt={suite.title}
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
                                 </div>
-                              </div>
-                            </a>
-                          ))}
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white flex flex-col justify-end" style={{ minHeight: '120px' }}>
+                                  <h3 className="text-[0.8rem] font-serif mb-2 uppercase text-white">
+                                    {suite.title}
+                                  </h3>
+                                  <div className="flex gap-3 text-[0.65rem] text-white/80">
+                                    <span>{suite.size}</span>
+                                    <span>•</span>
+                                    <span>{suite.guests} {guestLabel}</span>
+                                  </div>
+                                </div>
+                              </a>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
@@ -199,11 +213,11 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
           {/* Language Switch & Book Now */}
           <div className="flex items-center gap-3">
             {/* Language Switcher */}
-            <a
-              href={getLanguageSwitchUrl()}
-              className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase transition-all hover:text-ink/70 text-ink whitespace-nowrap"
-              aria-label={currentLang === "en" ? "Switch to Spanish" : "Cambiar a Inglés"}
-            >
+          <a
+            href={getLanguageSwitchUrl()}
+            className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase transition-all hover:text-ink/70 text-ink whitespace-nowrap"
+            aria-label={currentLang === "en" ? "Switch to Spanish" : "Cambiar a Inglés"}
+          >
               {currentLang === "en" ? "EN" : "ES"}
               <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -211,12 +225,12 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
             </a>
 
             {/* Bouton Book Now */}
-            <a
-              href="https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C"
-              className="inline-flex items-center gap-2 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-ink text-white hover:bg-ink/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink whitespace-nowrap"
-            >
-              {currentLang === "en" ? "Book Now" : "Reservar"}
-            </a>
+          <a
+            href={bookingUrl}
+            className="inline-flex items-center gap-2 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-ink text-white hover:bg-ink/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink whitespace-nowrap"
+          >
+            {currentLang === "en" ? "Book Now" : "Reservar"}
+          </a>
           </div>
         </header>
       </div>
@@ -238,7 +252,16 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
               {/* Sous-menu Suites pour mobile */}
               {link.hasMegamenu && (
                 <div className="pl-4 pb-4 space-y-3">
-                  {suites.map((suite) => (
+                  {suites.map((suite) => {
+                    const guestLabel =
+                      currentLang === "es"
+                        ? suite.guests === 1
+                          ? "huésped"
+                          : "huéspedes"
+                        : suite.guests === 1
+                        ? "guest"
+                        : "guests";
+                    return (
                     <a
                       key={suite.title}
                       href={`/suites/${slugify(suite.title)}`}
@@ -252,10 +275,11 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
                       />
                       <div>
                         <div className="text-sm font-medium text-ink">{suite.title}</div>
-                        <div className="text-xs text-ink/60">{suite.size} • {suite.guests}</div>
+                        <div className="text-xs text-ink/60">{suite.size} • {suite.guests} {guestLabel}</div>
                       </div>
                     </a>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

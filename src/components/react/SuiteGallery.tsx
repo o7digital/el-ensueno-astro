@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from "react";
+import { ui } from "@/i18n/ui";
 
 interface SuiteGalleryProps {
   images: string[];
   title: string;
+  lang?: "en" | "es";
 }
 
-export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
+export default function SuiteGallery({ images, title, lang = "en" }: SuiteGalleryProps) {
+  const labels = ui[lang];
   const defaultZoom = 2.5;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [mainImage, setMainImage] = useState(images[0]);
@@ -141,8 +144,8 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
               closeLightbox();
             }}
             className="absolute top-4 right-4 bg-white hover:bg-gray-200 text-black w-14 h-14 rounded-full flex items-center justify-center text-3xl font-bold z-20 transition-all shadow-lg hover:scale-110"
-            aria-label="Close"
-            title="Fermer (Échap)"
+            aria-label={labels["lightbox.close"]}
+            title={labels["lightbox.closeTitle"]}
           >
             ✕
           </button>
@@ -155,7 +158,7 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
                 handleZoomIn();
               }}
               className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
-              aria-label="Zoom in"
+              aria-label={labels["lightbox.zoomIn"]}
             >
               +
             </button>
@@ -182,7 +185,7 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
                 handleZoomOut();
               }}
               className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
-              aria-label="Zoom out"
+              aria-label={labels["lightbox.zoomOut"]}
             >
               −
             </button>
@@ -195,7 +198,7 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
               navigateLightbox("prev");
             }}
             className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10"
-            aria-label="Previous"
+            aria-label={labels["lightbox.previous"]}
           >
             ‹
           </button>
@@ -226,7 +229,7 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
               navigateLightbox("next");
             }}
             className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10"
-            aria-label="Next"
+            aria-label={labels["lightbox.next"]}
           >
             ›
           </button>
@@ -246,7 +249,11 @@ export default function SuiteGallery({ images, title }: SuiteGalleryProps) {
                   setPosition({ x: 0, y: 0 });
                 }}
               >
-                <img src={image} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+                <img
+                  src={image}
+                  alt={`${labels["lightbox.thumbnail"]} ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
               </div>
             ))}
           </div>

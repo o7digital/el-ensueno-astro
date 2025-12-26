@@ -1,11 +1,14 @@
 ---
 import AboutSlider from "@/components/react/AboutSlider";
+import { getLangFromUrl, useTranslations } from "@/i18n/ui";
 
 interface Props {
   id?: string;
+  lang?: 'en' | 'es';
 }
 
-const { id } = Astro.props as Props;
+const { id, lang = 'en' } = Astro.props as Props;
+const t = useTranslations(lang);
 ---
 
 <section id={id} class="relative overflow-hidden">
@@ -14,22 +17,25 @@ const { id } = Astro.props as Props;
     <!-- Texte en haut -->
     <div class="bg-gradient-to-br from-sand to-mist/60 px-6 py-12 sm:px-8 sm:py-16">
       <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6">
-        <h1 class="text-xl sm:text-2xl uppercase tracking-[0.10em] text-dusk font-semibold">About El Ensueño</h1>
+        <h1 class="text-xl sm:text-2xl uppercase tracking-[0.10em] text-dusk font-semibold">{t('about.title')}</h1>
         <h2 class="text-3xl leading-[1.05] sm:text-4xl md:text-5xl font-serif text-dusk">
-          Haven of Peace on the Beach
+          {t('about.intro')}
         </h2>
         <p class="text-base sm:text-lg leading-relaxed text-ink/80">
-          This stunning oceanfront boutique villa at La Ropa beach offers personalized meal plans, local food prepared by its chef and caring attention to our house guests.
+          {t('about.description')}
         </p>
         <p class="text-base sm:text-lg leading-relaxed text-ink/80">
-          Take a long siesta in one of the 4 plunge pool suites, have dinner in the palapa beach lounge and day dream in the infinity pool. A luxury villa by La Casa Que Canta.
+          {lang === 'es' 
+            ? 'Toma una larga siesta en una de las 4 suites con alberca privada, cena en el palapa lounge frente al mar y sueña despierto en la alberca infinita. Una villa de lujo por La Casa Que Canta.'
+            : 'Take a long siesta in one of the 4 plunge pool suites, have dinner in the palapa beach lounge and day dream in the infinity pool. A luxury villa by La Casa Que Canta.'
+          }
         </p>
       </div>
     </div>
     
     <!-- Slider en bas avec hauteur fixe -->
     <div class="relative h-[500px] sm:h-[600px]">
-      <AboutSlider client:visible />
+      <AboutSlider lang={lang} client:visible />
     </div>
   </div>
 
@@ -38,22 +44,25 @@ const { id } = Astro.props as Props;
     <!-- Texte à gauche -->
     <div class="relative flex items-center bg-gradient-to-br from-sand to-mist/60 px-12">
       <div class="w-full space-y-6">
-        <h1 class="text-2xl uppercase tracking-[0.10em] text-dusk font-semibold">About El Ensueño</h1>
+        <h1 class="text-2xl uppercase tracking-[0.10em] text-dusk font-semibold">{t('about.title')}</h1>
         <h2 class="text-5xl xl:text-6xl leading-[1.05] font-serif text-dusk">
-          Haven of Peace on the Beach
+          {t('about.intro')}
         </h2>
         <p class="text-lg leading-relaxed text-ink/80">
-          This stunning oceanfront boutique villa at La Ropa beach offers personalized meal plans, local food prepared by its chef and caring attention to our house guests.
+          {t('about.description')}
         </p>
         <p class="text-lg leading-relaxed text-ink/80">
-          Take a long siesta in one of the 4 plunge pool suites, have dinner in the palapa beach lounge and day dream in the infinity pool. A luxury villa by La Casa Que Canta.
+          {lang === 'es' 
+            ? 'Toma una larga siesta en una de las 4 suites con alberca privada, cena en el palapa lounge frente al mar y sueña despierto en la alberca infinita. Una villa de lujo por La Casa Que Canta.'
+            : 'Take a long siesta in one of the 4 plunge pool suites, have dinner in the palapa beach lounge and day dream in the infinity pool. A luxury villa by La Casa Que Canta.'
+          }
         </p>
       </div>
     </div>
 
     <!-- Slider à droite -->
     <div class="relative h-full">
-      <AboutSlider client:visible />
+      <AboutSlider lang={lang} client:visible />
     </div>
   </div>
 </section>

@@ -1,17 +1,47 @@
 import { useState, useEffect, useRef } from "react";
+import { ui } from "@/i18n/ui";
+
+interface FusionCuisineSliderProps {
+  lang?: 'en' | 'es';
+}
 
 const dishes = [
-  { name: "Local Breakfast", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-1.webp" },
-  { name: "Fresh Ingredients", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-2.webp" },
-  { name: "Local Specialties", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-3.webp" },
-  { name: "Traditional Dishes", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-4.webp" },
-  { name: "Sunset Dinner", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-7.webp" },
-  { name: "Beach Dining", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp" },
-  { name: "Mexican Flavors", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-9.webp" },
-  { name: "Local Desserts", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-10.webp" },
+  {
+    name: { en: "Local Breakfast", es: "Desayuno local" },
+    image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-1.webp",
+  },
+  {
+    name: { en: "Fresh Ingredients", es: "Ingredientes frescos" },
+    image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-2.webp",
+  },
+  {
+    name: { en: "Local Specialties", es: "Especialidades locales" },
+    image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-3.webp",
+  },
+  {
+    name: { en: "Traditional Dishes", es: "Platillos tradicionales" },
+    image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-4.webp",
+  },
+  {
+    name: { en: "Sunset Dinner", es: "Cena al atardecer" },
+    image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-7.webp",
+  },
+  {
+    name: { en: "Beach Dining", es: "Cena junto a la playa" },
+    image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp",
+  },
+  {
+    name: { en: "Mexican Flavors", es: "Sabores mexicanos" },
+    image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-9.webp",
+  },
+  {
+    name: { en: "Local Desserts", es: "Postres locales" },
+    image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-10.webp",
+  },
 ];
 
-export default function FusionCuisineSlider() {
+export default function FusionCuisineSlider({ lang = 'en' }: FusionCuisineSliderProps) {
+  const t = ui[lang];
   const defaultZoom = 2.5;
   const [isPaused, setIsPaused] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -159,15 +189,28 @@ export default function FusionCuisineSlider() {
           {/* Texte à gauche */}
           <div className="max-w-xl px-4 sm:px-0 lg:-ml-40">
             <span className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl italic text-ink/20 block mb-2">
-              Local Kitchen
+              {t['kitchen.title']}
             </span>
             <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink mb-4 md:mb-6 leading-tight">
-              Traditional Mexican
-              <br />
-              Cuisine
+              {lang === 'es' ? (
+                <>
+                  Cocina Mexicana
+                  <br />
+                  Tradicional
+                </>
+              ) : (
+                <>
+                  Traditional Mexican
+                  <br />
+                  Cuisine
+                </>
+              )}
             </h2>
             <p className="text-sm sm:text-base text-ink/70 leading-relaxed mb-6 md:mb-8">
-              Begin your day with homemade bread and fresh tropical fruit. Enjoy local specialties and international food cooked with fresh selected ingredients, and savor Mexico's most enticing flavors at sunset.
+              {lang === 'es' 
+                ? 'Comienza tu día con pan casero y fruta tropical fresca. Disfruta de especialidades locales y comida internacional preparada con ingredientes frescos seleccionados, y saborea los sabores más cautivadores de México al atardecer.'
+                : 'Begin your day with homemade bread and fresh tropical fruit. Enjoy local specialties and international food cooked with fresh selected ingredients, and savor Mexico\'s most enticing flavors at sunset.'
+              }
             </p>
           </div>
 
@@ -188,7 +231,7 @@ export default function FusionCuisineSlider() {
                   <div className="relative h-[380px] sm:h-[450px] md:h-[550px] lg:h-[600px] overflow-hidden rounded-lg shadow-xl">
                     <img
                       src={dish.image}
-                      alt={dish.name}
+                      alt={dish.name[lang]}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       draggable="false"
                       loading="lazy"
@@ -219,8 +262,8 @@ export default function FusionCuisineSlider() {
             closeLightbox();
           }}
           className="absolute top-4 right-4 bg-white hover:bg-gray-200 text-black w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold z-20 transition-all shadow-lg hover:scale-110"
-          aria-label="Close"
-          title="Fermer (Échap)"
+          aria-label={t["lightbox.close"]}
+          title={t["lightbox.closeTitle"]}
         >
           ✕
         </button>
@@ -233,7 +276,7 @@ export default function FusionCuisineSlider() {
               handleZoomIn();
             }}
             className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
-            aria-label="Zoom in"
+            aria-label={t["lightbox.zoomIn"]}
           >
             +
           </button>
@@ -260,7 +303,7 @@ export default function FusionCuisineSlider() {
               handleZoomOut();
             }}
             className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
-            aria-label="Zoom out"
+            aria-label={t["lightbox.zoomOut"]}
           >
             −
           </button>
@@ -273,7 +316,7 @@ export default function FusionCuisineSlider() {
             navigateLightbox("prev");
           }}
           className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl hover:text-gray-300 z-10 bg-white/10 hover:bg-white/20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
-          aria-label="Previous"
+          aria-label={t["lightbox.previous"]}
         >
           ‹
         </button>
@@ -285,7 +328,7 @@ export default function FusionCuisineSlider() {
         >
           <img
             src={lightboxImage}
-            alt="Lightbox"
+            alt={t["lightbox.imageAlt"]}
             className="max-w-[90%] max-h-[90%] object-contain transition-transform"
             style={{
               transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
@@ -304,7 +347,7 @@ export default function FusionCuisineSlider() {
             navigateLightbox("next");
           }}
           className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl hover:text-gray-300 z-10 bg-white/10 hover:bg-white/20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
-          aria-label="Next"
+          aria-label={t["lightbox.next"]}
         >
           ›
         </button>
@@ -324,7 +367,11 @@ export default function FusionCuisineSlider() {
                 setPosition({ x: 0, y: 0 });
               }}
             >
-              <img src={dish.image} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+              <img
+                src={dish.image}
+                alt={`${t["lightbox.thumbnail"]} ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
             </div>
           ))}
         </div>

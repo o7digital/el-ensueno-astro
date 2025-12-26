@@ -1,55 +1,89 @@
 import React, { useEffect, useState } from "react";
 import { slugify } from "@/utils/slugify";
+import { ui } from "@/i18n/ui";
 
 type Slide = {
   src: string;
-  title: string;
-  caption: string;
-  alt: string;
+  titleKey: string;
+  captionKey: string;
+  alt: {
+    en: string;
+    es: string;
+  };
 };
 
-const slides: Slide[] = [
+const slideData: Slide[] = [
   {
     src: "/images/hero/1.webp",
-    title: "Haven Of Peace On The Beach",
-    caption: "Stunning oceanfront boutique villa at La Ropa beach",
-    alt: "El Ensueño luxury beach villa",
+    titleKey: "hero.slide1.title",
+    captionKey: "hero.slide1.caption",
+    alt: {
+      en: "El Ensueño luxury beach villa",
+      es: "Villa de lujo frente al mar El Ensueño",
+    },
   },
   {
     src: "/images/hero/2.webp",
-    title: "Personalized Meal Plans",
-    caption: "Local food prepared by our chef with caring attention",
-    alt: "El Ensueño dining experience",
+    titleKey: "hero.slide2.title",
+    captionKey: "hero.slide2.caption",
+    alt: {
+      en: "El Ensueño dining experience",
+      es: "Experiencia gastronómica en El Ensueño",
+    },
   },
   {
     src: "/images/hero/3.webp",
-    title: "Plunge Pool Suites",
-    caption: "Take a long siesta in one of our 4 plunge pool suites",
-    alt: "El Ensueño suite with plunge pool",
+    titleKey: "hero.slide3.title",
+    captionKey: "hero.slide3.caption",
+    alt: {
+      en: "El Ensueño suite with plunge pool",
+      es: "Suite de El Ensueño con alberca privada",
+    },
   },
   {
     src: "/images/hero/4.webp",
-    title: "Palapa Beach Lounge",
-    caption: "Have dinner in the palapa beach lounge",
-    alt: "El Ensueño palapa lounge",
+    titleKey: "hero.slide4.title",
+    captionKey: "hero.slide4.caption",
+    alt: {
+      en: "El Ensueño palapa lounge",
+      es: "Palapa lounge de El Ensueño",
+    },
   },
   {
     src: "/images/hero/5.webp",
-    title: "Infinity Pool Dreams",
-    caption: "Day dream in our stunning infinity pool",
-    alt: "El Ensueño infinity pool",
+    titleKey: "hero.slide5.title",
+    captionKey: "hero.slide5.caption",
+    alt: {
+      en: "El Ensueño infinity pool",
+      es: "Alberca infinita en El Ensueño",
+    },
   },
   {
     src: "/images/hero/6.webp",
-    title: "Luxury Experience",
-    caption: "Experience the ultimate beachfront luxury",
-    alt: "El Ensueño beachfront",
+    titleKey: "hero.slide6.title",
+    captionKey: "hero.slide6.caption",
+    alt: {
+      en: "El Ensueño beachfront",
+      es: "Frente de playa en El Ensueño",
+    },
   },
 ];
 
 const SLIDE_DURATION = 5000;
 
-export default function HeroSlider() {
+interface HeroSliderProps {
+  lang?: 'en' | 'es';
+}
+
+export default function HeroSlider({ lang = 'en' }: HeroSliderProps) {
+  const labels = ui[lang];
+  const slides = slideData.map(slide => ({
+    ...slide,
+    title: ui[lang][slide.titleKey as keyof typeof ui.en],
+    caption: ui[lang][slide.captionKey as keyof typeof ui.en],
+    alt: slide.alt[lang],
+  }));
+  
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -138,7 +172,7 @@ export default function HeroSlider() {
               className={`h-1.5 rounded-full transition-all ${
                 index === activeIndex ? "bg-white w-12" : "bg-white/40 w-1.5"
               }`}
-              aria-label={`Voir le visuel ${index + 1}`}
+              aria-label={`${labels['slider.dotLabel']} ${index + 1}`}
             />
           ))}
         </div>

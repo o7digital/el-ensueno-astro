@@ -1,4 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import { ui } from "@/i18n/ui";
+
+interface EmbracedBySeaSliderProps {
+  lang?: 'en' | 'es';
+}
 
 const seaFeatures = [
   {
@@ -23,7 +28,8 @@ const seaFeatures = [
   },
 ];
 
-export default function EmbracedBySeaSlider() {
+export default function EmbracedBySeaSlider({ lang = 'en' }: EmbracedBySeaSliderProps) {
+  const t = ui[lang];
   const defaultZoom = 2.5;
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -138,13 +144,16 @@ export default function EmbracedBySeaSlider() {
           {/* En-tête de section */}
           <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink/60 block mb-3 md:mb-4">
-              Beach Experience
+              {lang === 'es' ? 'Experiencia de Playa' : 'Beach Experience'}
             </span>
             <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink mb-4 md:mb-6">
-              Palapa Beach Lounge
+              {t['palapa.title']}
             </h2>
             <p className="text-base sm:text-lg text-ink/70 max-w-2xl mx-auto px-4">
-              Stylish and accessible directly from the villa, our private beach lounge provides an ample space for leisure. Sip one of our signature cocktails while you take a sun bath or take a stroll along the sandy beach of La Ropa.
+              {lang === 'es'
+                ? 'Elegante y accesible directamente desde la villa, nuestro salón privado en la playa ofrece un amplio espacio para el ocio. Disfruta de uno de nuestros cócteles exclusivos mientras tomas el sol o das un paseo por la playa de arena de La Ropa.'
+                : 'Stylish and accessible directly from the villa, our private beach lounge provides an ample space for leisure. Sip one of our signature cocktails while you take a sun bath or take a stroll along the sandy beach of La Ropa.'
+              }
             </p>
           </div>
 
@@ -162,7 +171,7 @@ export default function EmbracedBySeaSlider() {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                   <img
                     src={feature.url}
-                    alt="Palapa Beach Lounge"
+                    alt={t["palapa.title"]}
                     className={`h-full w-full object-cover transition-all duration-700 ${
                       activeIndex === index ? "scale-110" : "scale-100"
                     }`}
@@ -176,7 +185,7 @@ export default function EmbracedBySeaSlider() {
           {/* Texte additionnel */}
           <div className="mt-8 md:mt-12 max-w-3xl mx-auto text-center px-4">
             <h3 className="font-editorial text-2xl sm:text-3xl text-ink mb-4">
-              A Doorway to Nature
+              {lang === 'es' ? 'Una Puerta a la Naturaleza' : 'A Doorway to Nature'}
             </h3>
           </div>
         </div>
@@ -199,8 +208,8 @@ export default function EmbracedBySeaSlider() {
               closeLightbox();
             }}
             className="absolute top-4 right-4 bg-white hover:bg-gray-200 text-black w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold z-20 transition-all shadow-lg hover:scale-110"
-            aria-label="Close"
-            title="Fermer (Échap)"
+            aria-label={t["lightbox.close"]}
+            title={t["lightbox.closeTitle"]}
           >
             ✕
           </button>
@@ -213,7 +222,7 @@ export default function EmbracedBySeaSlider() {
                 handleZoomIn();
               }}
               className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
-              aria-label="Zoom in"
+              aria-label={t["lightbox.zoomIn"]}
             >
               +
             </button>
@@ -240,7 +249,7 @@ export default function EmbracedBySeaSlider() {
                 handleZoomOut();
               }}
               className="bg-white/20 hover:bg-white/30 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
-              aria-label="Zoom out"
+              aria-label={t["lightbox.zoomOut"]}
             >
               −
             </button>
@@ -253,7 +262,7 @@ export default function EmbracedBySeaSlider() {
               navigateLightbox("prev");
             }}
             className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl hover:text-gray-300 z-10 bg-white/10 hover:bg-white/20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
-            aria-label="Previous"
+            aria-label={t["lightbox.previous"]}
           >
             ‹
           </button>
@@ -265,7 +274,7 @@ export default function EmbracedBySeaSlider() {
           >
             <img
               src={lightboxImage}
-              alt="Lightbox"
+              alt={t["lightbox.imageAlt"]}
               className="max-w-[90%] max-h-[90%] object-contain transition-transform"
               style={{
                 transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
@@ -284,7 +293,7 @@ export default function EmbracedBySeaSlider() {
               navigateLightbox("next");
             }}
             className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl hover:text-gray-300 z-10 bg-white/10 hover:bg-white/20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
-            aria-label="Next"
+            aria-label={t["lightbox.next"]}
           >
             ›
           </button>
@@ -304,7 +313,11 @@ export default function EmbracedBySeaSlider() {
                   setPosition({ x: 0, y: 0 });
                 }}
               >
-                <img src={feature.url} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+                <img
+                  src={feature.url}
+                  alt={`${t["lightbox.thumbnail"]} ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
               </div>
             ))}
           </div>

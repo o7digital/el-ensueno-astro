@@ -59,6 +59,18 @@ export const ui = {
     // Footer
     'footer.tagline': 'Luxury Villa by La Casa Que Canta',
     'footer.rights': 'All rights reserved.',
+
+    // Slider & Lightbox UI
+    'slider.dotLabel': 'View slide',
+    'slider.slideLabel': 'Slide',
+    'lightbox.close': 'Close',
+    'lightbox.closeTitle': 'Close (Esc)',
+    'lightbox.zoomIn': 'Zoom in',
+    'lightbox.zoomOut': 'Zoom out',
+    'lightbox.previous': 'Previous',
+    'lightbox.next': 'Next',
+    'lightbox.thumbnail': 'Thumbnail',
+    'lightbox.imageAlt': 'Enlarged image',
     
     // Suite Details
     'suite.size': 'Size',
@@ -123,6 +135,18 @@ export const ui = {
     // Footer
     'footer.tagline': 'Villa de Lujo por La Casa Que Canta',
     'footer.rights': 'Todos los derechos reservados.',
+
+    // Slider & Lightbox UI
+    'slider.dotLabel': 'Ver diapositiva',
+    'slider.slideLabel': 'Diapositiva',
+    'lightbox.close': 'Cerrar',
+    'lightbox.closeTitle': 'Cerrar (Esc)',
+    'lightbox.zoomIn': 'Acercar',
+    'lightbox.zoomOut': 'Alejar',
+    'lightbox.previous': 'Anterior',
+    'lightbox.next': 'Siguiente',
+    'lightbox.thumbnail': 'Miniatura',
+    'lightbox.imageAlt': 'Imagen ampliada',
     
     // Suite Details
     'suite.size': 'Tamaño',
