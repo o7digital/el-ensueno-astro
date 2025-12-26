@@ -144,10 +144,10 @@ export default function Header() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
                               </div>
                               <div className="absolute bottom-0 left-0 right-0 p-6 text-white flex flex-col justify-end" style={{ minHeight: '120px' }}>
-                                <h3 className="text-[1.0625rem] font-serif mb-2 uppercase text-white">
+                                <h3 className="text-[0.8rem] font-serif mb-2 uppercase text-white">
                                   {suite.title}
                                 </h3>
-                                <div className="flex gap-3 text-sm text-white/80">
+                                <div className="flex gap-3 text-[0.65rem] text-white/80">
                                   <span>{suite.size}</span>
                                   <span>•</span>
                                   <span>{suite.guests}</span>
