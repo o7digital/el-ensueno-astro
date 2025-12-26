@@ -60,8 +60,8 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
   const navLinks = getNavLinks(currentLang);
   const bookingUrl =
     currentLang === "es"
-      ? "https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=es-MX&productcurrency=USD&room=MUR&rooms=1&src=24C"
-      : "https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C";
+      ? "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=es-MX&productcurrency=USD&room=ENS&rooms=1&src=24C"
+      : "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=ENS&rooms=1&src=24C";
   const suiteBasePath = currentLang === "es" ? "/es/suites" : "/suites";
   const closeTimeoutRef = useRef<number | null>(null);
 
