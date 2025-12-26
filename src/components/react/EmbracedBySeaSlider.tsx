@@ -2,19 +2,24 @@ import { useState, useEffect, useRef } from "react";
 
 const seaFeatures = [
   {
-    url: "/images/embraced/embraced1.webp",
-    title: "Vues Océaniques",
-    description: "Admirez les vues imprenables sur l'océan Pacifique depuis chaque coin de notre propriété.",
+    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-1.jpg",
+    title: "",
+    description: "",
   },
   {
-    url: "/images/embraced/embraced2.webp",
-    title: "Accès Plage Privée",
-    description: "Profitez d'un accès direct à des plages vierges et des eaux cristallines.",
+    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-2.jpg",
+    title: "",
+    description: "",
   },
   {
-    url: "/images/embraced/embraced3.webp",
-    title: "Terrasses Panoramiques",
-    description: "Détendez-vous sur nos terrasses privées avec des couchers de soleil à couper le souffle.",
+    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-3.jpg",
+    title: "",
+    description: "",
+  },
+  {
+    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-4.jpg",
+    title: "",
+    description: "",
   },
 ];
 
@@ -128,23 +133,23 @@ export default function EmbracedBySeaSlider() {
 
   return (
     <>
-      <section id="embraced-sea" className="relative py-12 md:py-16 lg:py-20 bg-sand">
+      <section id="palapa-beach-lounge" className="relative py-12 md:py-16 lg:py-20 bg-sand">
         <div className="container mx-auto px-4 sm:px-6">
           {/* En-tête de section */}
           <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink/60 block mb-3 md:mb-4">
-              Surrounded by the sea
+              Beach Experience
             </span>
             <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink mb-4 md:mb-6">
-              Embraced by the Sea
+              Palapa Beach Lounge
             </h2>
             <p className="text-base sm:text-lg text-ink/70 max-w-2xl mx-auto px-4">
-              Experience the luxury of this Mexican home with Mediterranean nautical touches, ideal setting to admire the peaceful climate and panoramic views of the picturesque bay of Zihuatanejo.
+              Stylish and accessible directly from the villa, our private beach lounge provides an ample space for leisure. Sip one of our signature cocktails while you take a sun bath or take a stroll along the sandy beach of La Ropa.
             </p>
           </div>
 
           {/* Grille de contenu inspirée de Zotela */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {seaFeatures.map((feature, index) => (
               <div
                 key={index}
@@ -154,25 +159,15 @@ export default function EmbracedBySeaSlider() {
                 onClick={() => openLightbox(feature.url)}
               >
                 {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-4">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                   <img
                     src={feature.url}
-                    alt={feature.title}
+                    alt="Palapa Beach Lounge"
                     className={`h-full w-full object-cover transition-all duration-700 ${
                       activeIndex === index ? "scale-110" : "scale-100"
                     }`}
                     loading="lazy"
                   />
-                </div>
-
-                {/* Titre et description */}
-                <div className="text-center px-2">
-                  <h3 className="font-editorial text-xl sm:text-2xl text-ink mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-ink/70 text-sm sm:text-base leading-relaxed">
-                    {feature.description}
-                  </p>
                 </div>
               </div>
             ))}
@@ -180,10 +175,9 @@ export default function EmbracedBySeaSlider() {
 
           {/* Texte additionnel */}
           <div className="mt-8 md:mt-12 max-w-3xl mx-auto text-center px-4">
-            <p className="text-sm sm:text-base text-ink/70 leading-relaxed">
-              Our privileged location offers direct access to pristine beaches and stunning ocean vistas. 
-              Wake up to the sound of waves and enjoy breathtaking sunsets from your private terrace.
-            </p>
+            <h3 className="font-editorial text-2xl sm:text-3xl text-ink mb-4">
+              A Doorway to Nature
+            </h3>
           </div>
         </div>
       </section>
