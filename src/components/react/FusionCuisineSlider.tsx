@@ -5,8 +5,6 @@ const dishes = [
   { name: "Fresh Ingredients", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-2.jpg" },
   { name: "Local Specialties", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-3.jpg" },
   { name: "Traditional Dishes", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-4.jpg" },
-  { name: "Local Cuisine", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-5.jpg" },
-  { name: "Fresh Seafood", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-6.jpg" },
   { name: "Sunset Dinner", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-7.jpg" },
   { name: "Beach Dining", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-8.jpg" },
   { name: "Mexican Flavors", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-9.jpg" },
@@ -195,12 +193,6 @@ export default function FusionCuisineSlider() {
                       draggable="false"
                       loading="lazy"
                     />
-                    {/* Overlay avec titre */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent flex items-end p-4 sm:p-6 md:p-8">
-                      <h3 className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-sand">
-                        {dish.name}
-                      </h3>
-                    </div>
                   </div>
                 </div>
               ))}
