@@ -1,0 +1,130 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { suites } from "@/data/suites";
+import { slugify } from "@/utils/slugify";
+import SuiteGallery from "@/components/react/SuiteGallery";
+
+
+export function getStaticPaths() {
+  return suites.map((suite) => ({
+    params: { slug: slugify(suite.title) },
+    props: { suite },
+  }));
+}
+
+const { suite } = Astro.props as { suite: (typeof suites)[number] };
+const displayTitle = suite.displayTitle ?? suite.title;
+const title = `${displayTitle} | El Ensueño`;
+const description = suite.description;
+const defaultBookingUrl =
+  "https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=es-MX&productcurrency=USD&room=MUR&rooms=1&src=24C";
+const bookingUrl = suite.bookingUrl ?? defaultBookingUrl;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={suite.heroImage}
+  preloadImages={[suite.heroImage]}
+  currentLang="es"
+>
+  <div class="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+    <header class="container mx-auto flex items-center justify-between px-6 py-4 sm:px-10 sm:py-5">
+      <a href="/es">
+        <img
+          src="/logo/logo.webp"
+          alt="El Ensueño Logo"
+          class="h-12 w-auto object-contain"
+        />
+      </a>
+      <nav class="hidden items-center gap-8 text-sm font-bold lg:flex">
+        <a href="/es#home" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Inicio</a>
+        <a href="/es#suites" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Suites</a>
+        <a href="/es#palapa-beach-lounge" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Palapa Beach Lounge</a>
+        <a href="/es#local-kitchen" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Cocina Local</a>
+        <a href="/es/contact" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Contacto</a>
+      </nav>
+      <a
+        href={bookingUrl}
+        class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-white text-ink hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white border border-ink/20"
+      >
+        Reservar
+      </a>
+    </header>
+  </div>
+
+  <!-- Hero Section Full Width -->
+  <section class="relative h-screen min-h-[600px]">
+    <div class="absolute inset-0">
+      <img
+        src={suite.heroImage}
+        alt={displayTitle}
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
+    </div>
+    <div class="relative flex h-full items-end">
+      <div class="w-full pb-16 pt-32">
+        <div class="max-w-6xl mx-auto px-6 sm:px-10">
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-serif text-white">{displayTitle}</h1>
+          <p class="mt-4 max-w-2xl text-lg text-white/90">{suite.tagline}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room Overview Section -->
+  <section class="py-16 bg-white">
+    <div class="w-full px-6 sm:px-10">
+      <div class="grid lg:grid-cols-[2fr,1fr] gap-12">
+        {/* Photo à gauche - 67% de l'espace */}
+        <div class="lg:sticky lg:top-24 self-start">
+          <SuiteGallery 
+            client:visible
+            images={[suite.heroImage, ...suite.details.map(d => d.image), ...suite.gallery]}
+            title={displayTitle}
+          />
+        </div>
+
+        {/* Contenu à droite - 33% de l'espace */}
+        <div class="max-w-xl">
+          <h2 class="text-3xl sm:text-4xl font-serif text-[#8B9F7E] mb-2">{displayTitle}</h2>
+          
+          {/* Détails de la suite */}
+          <div class="mb-8 space-y-1 text-ink/80">
+            <p class="text-base font-medium">{suite.size}</p>
+            <p class="text-sm">{suite.view}</p>
+            <p class="text-sm">{suite.guests}</p>
+            <p class="text-sm">{suite.bed}</p>
+          </div>
+
+          {/* Description principale */}
+          <p class="text-base text-ink/70 leading-relaxed mb-10">
+            Discover the beautiful panoramic view from any corner of this spacious suite. The elegant décor with Mexican handcrafted furniture enhances the ambiance. Relax on the terrace or refresh in the private pool while enjoying breathtaking ocean vistas.
+          </p>
+          
+          {/* Amenities */}
+          <div class="mb-10">
+            <h3 class="text-2xl font-serif text-[#4A90C4] mb-6 pb-2 border-b-2 border-[#4A90C4]">Amenities</h3>
+            <ul class="space-y-3">
+              {suite.amenities.map((amenity) => (
+                <li class="text-sm text-ink/80">{amenity}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Bouton Book Now */}
+          <div class="mt-12">
+            <a
+              href={bookingUrl}
+              class="inline-block bg-[#0096C7] hover:bg-[#0096C7]/90 text-white font-semibold px-12 py-4 rounded transition-all"
+            >
+              BOOK NOW
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

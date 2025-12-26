@@ -7,6 +7,13 @@ import sitemap from "@astrojs/sitemap";
 import compress from "astro-compress";
 
 export default defineConfig({
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es"],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   integrations: [
     react(),
     tailwind(),

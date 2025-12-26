@@ -1,0 +1,75 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HeroSlider from "@/components/react/HeroSlider";
+import EditorialIntro from "@/components/astro/EditorialIntro.astro";
+import EmbracedBySeaSlider from "@/components/react/EmbracedBySeaSlider";
+import FusionCuisineSlider from "@/components/react/FusionCuisineSlider";
+
+const title = "Villa Boutique Hotel El Ensueño en la Playa — Zihuatanejo Ixtapa México | Sitio Oficial";
+const description =
+  "Refugio de paz en la playa. Esta impresionante villa boutique frente al mar en Playa La Ropa ofrece planes de comida personalizados, comida local preparada por nuestro chef y atención especial a nuestros huéspedes.";
+const ogImage = "/images/hero/1.webp";
+const preloadImages = [
+  "/images/hero/1.webp",
+  "/images/hero/2.webp",
+  "/images/hero/3.webp",
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  name: "El Ensueño",
+  url: "https://www.el-ensueno.com",
+  description,
+  telephone: "+52 755 554 2222",
+  image: [
+    "https://www.el-ensueno.com/images/hero/1.webp",
+    "https://www.el-ensueno.com/images/hero/2.webp",
+    "https://www.el-ensueno.com/images/hero/3.webp",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Playa La Ropa S/N",
+    addressLocality: "Zihuatanejo",
+    addressRegion: "Guerrero",
+    postalCode: "40880",
+    addressCountry: "MX",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 17.6398,
+    longitude: -101.5548,
+  },
+  amenityFeature: [
+    { "@type": "LocationFeatureSpecification", name: "Albercas privadas", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Alberca infinita", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Palapa beach lounge", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Planes de comida disponibles", value: true },
+  ],
+  sameAs: ["https://www.tripadvisor.com/ShowUserReviews-g150795-d152932-r121555894-La_Casa_Que_Canta-Zihuatanejo_Pacific_Coast.html"],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  preloadImages={preloadImages}
+  structuredData={structuredData}
+  currentLang="es"
+>
+  <script is:inline>
+    if (window.location.hash && window.location.hash.startsWith("#contact")) {
+      window.location.replace("/es/contact");
+    }
+  </script>
+  <section id="home" class="relative h-screen">
+    <HeroSlider client:visible />
+  </section>
+
+  <EditorialIntro id="maison" />
+
+  <FusionCuisineSlider client:visible />
+
+  <EmbracedBySeaSlider client:visible />
+</BaseLayout>

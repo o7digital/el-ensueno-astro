@@ -9,6 +9,7 @@ interface Props {
   ogImage?: string;
   preloadImages?: string[];
   structuredData?: Record<string, unknown>;
+  currentLang?: string;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   ogImage = "/images/hero/el-murmullo0.webp",
   preloadImages = [],
   structuredData,
+  currentLang = "en",
 } = Astro.props as Props;
 
 const canonical = Astro.site
@@ -25,7 +27,7 @@ const canonical = Astro.site
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={currentLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -65,7 +67,7 @@ const canonical = Astro.site
     )}
   </head>
   <body class="min-h-screen bg-sand text-ink">
-    <Header client:load />
+    <Header client:load currentLang={currentLang} />
     <main id="contenu" class="relative isolate overflow-hidden">
       <slot />
     </main>

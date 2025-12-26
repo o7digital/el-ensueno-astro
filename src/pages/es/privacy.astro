@@ -1,0 +1,160 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const title = "Aviso de Privacidad | El Ensueño";
+const description = "Aviso de Privacidad y Política de Protección de Datos para El Ensueño Hotel";
+---
+
+<BaseLayout title={title} description={description} currentLang="es">
+  <!-- Header avec logo fixe -->
+  <div id="header" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+    <div class="relative bg-white/95 backdrop-blur-sm">
+      <header class="container mx-auto flex items-center justify-between px-6 py-4 sm:px-10 sm:py-5">
+        <a href="/es">
+          <img 
+            src="/logo/logo.svg" 
+            alt="El Ensueño Logo" 
+            class="h-12 w-auto object-contain"
+          />
+        </a>
+        <nav class="hidden items-center gap-8 text-sm font-bold lg:flex">
+          <a href="/#home" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Home</a>
+          <a href="/#suites" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Suites</a>
+          <a href="/contact" class="uppercase tracking-wider transition-colors text-ink hover:text-ink/70">Contact</a>
+        </nav>
+        <a
+          href="https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=ENS&rooms=1&src=24C"
+          class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-white text-ink hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white border border-ink/20"
+        >
+          Book Now
+        </a>
+      </header>
+    </div>
+    
+    <!-- Dégradé sombre au scroll sous le header -->
+    <div id="gradient-overlay" class="absolute top-full left-0 right-0 h-40 bg-gradient-to-b from-black/30 via-black/15 to-transparent pointer-events-none opacity-0 transition-opacity duration-500"></div>
+  </div>
+
+  <!-- Contenu de la page -->
+  <main class="pt-32 pb-20 bg-sand relative overflow-hidden">
+    <!-- Logo watermark en arrière-plan avec dégradé -->
+    <div class="fixed inset-0 z-0 flex items-center justify-center pointer-events-none">
+      <div class="relative w-[1600px] h-[1600px]">
+        <img 
+          src="/logo/logo-watermark.svg" 
+          alt="" 
+          class="w-full h-full object-contain opacity-[0.25]"
+        />
+        <!-- Dégradé qui s'estompe vers le bas -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent from-40% via-sand/50 via-70% to-sand"></div>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      <h1 class="text-5xl sm:text-6xl font-serif text-dusk mb-8">Privacy Notice</h1>
+      
+      <div class="prose prose-lg max-w-none">
+        <div class="space-y-6 text-ink/80">
+          <p class="text-lg leading-relaxed">
+            In "El Ensueño" (hereinafter CASACANTA ZIHUA S.A. de C.V.) we are aware of the importance of maintaining the confidentiality of personal and sensitive information of our guests and clients. We are committed to protecting your information and privacy in accordance with the Federal Law on Protection of Personal Data Held by Private Parties (Mexico), the General Data Protection Regulation (GDPR) of the European Union, and the California Consumer Privacy Act (CCPA) in the United States. Below, we provide important information regarding the collection and use of personal data.
+          </p>
+
+          <section>
+            <h2 class="text-3xl font-serif text-dusk mb-4">1. Data Collection</h2>
+            <p class="mb-4">We may collect personal information at any of the contact and interaction points we have with our clients, including:</p>
+            <ul class="list-disc pl-6 space-y-2 mb-4">
+              <li>Our website, reservation system, and online forms</li>
+              <li>Information sent or shared through our social media channels</li>
+              <li>Direct interactions at the hotel</li>
+            </ul>
+            <p class="mb-4">This information may include:</p>
+            <p>Contact details (name, address, email, phone number); reservation or stay details; information related to product or service purchases; nationality; passport or ID number, place and date of issue; history of previous stays; payment and tax information (including RFC or TAX ID); stay preferences; marketing and communication preferences; feedback or opinions; information about travel companions; and medical information you choose to share to enhance your stay.</p>
+          </section>
+
+          <section>
+            <h2 class="text-3xl font-serif text-dusk mb-4">2. Use of Personal and Sensitive Information</h2>
+            <p class="mb-4">We use your personal data to:</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>Provide the requested services</li>
+              <li>Improve our services and guest experience</li>
+              <li>Ensure our website and services meet your needs</li>
+              <li>Process payments, refunds, and inquiries</li>
+              <li>Communicate promotions and service updates</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-3xl font-serif text-dusk mb-4">3. Data Transfers</h2>
+            <p class="mb-4">We may transfer your data to:</p>
+            <ul class="list-disc pl-6 space-y-2 mb-4">
+              <li>Medical professionals in case of emergency</li>
+              <li>Third-party providers operating our IT infrastructure</li>
+              <li>Government or regulatory authorities when legally required</li>
+            </ul>
+            <p>If you do not object to these transfers, we will assume your consent.</p>
+          </section>
+
+          <section>
+            <h2 class="text-3xl font-serif text-dusk mb-4">4. Data Security</h2>
+            <p>CASACANTA ZIHUA S.A. de C.V. has implemented physical, technical, and administrative measures to protect your data against unauthorized access, alteration, or loss. Our systems use SSL encryption, access controls, and secure backups.</p>
+          </section>
+
+          <section>
+            <h2 class="text-3xl font-serif text-dusk mb-4">5. ARCO Rights, GDPR and CCPA</h2>
+            <p class="mb-4">You have the right to:</p>
+            <ul class="list-disc pl-6 space-y-2 mb-4">
+              <li>Access your personal data</li>
+              <li>Request correction of incorrect or outdated data</li>
+              <li>Cancel or request deletion of your data when applicable</li>
+              <li>Object to the processing of your data</li>
+              <li>Request data portability (under GDPR)</li>
+              <li>Revoke your consent at any time</li>
+            </ul>
+            <p class="mb-4">You may exercise these rights by sending your request to:</p>
+            <p class="space-y-2">
+              📧 <a href="mailto:sales.reservations@lacasaquecanta.com" class="text-dusk hover:underline">sales.reservations@lacasaquecanta.com</a><br>
+              📞 <a href="tel:+527555557000" class="text-dusk hover:underline">+52 (755) 555 7000</a>
+            </p>
+            <p class="mt-4">We will respond within 20 business days from the date we receive your request. If your request is valid, it will be fulfilled within 15 business days following the communication of our response.</p>
+          </section>
+
+          <section>
+            <h2 class="text-3xl font-serif text-dusk mb-4">6. Modifications</h2>
+            <p class="mb-2">This Privacy Notice may be updated at any time. Changes will be published at:</p>
+            <p class="mb-4">🌐 <a href="https://www.el-ensueno.com" class="text-dusk hover:underline">www.el-ensueno.com</a></p>
+            <p class="font-semibold">Last updated: August 2025</p>
+          </section>
+
+          <section>
+            <h2 class="text-3xl font-serif text-dusk mb-4">7. Data Controller Identity and Address</h2>
+            <p class="mb-2 font-semibold">CASACANTA ZIHUA S.A. de C.V.</p>
+            <p class="space-y-2">
+              📍 <strong>Fiscal address:</strong> Montes Urales 720, Floor 1, Office 1-A, Lomas de Chapultepec I Sección, Miguel Hidalgo, 11000, CDMX, Mexico<br>
+              📍 <strong>Hotel address:</strong> Camino Escénico a Playa La Ropa, Colonia La Ropa, 40880 Zihuatanejo, Gro., Mexico
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  // Effet de dégradé au scroll sous le header
+  const header = document.getElementById('header');
+  const gradientOverlay = document.getElementById('gradient-overlay');
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    
+    if (scrolled > 50) {
+      gradientOverlay?.classList.add('opacity-100');
+      header?.classList.add('shadow-lg');
+    } else {
+      gradientOverlay?.classList.remove('opacity-100');
+      header?.classList.remove('shadow-lg');
+    }
+  });
+</script>
+  </main>
+</BaseLayout>

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { slugify } from "@/utils/slugify";
 
+interface HeaderProps {
+  currentLang?: string;
+}
+
 const navLinks = [
   { label: "Home", href: "/#home" },
   { label: "Suites", href: "/#suites", hasMegamenu: true },
@@ -36,11 +40,24 @@ const suites = [
   },
 ];
 
-export default function Header() {
+export default function Header({ currentLang = "en" }: HeaderProps) {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showSuitesMegamenu, setShowSuitesMegamenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const getLanguageSwitchUrl = () => {
+    if (typeof window === "undefined") return "/";
+    const currentPath = window.location.pathname;
+    
+    if (currentLang === "en") {
+      // Switch to Spanish
+      return currentPath === "/" ? "/es" : `/es${currentPath}`;
+    } else {
+      // Switch to English
+      return currentPath.replace(/^\/es/, "") || "/";
+    }
+  };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     const hashIndex = href.indexOf("#");
@@ -164,13 +181,28 @@ export default function Header() {
             </nav>
           </div>
           
-          {/* Bouton Book Now - Toujours visible à droite */}
-          <a
-            href="https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C"
-            className="inline-flex items-center gap-2 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-ink text-white hover:bg-ink/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink whitespace-nowrap"
-          >
-            Book Now
-          </a>
+          {/* Language Switch & Book Now */}
+          <div className="flex items-center gap-3">
+            {/* Language Switcher */}
+            <a
+              href={getLanguageSwitchUrl()}
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-semibold uppercase transition-all hover:text-ink/70 text-ink whitespace-nowrap"
+              aria-label={currentLang === "en" ? "Switch to Spanish" : "Cambiar a Inglés"}
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+              </svg>
+              {currentLang === "en" ? "ES" : "EN"}
+            </a>
+
+            {/* Bouton Book Now */}
+            <a
+              href="https://be.synxis.com/?adult=1&arrive=2025-12-22&chain=22402&child=0&currency=USD&depart=2025-12-23&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=MUR&rooms=1&src=24C"
+              className="inline-flex items-center gap-2 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold uppercase transition-all hover:-translate-y-0.5 bg-ink text-white hover:bg-ink/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink whitespace-nowrap"
+            >
+              {currentLang === "en" ? "Book Now" : "Reservar"}
+            </a>
+          </div>
         </header>
       </div>
 
