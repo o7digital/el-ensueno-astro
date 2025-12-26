@@ -126,8 +126,8 @@ export default function Header() {
                   
                   {/* Megamenu pour Suites */}
                   {link.hasMegamenu && showSuitesMegamenu && (
-                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-screen max-w-[1600px]">
-                      <div className="bg-white rounded-2xl shadow-2xl p-12 mx-6 border border-dusk/10">
+                    <div className="fixed left-0 right-0 top-[88px] pt-4 flex justify-center">
+                      <div className="bg-white rounded-2xl shadow-2xl p-12 mx-6 border border-dusk/10 max-w-[1200px] w-full">
                         <div className="grid grid-cols-4 gap-8">
                           {suites.map((suite) => (
                             <a
