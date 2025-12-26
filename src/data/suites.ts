@@ -98,7 +98,7 @@ export const suites: Suite[] = [
     view: "Ocean view",
     rate: "$890",
     bookingUrl:
-      "https://be.synxis.com/?chain=22402&hotel=78821&locale=en-GB&src=24C&filter=HOTEL&Room=RMS",
+      "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=RMS&rooms=1&src=24C",
     heroImage: "/images/suites/roma/1.webp",
     highlights: [
       "Original chuspata decorations by Pátzcuaro artisans",
