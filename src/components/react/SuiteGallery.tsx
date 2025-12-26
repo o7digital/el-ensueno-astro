@@ -11,14 +11,20 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
   const labels = ui[lang];
   const defaultZoom = 2.5;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [mainImage, setMainImage] = useState(images[0]);
+  const [mainIndex, setMainIndex] = useState(0);
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const lightboxRef = useRef<HTMLDivElement>(null);
+  const mainImage = images[mainIndex];
+  const hasMultipleImages = images.length > 1;
 
   const openLightbox = (image: string) => {
+    const imageIndex = images.indexOf(image);
+    if (imageIndex >= 0) {
+      setMainIndex(imageIndex);
+    }
     setSelectedImage(image);
     setZoom(defaultZoom);
     setPosition({ x: 0, y: 0 });
@@ -42,8 +48,19 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
     }
     
     setSelectedImage(images[newIndex]);
+    setMainIndex(newIndex);
     setZoom(defaultZoom);
     setPosition({ x: 0, y: 0 });
+  };
+
+  const handlePrev = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setMainIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handleNext = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setMainIndex((prev) => (prev + 1) % images.length);
   };
 
   const handleZoomIn = () => {
@@ -119,13 +136,73 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
   return (
     <>
       {/* Image principale grande - pleine hauteur */}
-      <div className="relative w-full h-[700px] lg:h-[900px] cursor-pointer" onClick={() => openLightbox(mainImage)}>
+      <div className="relative w-full h-[700px] lg:h-[900px]">
         <img
           src={mainImage}
           alt={title}
-          className="w-full h-full object-cover rounded-lg shadow-xl"
+          className="w-full h-full object-cover rounded-lg shadow-xl cursor-pointer"
+          onClick={() => openLightbox(mainImage)}
         />
+        <button
+          type="button"
+          className="absolute top-4 right-4 bg-white/90 text-ink text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-lg hover:bg-white transition"
+          onClick={() => openLightbox(mainImage)}
+          aria-label={labels["suite.viewGallery"]}
+        >
+          {labels["suite.viewGallery"]}
+        </button>
+        {hasMultipleImages && (
+          <>
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl transition hover:bg-black/70"
+              aria-label={labels["lightbox.previous"]}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl transition hover:bg-black/70"
+              aria-label={labels["lightbox.next"]}
+            >
+              ›
+            </button>
+          </>
+        )}
       </div>
+
+      {hasMultipleImages && (
+        <div className="mt-4 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-2">
+          {images.map((image, index) => (
+            <button
+              key={`${image}-${index}`}
+              type="button"
+              onClick={() => setMainIndex(index)}
+              className={`group relative aspect-[4/3] rounded overflow-hidden border transition-all ${
+                index === mainIndex 
+                  ? "border-ink ring-1 ring-ink/30 shadow-md" 
+                  : "border-transparent opacity-70 hover:opacity-100 hover:border-ink/20"
+              }`}
+              aria-label={`${labels["lightbox.thumbnail"]} ${index + 1}`}
+            >
+              <img 
+                src={image} 
+                alt={`${labels["lightbox.thumbnail"]} ${index + 1}`} 
+                className="w-full h-full object-cover transition-transform group-hover:scale-105" 
+              />
+              {index === mainIndex && (
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent flex items-end justify-center pb-1">
+                  <span className="text-white text-[0.6rem] font-semibold bg-ink/70 px-1.5 py-0.5 rounded">
+                    {index + 1}/{images.length}
+                  </span>
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Lightbox */}
       {selectedImage && (
@@ -235,20 +312,21 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
           </button>
 
           {/* Miniatures en bas */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {images.map((image, index) => (
-              <div
-                key={index}
-                className={`w-16 h-16 cursor-pointer rounded overflow-hidden ${
-                  selectedImage === image ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedImage(image);
-                  setZoom(defaultZoom);
-                  setPosition({ x: 0, y: 0 });
-                }}
-              >
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`w-16 h-16 cursor-pointer rounded overflow-hidden ${
+                selectedImage === image ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(image);
+                setMainIndex(index);
+                setZoom(defaultZoom);
+                setPosition({ x: 0, y: 0 });
+              }}
+            >
                 <img
                   src={image}
                   alt={`${labels["lightbox.thumbnail"]} ${index + 1}`}

@@ -81,6 +81,7 @@ export const ui = {
     'suite.highlights': 'Highlights',
     'suite.amenities': 'Amenities',
     'suite.gallery': 'Gallery',
+    'suite.viewGallery': 'View gallery',
   },
   es: {
     'nav.home': 'Inicio',
@@ -157,6 +158,7 @@ export const ui = {
     'suite.highlights': 'Destacados',
     'suite.amenities': 'Amenidades',
     'suite.gallery': 'Galería',
+    'suite.viewGallery': 'Ver galería',
   },
 } as const;
 

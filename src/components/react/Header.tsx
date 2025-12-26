@@ -165,11 +165,13 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
 
           {/* Logo - Centre sur mobile, gauche sur desktop */}
           <div className="flex items-center gap-10 lg:flex-1">
-            <img 
-              src="/logo/el-ensueno-logo.webp" 
-              alt="El Ensueño Logo" 
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
+            <a href={currentLang === "es" ? "/es" : "/"}>
+              <img 
+                src="/logo/el-ensueno-logo.webp" 
+                alt="El Ensueño Logo" 
+                className="h-10 sm:h-12 w-auto object-contain"
+              />
+            </a>
             {/* Navigation Desktop */}
             <nav className="hidden items-center gap-8 text-sm font-bold lg:flex ml-20">
               {navLinks.map((link) => (
