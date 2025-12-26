@@ -2,22 +2,22 @@ import { useState, useEffect, useRef } from "react";
 
 const seaFeatures = [
   {
-    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-1.jpg",
+    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-1.webp",
     title: "",
     description: "",
   },
   {
-    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-2.jpg",
+    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-2.webp",
     title: "",
     description: "",
   },
   {
-    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-3.jpg",
+    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-3.webp",
     title: "",
     description: "",
   },
   {
-    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-4.jpg",
+    url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-4.webp",
     title: "",
     description: "",
   },

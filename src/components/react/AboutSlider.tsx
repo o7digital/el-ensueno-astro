@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 
 const images = [
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-1.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-2.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-3.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-4.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-5.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-6.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-7.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-8.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-9.jpg",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-10.jpg",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-1.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-2.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-3.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-4.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-5.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-6.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-7.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-9.webp",
+  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-10.webp",
 ];
 
 const SLIDE_DURATION = 5000;

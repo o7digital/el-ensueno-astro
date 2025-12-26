@@ -12,25 +12,25 @@ const navLinks = [
 const suites = [
   {
     title: "Inspiración",
-    image: "/images/suites/Insp/1.jpg",
+    image: "/images/suites/Insp/1.webp",
     size: "285 m² / 3,045 ft²",
     guests: "2 guests",
   },
   {
     title: "Romance",
-    image: "/images/suites/roma/1.jpg",
+    image: "/images/suites/roma/1.webp",
     size: "165 m² / 1,775 ft²",
     guests: "2 guests",
   },
   {
     title: "Crepúsculo",
-    image: "/images/suites/Crep/1.jpg",
+    image: "/images/suites/Crep/1.webp",
     size: "125 m² / 1,350 ft²",
     guests: "2 guests",
   },
   {
     title: "Talismán",
-    image: "/images/suites/Talis/1.jpg",
+    image: "/images/suites/Talis/1.webp",
     size: "110 m² / 1,170 ft²",
     guests: "2 guests",
   },
@@ -102,7 +102,7 @@ export default function Header() {
           {/* Logo - Centre sur mobile, gauche sur desktop */}
           <div className="flex items-center gap-10 lg:flex-1">
             <img 
-              src="/logo/el-ensueno-logo.jpg" 
+              src="/logo/el-ensueno-logo.webp" 
               alt="El Ensueño Logo" 
               className="h-10 sm:h-12 w-auto object-contain"
             />

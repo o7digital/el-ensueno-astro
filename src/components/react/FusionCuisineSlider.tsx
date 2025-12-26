@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 
 const dishes = [
-  { name: "Local Breakfast", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-1.jpg" },
-  { name: "Fresh Ingredients", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-2.jpg" },
-  { name: "Local Specialties", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-3.jpg" },
-  { name: "Traditional Dishes", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-4.jpg" },
-  { name: "Sunset Dinner", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-7.jpg" },
-  { name: "Beach Dining", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-8.jpg" },
-  { name: "Mexican Flavors", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-9.jpg" },
-  { name: "Local Desserts", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-10.jpg" },
+  { name: "Local Breakfast", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-1.webp" },
+  { name: "Fresh Ingredients", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-2.webp" },
+  { name: "Local Specialties", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-3.webp" },
+  { name: "Traditional Dishes", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-4.webp" },
+  { name: "Sunset Dinner", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-7.webp" },
+  { name: "Beach Dining", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp" },
+  { name: "Mexican Flavors", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-9.webp" },
+  { name: "Local Desserts", image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-10.webp" },
 ];
 
 export default function FusionCuisineSlider() {
