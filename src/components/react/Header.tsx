@@ -5,13 +5,24 @@ interface HeaderProps {
   currentLang?: string;
 }
 
-const navLinks = [
-  { label: "Home", href: "/#home" },
-  { label: "Suites", href: "/#suites", hasMegamenu: true },
-  { label: "Palapa Beach Lounge", href: "/#palapa" },
-  { label: "Meal Plans", href: "/#meal-plans" },
-  { label: "Contact", href: "/contact" },
-];
+const getNavLinks = (lang: string) => {
+  if (lang === "es") {
+    return [
+      { label: "Inicio", href: "/es#home" },
+      { label: "Suites", href: "/es#suites", hasMegamenu: true },
+      { label: "Palapa Beach Lounge", href: "/es#palapa" },
+      { label: "Planes de Comida", href: "/es#meal-plans" },
+      { label: "Contacto", href: "/es/contact" },
+    ];
+  }
+  return [
+    { label: "Home", href: "/#home" },
+    { label: "Suites", href: "/#suites", hasMegamenu: true },
+    { label: "Palapa Beach Lounge", href: "/#palapa" },
+    { label: "Meal Plans", href: "/#meal-plans" },
+    { label: "Contact", href: "/contact" },
+  ];
+};
 
 const suites = [
   {
@@ -46,16 +57,20 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
   const [showSuitesMegamenu, setShowSuitesMegamenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const navLinks = getNavLinks(currentLang);
+
   const getLanguageSwitchUrl = () => {
     if (typeof window === "undefined") return "/";
     const currentPath = window.location.pathname;
     
     if (currentLang === "en") {
       // Switch to Spanish
-      return currentPath === "/" ? "/es" : `/es${currentPath}`;
+      if (currentPath === "/") return "/es";
+      return `/es${currentPath}`;
     } else {
       // Switch to English
-      return currentPath.replace(/^\/es/, "") || "/";
+      const newPath = currentPath.replace(/^\/es/, "");
+      return newPath || "/";
     }
   };
 
