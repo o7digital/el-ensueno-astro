@@ -1,32 +1,65 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import HeroSlider from "@/components/react/HeroSlider";
+import HeroSlider, { slideData } from "@/components/react/HeroSlider";
 import EditorialIntro from "@/components/astro/EditorialIntro.astro";
-import EmbracedBySeaSlider from "@/components/react/EmbracedBySeaSlider";
-import FusionCuisineSlider from "@/components/react/FusionCuisineSlider";
+import EmbracedBySeaSlider, { seaFeatures } from "@/components/react/EmbracedBySeaSlider";
+import FusionCuisineSlider, { dishes } from "@/components/react/FusionCuisineSlider";
+import { getResponsiveImage } from "@/utils/responsive-images";
 
 const title = "Villa Boutique Hotel El Ensueño en la Playa — Zihuatanejo Ixtapa México | Sitio Oficial";
 const description =
   "Refugio de paz en la playa. Esta impresionante villa boutique frente al mar en Playa La Ropa ofrece planes de comida personalizados, comida local preparada por nuestro chef y atención especial a nuestros huéspedes.";
-const ogImage = "/images/hero/1.webp";
-const preloadImages = [
-  "/images/hero/1.webp",
-  "/images/hero/2.webp",
-  "/images/hero/3.webp",
-];
+const heroPaths = slideData.map((slide) => slide.src);
+const heroImages = await Promise.all(
+  heroPaths.map((path, index) =>
+    getResponsiveImage(path, {
+      widths: [640, 960, 1366, 1600, 1920],
+      sizes: "100vw",
+      priority: index === 0,
+    }),
+  ),
+);
+const heroImageMap = Object.fromEntries(
+  heroPaths.map((path, index) => [path, heroImages[index]]),
+);
 
+const cuisinePaths = dishes.map((dish) => dish.image);
+const cuisineImages = await Promise.all(
+  cuisinePaths.map((path) =>
+    getResponsiveImage(path, {
+      widths: [480, 768, 1024, 1280],
+      sizes: "(min-width: 1024px) 45vw, 80vw",
+    }),
+  ),
+);
+const cuisineImageMap = Object.fromEntries(
+  cuisinePaths.map((path, index) => [path, cuisineImages[index]]),
+);
+
+const seaPaths = seaFeatures.map((feature) => feature.url);
+const seaImages = await Promise.all(
+  seaPaths.map((path) =>
+    getResponsiveImage(path, {
+      widths: [480, 768, 1024, 1280],
+      sizes: "(min-width: 1024px) 25vw, 80vw",
+    }),
+  ),
+);
+const seaImageMap = Object.fromEntries(
+  seaPaths.map((path, index) => [path, seaImages[index]]),
+);
+
+const ogImage = heroImageMap[heroPaths[0]].src;
+const preloadImages = [heroImageMap[heroPaths[0]].src];
+const siteUrl = Astro.site ?? "https://www.el-ensueno.com";
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Hotel",
   name: "El Ensueño",
-  url: "https://www.el-ensueno.com",
+  url: siteUrl,
   description,
   telephone: "+52 755 554 2222",
-  image: [
-    "https://www.el-ensueno.com/images/hero/1.webp",
-    "https://www.el-ensueno.com/images/hero/2.webp",
-    "https://www.el-ensueno.com/images/hero/3.webp",
-  ],
+  image: heroPaths.slice(0, 3).map((path) => new URL(heroImageMap[path].src, siteUrl).toString()),
   address: {
     "@type": "PostalAddress",
     streetAddress: "Playa La Ropa S/N",
@@ -64,12 +97,12 @@ const structuredData = {
     }
   </script>
   <section id="home" class="relative h-screen">
-    <HeroSlider lang="es" client:visible />
+    <HeroSlider lang="es" images={heroImageMap} client:visible />
   </section>
 
   <EditorialIntro id="maison" lang="es" />
 
-  <FusionCuisineSlider lang="es" client:visible />
+  <FusionCuisineSlider lang="es" images={cuisineImageMap} client:visible />
 
-  <EmbracedBySeaSlider lang="es" client:visible />
+  <EmbracedBySeaSlider lang="es" images={seaImageMap} client:visible />
 </BaseLayout>

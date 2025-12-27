@@ -1,7 +1,9 @@
 ---
 import "@/styles/global.css";
 import Footer from "@/components/astro/Footer.astro";
-import Header from "@/components/react/Header";
+import Header, { headerSuites } from "@/components/react/Header";
+import defaultOgImage from "@/assets/images/hero/contact/el-ensueno-pool.webp";
+import { getResponsiveImage } from "@/utils/responsive-images";
 
 interface Props {
   title: string;
@@ -15,16 +17,35 @@ interface Props {
 const {
   title,
   description,
-  ogImage = "/images/hero/contact/hero-contact.webp",
+  ogImage = defaultOgImage.src,
   preloadImages = [],
   structuredData,
   currentLang = "en",
 } = Astro.props as Props;
 
+const suiteImageMap = Object.fromEntries(
+  await Promise.all(
+    headerSuites.map(async (suite) => [
+      suite.image,
+      await getResponsiveImage(suite.image, {
+        widths: [240, 360, 480],
+        sizes: "300px",
+      }),
+    ]),
+  ),
+);
+
 const canonical = Astro.site
   ? new URL(Astro.url.pathname, Astro.site).toString()
   : Astro.url.pathname;
+const ogImageUrl = Astro.site ? new URL(ogImage, Astro.site).toString() : ogImage;
 const ogLocale = currentLang === "es" ? "es_MX" : "en_US";
+const path = Astro.url.pathname;
+const englishPath = currentLang === "es" ? path.replace(/^\/es(\/|$)/, "/") : path;
+const spanishPath = currentLang === "es" ? path : path === "/" ? "/es" : `/es${path}`;
+const englishUrl = Astro.site ? new URL(englishPath, Astro.site).toString() : englishPath;
+const spanishUrl = Astro.site ? new URL(spanishPath, Astro.site).toString() : spanishPath;
+const alternateLocale = currentLang === "es" ? "en_US" : "es_MX";
 ---
 
 <!DOCTYPE html>
@@ -49,17 +70,21 @@ const ogLocale = currentLang === "es" ? "es_MX" : "en_US";
     ))}
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hrefLang="en" href={englishUrl} />
+    <link rel="alternate" hrefLang="es" href={spanishUrl} />
+    <link rel="alternate" hrefLang="x-default" href={englishUrl} />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={alternateLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     {structuredData && (
       <script type="application/ld+json">
@@ -68,7 +93,7 @@ const ogLocale = currentLang === "es" ? "es_MX" : "en_US";
     )}
   </head>
   <body class="min-h-screen bg-sand text-ink">
-    <Header client:load currentLang={currentLang} />
+    <Header client:load currentLang={currentLang} suiteImages={suiteImageMap} />
     <main id="contenu" class="relative isolate overflow-hidden">
       <slot />
     </main>

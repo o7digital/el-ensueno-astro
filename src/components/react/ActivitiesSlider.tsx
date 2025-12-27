@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+import type { ResponsiveImageMap } from "@/types/images";
 
-const images = [
+export const activityImages = [
   "/images/robin-davies-diner.webp",
   "/images/jeremy-bishop-surfing.webp",
   "/images/karl-callwood.webp",
@@ -12,7 +13,11 @@ const images = [
 
 const SLIDE_DURATION = 5000;
 
-export default function ActivitiesSlider() {
+interface ActivitiesSliderProps {
+  images: ResponsiveImageMap;
+}
+
+export default function ActivitiesSlider({ images }: ActivitiesSliderProps) {
   const defaultZoom = 2.5;
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -22,6 +27,8 @@ export default function ActivitiesSlider() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const lightboxRef = useRef<HTMLDivElement>(null);
+  const imageKeys = activityImages;
+  const resolveImage = (path: string) => images[path];
 
   const openLightbox = (imageUrl: string) => {
     setLightboxImage(imageUrl);
@@ -37,16 +44,16 @@ export default function ActivitiesSlider() {
 
   const navigateLightbox = (direction: "prev" | "next") => {
     if (!lightboxImage) return;
-    const currentIndex = images.findIndex(img => img === lightboxImage);
+    const currentIndex = imageKeys.findIndex(img => img === lightboxImage);
     let newIndex;
     
     if (direction === "prev") {
-      newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+      newIndex = currentIndex === 0 ? imageKeys.length - 1 : currentIndex - 1;
     } else {
-      newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+      newIndex = currentIndex === imageKeys.length - 1 ? 0 : currentIndex + 1;
     }
     
-    setLightboxImage(images[newIndex]);
+    setLightboxImage(imageKeys[newIndex]);
     setZoom(defaultZoom);
     setPosition({ x: 0, y: 0 });
   };
@@ -124,7 +131,7 @@ export default function ActivitiesSlider() {
   useEffect(() => {
     if (paused) return undefined;
     const id = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % images.length);
+      setActiveIndex((prev) => (prev + 1) % imageKeys.length);
     }, SLIDE_DURATION);
 
     return () => window.clearInterval(id);
@@ -138,23 +145,31 @@ export default function ActivitiesSlider() {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Images du slider */}
-      <div className="relative h-full w-full cursor-pointer" onClick={() => openLightbox(images[activeIndex])}>
-        {images.map((src, index) => (
-          <img
-            key={src}
-            src={src}
-            alt={`Activities ${index + 1}`}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-              index === activeIndex ? "opacity-100" : "opacity-0"
-            }`}
-            loading={index === 0 ? "eager" : "lazy"}
-          />
-        ))}
+      <div className="relative h-full w-full cursor-pointer" onClick={() => openLightbox(imageKeys[activeIndex])}>
+        {imageKeys.map((src, index) => {
+          const image = resolveImage(src);
+          return (
+            <img
+              key={src}
+              src={image.src}
+              alt={`Activities ${index + 1}`}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                index === activeIndex ? "opacity-100" : "opacity-0"
+              }`}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding={image.decoding ?? "async"}
+              srcSet={image.srcSet}
+              sizes={image.sizes}
+              width={image.width}
+              height={image.height}
+            />
+          );
+        })}
       </div>
 
       {/* Navigation dots */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
-        {images.map((_, index) => (
+        {imageKeys.map((_, index) => (
           <button
             key={index}
             onClick={() => setActiveIndex(index)}
@@ -248,18 +263,24 @@ export default function ActivitiesSlider() {
           className="flex items-center justify-center w-full h-full"
           style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
         >
-          <img
-            src={lightboxImage}
-            alt="Lightbox"
-            className="max-w-[90%] max-h-[90%] object-contain transition-transform"
-            style={{
-              transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-              transformOrigin: 'center center'
-            }}
-            onClick={(e) => e.stopPropagation()}
-            onMouseDown={handleMouseDown}
-            draggable={false}
-          />
+          {(() => {
+            const image = resolveImage(lightboxImage as string);
+            return (
+              <img
+                src={image.src}
+                alt="Lightbox"
+                className="max-w-[90%] max-h-[90%] object-contain transition-transform"
+                style={{
+                  transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                  transformOrigin: 'center center'
+                }}
+                onClick={(e) => e.stopPropagation()}
+                onMouseDown={handleMouseDown}
+                draggable={false}
+                decoding={image.decoding ?? "async"}
+              />
+            );
+          })()}
         </div>
 
         {/* Bouton suivant */}
@@ -276,22 +297,35 @@ export default function ActivitiesSlider() {
 
         {/* Miniatures en bas */}
         <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 overflow-x-auto max-w-[90vw]">
-          {images.map((img, index) => (
-            <div
-              key={index}
-              className={`w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded overflow-hidden flex-shrink-0 ${
-                lightboxImage === img ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxImage(img);
-                setZoom(defaultZoom);
-                setPosition({ x: 0, y: 0 });
-              }}
-            >
-              <img src={img} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
-            </div>
-          ))}
+          {imageKeys.map((img, index) => {
+            const image = resolveImage(img);
+            return (
+              <div
+                key={index}
+                className={`w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded overflow-hidden flex-shrink-0 ${
+                  lightboxImage === img ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxImage(img);
+                  setZoom(defaultZoom);
+                  setPosition({ x: 0, y: 0 });
+                }}
+              >
+                <img
+                  src={image.src}
+                  alt={`Thumbnail ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding={image.decoding ?? "async"}
+                  srcSet={image.srcSet}
+                  sizes="64px"
+                  width={image.width}
+                  height={image.height}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     )}

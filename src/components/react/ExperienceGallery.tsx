@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import type { ResponsiveImageMap } from "@/types/images";
 
 type GalleryItem = {
   src: string;
@@ -7,7 +8,7 @@ type GalleryItem = {
   detail: string;
 };
 
-const items: GalleryItem[] = [
+export const galleryItems: GalleryItem[] = [
   {
     src: "/images/beach-villa-hotel-ixtapa-zihuatanejo-01.webp",
     alt: "Chemin sablé bordé de palmiers menant à la mer.",
@@ -66,9 +67,10 @@ const items: GalleryItem[] = [
 
 type Props = {
   id?: string;
+  images: ResponsiveImageMap;
 };
 
-export default function ExperienceGallery({ id }: Props) {
+export default function ExperienceGallery({ id, images }: Props) {
   const defaultZoom = 2.5;
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -77,6 +79,7 @@ export default function ExperienceGallery({ id }: Props) {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const lightboxRef = useRef<HTMLDivElement>(null);
+  const resolveImage = (path: string) => images[path];
 
   const openLightbox = (imageUrl: string) => {
     setLightboxImage(imageUrl);
@@ -92,16 +95,16 @@ export default function ExperienceGallery({ id }: Props) {
 
   const navigateLightbox = (direction: "prev" | "next") => {
     if (!lightboxImage) return;
-    const currentIndex = items.findIndex(item => item.src === lightboxImage);
+    const currentIndex = galleryItems.findIndex(item => item.src === lightboxImage);
     let newIndex;
     
     if (direction === "prev") {
-      newIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+      newIndex = currentIndex === 0 ? galleryItems.length - 1 : currentIndex - 1;
     } else {
-      newIndex = currentIndex === items.length - 1 ? 0 : currentIndex + 1;
+      newIndex = currentIndex === galleryItems.length - 1 ? 0 : currentIndex + 1;
     }
     
-    setLightboxImage(items[newIndex].src);
+    setLightboxImage(galleryItems[newIndex].src);
     setZoom(defaultZoom);
     setPosition({ x: 0, y: 0 });
   };
@@ -218,17 +221,23 @@ export default function ExperienceGallery({ id }: Props) {
         className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-8"
         aria-label="Galerie des expériences Murmullo"
       >
-        {items.map((item, index) => (
+        {galleryItems.map((item, index) => {
+          const image = resolveImage(item.src);
+          return (
           <figure
             key={item.src}
             className="group relative w-72 shrink-0 snap-start overflow-hidden rounded-3xl bg-mist/60 shadow-soft sm:w-80 md:w-[22rem] cursor-pointer"
             onClick={() => openLightbox(item.src)}
           >
             <img
-              src={item.src}
+              src={image.src}
               alt={item.alt}
               loading="lazy"
-              decoding="async"
+              decoding={image.decoding ?? "async"}
+              srcSet={image.srcSet}
+              sizes={image.sizes}
+              width={image.width}
+              height={image.height}
               className="h-56 w-full object-cover transition duration-500 group-hover:scale-[1.03] group-hover:brightness-95 sm:h-64"
             />
             <figcaption className="flex items-center justify-between px-4 py-4">
@@ -240,7 +249,8 @@ export default function ExperienceGallery({ id }: Props) {
             </figcaption>
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-sand/70 via-sand/30 to-transparent" />
           </figure>
-        ))}
+          );
+        })}
       </div>
     </div>
 
@@ -325,18 +335,24 @@ export default function ExperienceGallery({ id }: Props) {
           className="flex items-center justify-center w-full h-full"
           style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
         >
-          <img
-            src={lightboxImage}
-            alt="Lightbox"
-            className="max-w-[90%] max-h-[90%] object-contain transition-transform"
-            style={{
-              transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-              transformOrigin: 'center center'
-            }}
-            onClick={(e) => e.stopPropagation()}
-            onMouseDown={handleMouseDown}
-            draggable={false}
-          />
+          {(() => {
+            const image = resolveImage(lightboxImage as string);
+            return (
+              <img
+                src={image.src}
+                alt="Lightbox"
+                className="max-w-[90%] max-h-[90%] object-contain transition-transform"
+                style={{
+                  transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                  transformOrigin: 'center center'
+                }}
+                onClick={(e) => e.stopPropagation()}
+                onMouseDown={handleMouseDown}
+                draggable={false}
+                decoding={image.decoding ?? "async"}
+              />
+            );
+          })()}
         </div>
 
         {/* Bouton suivant */}
@@ -353,7 +369,9 @@ export default function ExperienceGallery({ id }: Props) {
 
         {/* Miniatures en bas */}
         <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 overflow-x-auto max-w-[90vw]">
-          {items.map((item, index) => (
+          {galleryItems.map((item, index) => {
+            const image = resolveImage(item.src);
+            return (
             <div
               key={index}
               className={`w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded overflow-hidden flex-shrink-0 ${
@@ -366,9 +384,20 @@ export default function ExperienceGallery({ id }: Props) {
                 setPosition({ x: 0, y: 0 });
               }}
             >
-              <img src={item.src} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+              <img
+                src={image.src}
+                alt={`Thumbnail ${index + 1}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding={image.decoding ?? "async"}
+                srcSet={image.srcSet}
+                sizes="64px"
+                width={image.width}
+                height={image.height}
+              />
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     )}

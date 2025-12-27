@@ -1,5 +1,7 @@
 ---
 import { slugify } from "@/utils/slugify";
+import { suites as suitesData } from "@/data/suites";
+import { getResponsiveImage } from "@/utils/responsive-images";
 
 interface Props {
   id?: string;
@@ -7,36 +9,25 @@ interface Props {
 
 const { id } = Astro.props as Props;
 
-const suites = [
-  {
-    title: "Garden Suite",
-    image: "/images/suites/garden-suite/garden-1.webp",
-    description: "Immerse yourself in nature with our Garden Suite, featuring a private terrace and lush tropical views.",
-    size: "45 m²",
-    guests: "2 guests",
-  },
-  {
-    title: "Junior Suite Señorita Surena",
-    image: "/images/suites/junior-suite-senerata-surena/junior-suite1.webp",
-    description: "Elegant and spacious junior suite with modern amenities and stunning ocean glimpses.",
-    size: "38 m²",
-    guests: "2 guests",
-  },
-  {
-    title: "Junior Suite Señorita Sonrisa",
-    image: "/images/suites/junior-suite-senorita-sonrisa/suite-1.webp",
-    description: "A bright and welcoming suite designed for comfort and relaxation.",
-    size: "40 m²",
-    guests: "2 guests",
-  },
-  {
-    title: "Sra. Tentación",
-    image: "/images/suites/sra-tentacion/suite-1.webp",
-    description: "The ultimate luxury suite with premium finishes and exclusive amenities.",
-    size: "55 m²",
-    guests: "2-3 guests",
-  },
-];
+const suites = suitesData.map((suite) => ({
+  title: suite.title,
+  image: suite.heroImage,
+  description: suite.description,
+  size: suite.size,
+  guests: suite.guests,
+}));
+
+const suiteImageMap = Object.fromEntries(
+  await Promise.all(
+    suites.map(async (suite) => [
+      suite.image,
+      await getResponsiveImage(suite.image, {
+        widths: [320, 480, 640],
+        sizes: "(min-width: 1024px) 25vw, 50vw",
+      }),
+    ]),
+  ),
+);
 ---
 
 <section id={id} class="py-16 sm:py-20 lg:py-28 bg-sand">
@@ -50,36 +41,45 @@ const suites = [
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {suites.map((suite) => (
-        <a
-          href={`/suites/${slugify(suite.title)}`}
-          class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
-        >
-          <div class="aspect-[3/4] relative overflow-hidden">
-            <img
-              src={suite.image}
-              alt={suite.title}
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-90"></div>
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 p-6">
-            <div class="h-14 mb-2 flex items-end">
-              <h3 class="text-lg font-serif text-white line-clamp-2">{suite.title}</h3>
+      {suites.map((suite) => {
+        const image = suiteImageMap[suite.image];
+        return (
+          <a
+            href={`/suites/${slugify(suite.title)}`}
+            class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
+          >
+            <div class="aspect-[3/4] relative overflow-hidden">
+              <img
+                src={image.src}
+                alt={suite.title}
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+                decoding={image.decoding ?? "async"}
+                srcset={image.srcSet}
+                sizes={image.sizes}
+                width={image.width}
+                height={image.height}
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-90"></div>
             </div>
-            <div class="flex gap-4 text-sm text-white/90 mb-3">
-              <span>{suite.size}</span>
-              <span>•</span>
-              <span>{suite.guests}</span>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="h-14 mb-2 flex items-end">
+                <h3 class="text-lg font-serif text-white line-clamp-2">{suite.title}</h3>
+              </div>
+              <div class="flex gap-4 text-sm text-white/90 mb-3">
+                <span>{suite.size}</span>
+                <span>•</span>
+                <span>{suite.guests}</span>
+              </div>
+              <p class="text-sm text-white/90 line-clamp-2">{suite.description}</p>
+              <div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-amber-400 group-hover:gap-3 transition-all">
+                View Details
+                <span>→</span>
+              </div>
             </div>
-            <p class="text-sm text-white/90 line-clamp-2">{suite.description}</p>
-            <div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-amber-400 group-hover:gap-3 transition-all">
-              View Details
-              <span>→</span>
-            </div>
-          </div>
-        </a>
-      ))}
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>

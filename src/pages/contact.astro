@@ -1,18 +1,19 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import heroImage from "@/assets/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp";
+import mapImage from "@/assets/images/hero/contact/el-ensueno-map.webp";
 
 const title = "Contact | El Ensueño";
 const description =
   "Plan your stay at El Ensueño. Reach our reservations team for suites, rates, and bespoke experiences.";
-const heroImage = "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp";
-const mapImage = "/images/hero/contact/el-ensueno-map.webp";
-const preloadImages = [heroImage, mapImage];
+const preloadImages = [heroImage.src];
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  ogImage={heroImage}
+  ogImage={heroImage.src}
   preloadImages={preloadImages}
   currentLang="en"
 >
@@ -20,9 +21,11 @@ const preloadImages = [heroImage, mapImage];
     <header class="container mx-auto flex items-center justify-between px-6 py-4 sm:px-10 sm:py-5">
       <a href="/">
         <img
-          src="/logo/logo.svg"
+          src="/logo/el-ensueno-logo.webp"
           alt="El Ensueño Logo"
           class="h-12 w-auto object-contain"
+          width="634"
+          height="102"
         />
       </a>
       <nav class="hidden items-center gap-8 text-sm font-bold lg:flex">
@@ -44,11 +47,12 @@ const preloadImages = [heroImage, mapImage];
   <section class="pt-0">
     <div class="flex flex-col lg:flex-row">
       <div class="lg:w-[67%]">
-        <img
+        <Image
           src={heroImage}
           alt="El Ensueño pool and palapa"
           class="h-[360px] w-full object-cover sm:h-[460px] lg:h-full"
-          loading="eager"
+          sizes="(min-width: 1024px) 67vw, 100vw"
+          priority
         />
       </div>
       <div class="lg:w-[33%] bg-[#020713] text-white px-6 sm:px-10 lg:pl-[80px] lg:pr-[15px] pt-16 sm:pt-24 lg:pt-[280px] pb-16 lg:pb-[120px]">
@@ -182,11 +186,13 @@ const preloadImages = [heroImage, mapImage];
 
       <div class="lg:w-1/2">
         <div class="h-[340px] sm:h-[460px] lg:h-full lg:min-h-[680px] bg-sand/60">
-          <img
+          <Image
             src={mapImage}
-            alt="El Murmullo map"
+            alt="El Ensueño map"
             class="h-full w-full object-cover"
+            sizes="(min-width: 1024px) 50vw, 100vw"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

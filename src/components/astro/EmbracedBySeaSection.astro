@@ -1,5 +1,7 @@
 ---
 // Section "Embraced by the Sea"
+import { Image } from "astro:assets";
+import embracedImage from "@/assets/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-1.webp";
 ---
 
 <section id="embraced-sea" class="relative py-20 md:py-32">
@@ -26,11 +28,13 @@
 
       <!-- Image -->
       <div class="relative aspect-[4/3] overflow-hidden rounded-lg">
-        <img
-          src="/images/embraced/embraced1.webp"
+        <Image
+          src={embracedImage}
           alt="Surrounded by the sea"
           class="h-full w-full object-cover"
+          sizes="(min-width: 1024px) 50vw, 100vw"
           loading="lazy"
+          decoding="async"
         />
       </div>
     </div>

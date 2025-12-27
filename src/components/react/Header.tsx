@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { slugify } from "@/utils/slugify";
+import type { ResponsiveImageMap } from "@/types/images";
 
 interface HeaderProps {
   currentLang?: string;
+  suiteImages: ResponsiveImageMap;
 }
 
 const getNavLinks = (lang: string) => {
@@ -24,7 +26,7 @@ const getNavLinks = (lang: string) => {
   ];
 };
 
-const suites = [
+export const headerSuites = [
   {
     title: "Inspiración",
     image: "/images/suites/Insp/1.webp",
@@ -51,11 +53,13 @@ const suites = [
   },
 ];
 
-export default function Header({ currentLang = "en" }: HeaderProps) {
+export default function Header({ currentLang = "en", suiteImages }: HeaderProps) {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showSuitesMegamenu, setShowSuitesMegamenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const suites = headerSuites;
+  const resolveImage = (path: string) => suiteImages[path];
 
   const navLinks = getNavLinks(currentLang);
   const bookingUrl =
@@ -170,6 +174,9 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
                 src="/logo/el-ensueno-logo.webp" 
                 alt="El Ensueño Logo" 
                 className="h-10 sm:h-12 w-auto object-contain"
+                width={634}
+                height={102}
+                decoding="async"
               />
             </a>
             {/* Navigation Desktop */}
@@ -216,9 +223,15 @@ export default function Header({ currentLang = "en" }: HeaderProps) {
                               >
                                 <div className="aspect-[4/3] relative overflow-hidden">
                                   <img
-                                    src={suite.image}
+                                    src={resolveImage(suite.image).src}
                                     alt={suite.title}
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy"
+                                    decoding={resolveImage(suite.image).decoding ?? "async"}
+                                    srcSet={resolveImage(suite.image).srcSet}
+                                    sizes="300px"
+                                    width={resolveImage(suite.image).width}
+                                    height={resolveImage(suite.image).height}
                                   />
                                   <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
                                 </div>

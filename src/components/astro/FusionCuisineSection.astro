@@ -1,5 +1,7 @@
 ---
 // Section "Fusion Cuisine"
+import { Image } from "astro:assets";
+import cuisineImage from "@/assets/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-3.webp";
 ---
 
 <section id="fusion-cuisine" class="relative py-20 md:py-32 bg-sand-light">
@@ -7,11 +9,13 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Image -->
       <div class="relative aspect-[4/3] overflow-hidden rounded-lg order-2 lg:order-1">
-        <img
-          src="/images/cuisines/cuisine3.webp"
+        <Image
+          src={cuisineImage}
           alt="Fusion cuisine"
           class="h-full w-full object-cover"
+          sizes="(min-width: 1024px) 50vw, 100vw"
           loading="lazy"
+          decoding="async"
         />
       </div>
 

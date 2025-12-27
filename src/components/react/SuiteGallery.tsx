@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { ui } from "@/i18n/ui";
+import type { ResponsiveImageMap } from "@/types/images";
 
 interface SuiteGalleryProps {
   images: string[];
+  imageMap: ResponsiveImageMap;
   title: string;
   lang?: "en" | "es";
 }
 
-export default function SuiteGallery({ images, title, lang = "en" }: SuiteGalleryProps) {
+export default function SuiteGallery({ images, imageMap, title, lang = "en" }: SuiteGalleryProps) {
   const labels = ui[lang];
   const defaultZoom = 2.5;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -17,7 +19,9 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const lightboxRef = useRef<HTMLDivElement>(null);
-  const mainImage = images[mainIndex];
+  const resolveImage = (path: string) => imageMap[path];
+  const mainImageKey = images[mainIndex];
+  const mainImage = resolveImage(mainImageKey);
   const hasMultipleImages = images.length > 1;
 
   const openLightbox = (image: string) => {
@@ -138,15 +142,21 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
       {/* Image principale grande - pleine hauteur */}
       <div className="relative w-full h-[700px] lg:h-[900px]">
         <img
-          src={mainImage}
+          src={mainImage.src}
           alt={title}
           className="w-full h-full object-cover rounded-lg shadow-xl cursor-pointer"
-          onClick={() => openLightbox(mainImage)}
+          onClick={() => openLightbox(mainImageKey)}
+          loading={mainImage.loading ?? "lazy"}
+          decoding={mainImage.decoding ?? "async"}
+          srcSet={mainImage.srcSet}
+          sizes={mainImage.sizes}
+          width={mainImage.width}
+          height={mainImage.height}
         />
         <button
           type="button"
           className="absolute top-4 right-4 bg-white/90 text-ink text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-lg hover:bg-white transition"
-          onClick={() => openLightbox(mainImage)}
+          onClick={() => openLightbox(mainImageKey)}
           aria-label={labels["suite.viewGallery"]}
         >
           {labels["suite.viewGallery"]}
@@ -175,32 +185,41 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
 
       {hasMultipleImages && (
         <div className="mt-4 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-2">
-          {images.map((image, index) => (
-            <button
-              key={`${image}-${index}`}
-              type="button"
-              onClick={() => setMainIndex(index)}
-              className={`group relative aspect-[4/3] rounded overflow-hidden border transition-all ${
-                index === mainIndex 
-                  ? "border-ink ring-1 ring-ink/30 shadow-md" 
-                  : "border-transparent opacity-70 hover:opacity-100 hover:border-ink/20"
-              }`}
-              aria-label={`${labels["lightbox.thumbnail"]} ${index + 1}`}
-            >
-              <img 
-                src={image} 
-                alt={`${labels["lightbox.thumbnail"]} ${index + 1}`} 
-                className="w-full h-full object-cover transition-transform group-hover:scale-105" 
-              />
-              {index === mainIndex && (
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent flex items-end justify-center pb-1">
-                  <span className="text-white text-[0.6rem] font-semibold bg-ink/70 px-1.5 py-0.5 rounded">
-                    {index + 1}/{images.length}
-                  </span>
-                </div>
-              )}
-            </button>
-          ))}
+          {images.map((image, index) => {
+            const thumbImage = resolveImage(image);
+            return (
+              <button
+                key={`${image}-${index}`}
+                type="button"
+                onClick={() => setMainIndex(index)}
+                className={`group relative aspect-[4/3] rounded overflow-hidden border transition-all ${
+                  index === mainIndex 
+                    ? "border-ink ring-1 ring-ink/30 shadow-md" 
+                    : "border-transparent opacity-70 hover:opacity-100 hover:border-ink/20"
+                }`}
+                aria-label={`${labels["lightbox.thumbnail"]} ${index + 1}`}
+              >
+                <img 
+                  src={thumbImage.src} 
+                  alt={`${labels["lightbox.thumbnail"]} ${index + 1}`} 
+                  className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                  loading="lazy"
+                  decoding={thumbImage.decoding ?? "async"}
+                  srcSet={thumbImage.srcSet}
+                  sizes="96px"
+                  width={thumbImage.width}
+                  height={thumbImage.height}
+                />
+                {index === mainIndex && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent flex items-end justify-center pb-1">
+                    <span className="text-white text-[0.6rem] font-semibold bg-ink/70 px-1.5 py-0.5 rounded">
+                      {index + 1}/{images.length}
+                    </span>
+                  </div>
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
 
@@ -285,18 +304,24 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
             className="flex items-center justify-center w-full h-full"
             style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
           >
-            <img
-              src={selectedImage}
-              alt={title}
-              className="max-w-[90%] max-h-[90%] object-contain transition-transform"
-              style={{
-                transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-                transformOrigin: 'center center'
-              }}
-              onClick={(e) => e.stopPropagation()}
-              onMouseDown={handleMouseDown}
-              draggable={false}
-            />
+            {(() => {
+              const image = resolveImage(selectedImage as string);
+              return (
+                <img
+                  src={image.src}
+                  alt={title}
+                  className="max-w-[90%] max-h-[90%] object-contain transition-transform"
+                  style={{
+                    transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                    transformOrigin: 'center center'
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  onMouseDown={handleMouseDown}
+                  draggable={false}
+                  decoding={image.decoding ?? "async"}
+                />
+              );
+            })()}
           </div>
 
           {/* Bouton suivant */}
@@ -313,27 +338,36 @@ export default function SuiteGallery({ images, title, lang = "en" }: SuiteGaller
 
           {/* Miniatures en bas */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`w-16 h-16 cursor-pointer rounded overflow-hidden ${
-                selectedImage === image ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedImage(image);
-                setMainIndex(index);
-                setZoom(defaultZoom);
-                setPosition({ x: 0, y: 0 });
-              }}
-            >
+          {images.map((image, index) => {
+            const thumbImage = resolveImage(image);
+            return (
+              <div
+                key={index}
+                className={`w-16 h-16 cursor-pointer rounded overflow-hidden ${
+                  selectedImage === image ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImage(image);
+                  setMainIndex(index);
+                  setZoom(defaultZoom);
+                  setPosition({ x: 0, y: 0 });
+                }}
+              >
                 <img
-                  src={image}
+                  src={thumbImage.src}
                   alt={`${labels["lightbox.thumbnail"]} ${index + 1}`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding={thumbImage.decoding ?? "async"}
+                  srcSet={thumbImage.srcSet}
+                  sizes="64px"
+                  width={thumbImage.width}
+                  height={thumbImage.height}
                 />
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
       )}

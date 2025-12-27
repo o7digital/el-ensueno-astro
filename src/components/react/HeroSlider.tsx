@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { slugify } from "@/utils/slugify";
 import { ui } from "@/i18n/ui";
+import type { ResponsiveImageMap } from "@/types/images";
 
 type Slide = {
   src: string;
@@ -12,7 +12,7 @@ type Slide = {
   };
 };
 
-const slideData: Slide[] = [
+export const slideData: Slide[] = [
   {
     src: "/images/hero/1.webp",
     titleKey: "hero.slide1.title",
@@ -73,9 +73,10 @@ const SLIDE_DURATION = 5000;
 
 interface HeroSliderProps {
   lang?: 'en' | 'es';
+  images: ResponsiveImageMap;
 }
 
-export default function HeroSlider({ lang = 'en' }: HeroSliderProps) {
+export default function HeroSlider({ lang = 'en', images }: HeroSliderProps) {
   const labels = ui[lang];
   const slides = slideData.map(slide => ({
     ...slide,
@@ -83,6 +84,8 @@ export default function HeroSlider({ lang = 'en' }: HeroSliderProps) {
     caption: ui[lang][slide.captionKey as keyof typeof ui.en],
     alt: slide.alt[lang],
   }));
+
+  const resolveImage = (path: string) => images[path];
   
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -132,6 +135,10 @@ export default function HeroSlider({ lang = 'en' }: HeroSliderProps) {
       {/* Images du slider */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
+          (() => {
+            const image = resolveImage(slide.src);
+            const isFirst = index === 0;
+            return (
           <picture
             key={slide.src}
             className={`absolute inset-0 transition-opacity duration-1000 ease-out ${
@@ -140,14 +147,20 @@ export default function HeroSlider({ lang = 'en' }: HeroSliderProps) {
             aria-hidden={index !== activeIndex}
           >
             <img
-              src={slide.src}
+              src={image.src}
               alt={slide.alt}
               className="h-full w-full object-cover"
-              loading={index === 0 ? "eager" : "lazy"}
-              fetchPriority={index === 0 ? "high" : "auto"}
-              decoding="async"
+              srcSet={image.srcSet}
+              sizes={image.sizes}
+              width={image.width}
+              height={image.height}
+              loading={image.loading ?? (isFirst ? "eager" : "lazy")}
+              fetchPriority={image.fetchPriority ?? (isFirst ? "high" : "auto")}
+              decoding={image.decoding ?? "async"}
             />
           </picture>
+            );
+          })()
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
       </div>

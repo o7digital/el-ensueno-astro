@@ -1,18 +1,31 @@
 ---
-import ActivitiesSlider from "@/components/react/ActivitiesSlider";
+import ActivitiesSlider, { activityImages } from "@/components/react/ActivitiesSlider";
+import { getResponsiveImage } from "@/utils/responsive-images";
 
 interface Props {
   id?: string;
 }
 
 const { id } = Astro.props as Props;
+const activityImageMap = Object.fromEntries(
+  await Promise.all(
+    activityImages.map(async (path, index) => [
+      path,
+      await getResponsiveImage(path, {
+        widths: [640, 960, 1280],
+        sizes: "(min-width: 1024px) 66vw, 100vw",
+        priority: index === 0,
+      }),
+    ]),
+  ),
+);
 ---
 
 <section id={id} class="relative h-screen min-h-[700px] overflow-hidden">
   <div class="absolute inset-0 grid lg:grid-cols-[2fr,1fr]">
     <!-- Slider à gauche - prend 2/3 de l'espace -->
     <div class="relative h-full">
-      <ActivitiesSlider client:visible />
+      <ActivitiesSlider images={activityImageMap} client:visible />
     </div>
 
     <!-- Texte à droite - prend 1/3 de l'espace, centré verticalement -->

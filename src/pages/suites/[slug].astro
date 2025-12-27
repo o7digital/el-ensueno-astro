@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { suites } from "@/data/suites";
 import { slugify } from "@/utils/slugify";
 import SuiteGallery from "@/components/react/SuiteGallery";
+import { getResponsiveImage } from "@/utils/responsive-images";
 
 
 export function getStaticPaths() {
@@ -19,23 +20,48 @@ const description = suite.description;
 const defaultBookingUrl =
   "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=ENS&rooms=1&src=24C";
 const bookingUrl = suite.bookingUrl ?? defaultBookingUrl;
+const galleryImages = [
+  suite.heroImage,
+  ...suite.details.map((detail) => detail.image),
+  ...suite.gallery,
+];
+const uniqueImages = Array.from(new Set(galleryImages));
+const galleryImageMap = Object.fromEntries(
+  await Promise.all(
+    uniqueImages.map(async (path) => [
+      path,
+      await getResponsiveImage(path, {
+        widths: [480, 768, 1024, 1366, 1600],
+        sizes: "(min-width: 1024px) 66vw, 100vw",
+        priority: path === suite.heroImage,
+      }),
+    ]),
+  ),
+);
+const heroImage = galleryImageMap[suite.heroImage];
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  ogImage={suite.heroImage}
-  preloadImages={[suite.heroImage]}
+  ogImage={heroImage.src}
+  preloadImages={[heroImage.src]}
   currentLang="en"
 >
   <!-- Hero Section Full Width -->
   <section class="relative h-screen min-h-[600px]">
     <div class="absolute inset-0">
       <img
-        src={suite.heroImage}
+        src={heroImage.src}
         alt={displayTitle}
         class="h-full w-full object-cover"
-        loading="eager"
+        loading={heroImage.loading ?? "eager"}
+        decoding={heroImage.decoding ?? "async"}
+        fetchpriority={heroImage.fetchPriority ?? "high"}
+        srcset={heroImage.srcSet}
+        sizes={heroImage.sizes}
+        width={heroImage.width}
+        height={heroImage.height}
       />
       <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
     </div>
@@ -57,7 +83,8 @@ const bookingUrl = suite.bookingUrl ?? defaultBookingUrl;
         <div class="lg:sticky lg:top-24 self-start">
           <SuiteGallery 
             client:visible
-            images={[suite.heroImage, ...suite.details.map(d => d.image), ...suite.gallery]}
+            images={galleryImages}
+            imageMap={galleryImageMap}
             title={displayTitle}
           />
         </div>

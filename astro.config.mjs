@@ -29,7 +29,7 @@ export default defineConfig({
   alias: {
     "@": fileURLToPath(new URL("./src", import.meta.url)),
   },
-  site: "https://murmullo.studio",
+  site: "https://www.el-ensueno.com",
   build: {
     inlineStylesheets: "auto",
   },

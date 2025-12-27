@@ -1,4 +1,6 @@
 ---
+import { getResponsiveImage } from "@/utils/responsive-images";
+
 interface Props {
   title: string;
   text: string;
@@ -8,17 +10,25 @@ interface Props {
 }
 
 const { title, text, image, reverse = false, id } = Astro.props as Props;
+const imageData = await getResponsiveImage(image, {
+  widths: [480, 768, 1024, 1280],
+  sizes: "(min-width: 1024px) 50vw, 100vw",
+});
 ---
 
 <section id={id} class="py-12 sm:py-16 lg:py-20">
   <div class={`section-shell flex flex-col items-center gap-10 lg:gap-14 ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
     <div class="w-full overflow-hidden rounded-[28px] bg-mist/60 shadow-soft lg:w-1/2">
       <img
-        src={image}
+        src={imageData.src}
         alt={title}
         class="h-full w-full object-cover transition duration-500 hover:scale-[1.02]"
-        loading="lazy"
-        decoding="async"
+        loading={imageData.loading ?? "lazy"}
+        decoding={imageData.decoding ?? "async"}
+        srcset={imageData.srcSet}
+        sizes={imageData.sizes}
+        width={imageData.width}
+        height={imageData.height}
       />
     </div>
     <div class="w-full space-y-4 lg:w-1/2">

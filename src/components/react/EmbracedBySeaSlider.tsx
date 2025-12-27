@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { ui } from "@/i18n/ui";
+import type { ResponsiveImageMap } from "@/types/images";
 
 interface EmbracedBySeaSliderProps {
   lang?: 'en' | 'es';
+  images: ResponsiveImageMap;
 }
 
-const seaFeatures = [
+export const seaFeatures = [
   {
     url: "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-1.webp",
     title: "",
@@ -28,7 +30,7 @@ const seaFeatures = [
   },
 ];
 
-export default function EmbracedBySeaSlider({ lang = 'en' }: EmbracedBySeaSliderProps) {
+export default function EmbracedBySeaSlider({ lang = 'en', images }: EmbracedBySeaSliderProps) {
   const t = ui[lang];
   const defaultZoom = 2.5;
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -39,8 +41,10 @@ export default function EmbracedBySeaSlider({ lang = 'en' }: EmbracedBySeaSlider
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const lightboxRef = useRef<HTMLDivElement>(null);
 
-  const openLightbox = (imageUrl: string) => {
-    setLightboxImage(imageUrl);
+  const resolveImage = (path: string) => images[path];
+
+  const openLightbox = (imageKey: string) => {
+    setLightboxImage(imageKey);
     setZoom(defaultZoom);
     setPosition({ x: 0, y: 0 });
   };
@@ -159,27 +163,35 @@ export default function EmbracedBySeaSlider({ lang = 'en' }: EmbracedBySeaSlider
 
           {/* Grille de contenu inspirée de Zotela */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {seaFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className="group relative cursor-pointer"
-                onMouseEnter={() => setActiveIndex(index)}
-                onMouseLeave={() => setActiveIndex(null)}
-                onClick={() => openLightbox(feature.url)}
-              >
-                {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                  <img
-                    src={feature.url}
-                    alt={t["palapa.title"]}
-                    className={`h-full w-full object-cover transition-all duration-700 ${
-                      activeIndex === index ? "scale-110" : "scale-100"
-                    }`}
-                    loading="lazy"
-                  />
+            {seaFeatures.map((feature, index) => {
+              const image = resolveImage(feature.url);
+              return (
+                <div
+                  key={index}
+                  className="group relative cursor-pointer"
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseLeave={() => setActiveIndex(null)}
+                  onClick={() => openLightbox(feature.url)}
+                >
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                    <img
+                      src={image.src}
+                      alt={t["palapa.title"]}
+                      className={`h-full w-full object-cover transition-all duration-700 ${
+                        activeIndex === index ? "scale-110" : "scale-100"
+                      }`}
+                      loading="lazy"
+                      decoding={image.decoding ?? "async"}
+                      srcSet={image.srcSet}
+                      sizes={image.sizes}
+                      width={image.width}
+                      height={image.height}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Texte additionnel */}
@@ -272,18 +284,23 @@ export default function EmbracedBySeaSlider({ lang = 'en' }: EmbracedBySeaSlider
             className="flex items-center justify-center w-full h-full"
             style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
           >
-            <img
-              src={lightboxImage}
-              alt={t["lightbox.imageAlt"]}
-              className="max-w-[90%] max-h-[90%] object-contain transition-transform"
-              style={{
-                transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-                transformOrigin: 'center center'
-              }}
-              onClick={(e) => e.stopPropagation()}
-              onMouseDown={handleMouseDown}
-              draggable={false}
-            />
+            {(() => {
+              const image = resolveImage(lightboxImage as string);
+              return (
+                <img
+                  src={image.src}
+                  alt={t["lightbox.imageAlt"]}
+                  className="max-w-[90%] max-h-[90%] object-contain transition-transform"
+                  style={{
+                    transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                    transformOrigin: 'center center'
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  onMouseDown={handleMouseDown}
+                  draggable={false}
+                />
+              );
+            })()}
           </div>
 
           {/* Bouton suivant */}
@@ -300,26 +317,35 @@ export default function EmbracedBySeaSlider({ lang = 'en' }: EmbracedBySeaSlider
 
           {/* Miniatures en bas */}
           <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {seaFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className={`w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded overflow-hidden ${
-                  lightboxImage === feature.url ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setLightboxImage(feature.url);
-                  setZoom(defaultZoom);
-                  setPosition({ x: 0, y: 0 });
-                }}
-              >
-                <img
-                  src={feature.url}
-                  alt={`${t["lightbox.thumbnail"]} ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
+            {seaFeatures.map((feature, index) => {
+              const image = resolveImage(feature.url);
+              return (
+                <div
+                  key={index}
+                  className={`w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded overflow-hidden ${
+                    lightboxImage === feature.url ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxImage(feature.url);
+                    setZoom(defaultZoom);
+                    setPosition({ x: 0, y: 0 });
+                  }}
+                >
+                  <img
+                    src={image.src}
+                    alt={`${t["lightbox.thumbnail"]} ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding={image.decoding ?? "async"}
+                    srcSet={image.srcSet}
+                    sizes="64px"
+                    width={image.width}
+                    height={image.height}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

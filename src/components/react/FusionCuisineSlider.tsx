@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { ui } from "@/i18n/ui";
+import type { ResponsiveImageMap } from "@/types/images";
 
 interface FusionCuisineSliderProps {
   lang?: 'en' | 'es';
+  images: ResponsiveImageMap;
 }
 
-const dishes = [
+export const dishes = [
   {
     name: { en: "Local Breakfast", es: "Desayuno local" },
     image: "/images/cuisines/romantic-luxury-boutique-hotel-zihuatanejo-ixtapa-mexico-1.webp",
@@ -40,7 +42,7 @@ const dishes = [
   },
 ];
 
-export default function FusionCuisineSlider({ lang = 'en' }: FusionCuisineSliderProps) {
+export default function FusionCuisineSlider({ lang = 'en', images }: FusionCuisineSliderProps) {
   const t = ui[lang];
   const defaultZoom = 2.5;
   const [isPaused, setIsPaused] = useState(false);
@@ -52,8 +54,10 @@ export default function FusionCuisineSlider({ lang = 'en' }: FusionCuisineSlider
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const lightboxRef = useRef<HTMLDivElement>(null);
 
-  const openLightbox = (imageUrl: string) => {
-    setLightboxImage(imageUrl);
+  const resolveImage = (path: string) => images[path];
+
+  const openLightbox = (imageKey: string) => {
+    setLightboxImage(imageKey);
     setZoom(defaultZoom);
     setPosition({ x: 0, y: 0 });
   };
@@ -222,23 +226,31 @@ export default function FusionCuisineSlider({ lang = 'en' }: FusionCuisineSlider
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
-              {allDishes.map((dish, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[450px] group cursor-pointer"
-                  onClick={() => openLightbox(dish.image)}
-                >
-                  <div className="relative h-[380px] sm:h-[450px] md:h-[550px] lg:h-[600px] overflow-hidden rounded-lg shadow-xl">
-                    <img
-                      src={dish.image}
-                      alt={dish.name[lang]}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      draggable="false"
-                      loading="lazy"
-                    />
+              {allDishes.map((dish, index) => {
+                const image = resolveImage(dish.image);
+                return (
+                  <div
+                    key={index}
+                    className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[450px] group cursor-pointer"
+                    onClick={() => openLightbox(dish.image)}
+                  >
+                    <div className="relative h-[380px] sm:h-[450px] md:h-[550px] lg:h-[600px] overflow-hidden rounded-lg shadow-xl">
+                      <img
+                        src={image.src}
+                        alt={dish.name[lang]}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        draggable="false"
+                        loading="lazy"
+                        decoding={image.decoding ?? "async"}
+                        srcSet={image.srcSet}
+                        sizes={image.sizes}
+                        width={image.width}
+                        height={image.height}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -326,18 +338,23 @@ export default function FusionCuisineSlider({ lang = 'en' }: FusionCuisineSlider
           className="flex items-center justify-center w-full h-full"
           style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
         >
-          <img
-            src={lightboxImage}
-            alt={t["lightbox.imageAlt"]}
-            className="max-w-[90%] max-h-[90%] object-contain transition-transform"
-            style={{
-              transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-              transformOrigin: 'center center'
-            }}
-            onClick={(e) => e.stopPropagation()}
-            onMouseDown={handleMouseDown}
-            draggable={false}
-          />
+          {(() => {
+            const image = resolveImage(lightboxImage as string);
+            return (
+              <img
+                src={image.src}
+                alt={t["lightbox.imageAlt"]}
+                className="max-w-[90%] max-h-[90%] object-contain transition-transform"
+                style={{
+                  transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                  transformOrigin: 'center center'
+                }}
+                onClick={(e) => e.stopPropagation()}
+                onMouseDown={handleMouseDown}
+                draggable={false}
+              />
+            );
+          })()}
         </div>
 
         {/* Bouton suivant */}
@@ -354,26 +371,35 @@ export default function FusionCuisineSlider({ lang = 'en' }: FusionCuisineSlider
 
         {/* Miniatures en bas */}
         <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 overflow-x-auto max-w-[90vw]">
-          {dishes.map((dish, index) => (
-            <div
-              key={index}
-              className={`w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded overflow-hidden flex-shrink-0 ${
-                lightboxImage === dish.image ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxImage(dish.image);
-                setZoom(defaultZoom);
-                setPosition({ x: 0, y: 0 });
-              }}
-            >
-              <img
-                src={dish.image}
-                alt={`${t["lightbox.thumbnail"]} ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
+          {dishes.map((dish, index) => {
+            const image = resolveImage(dish.image);
+            return (
+              <div
+                key={index}
+                className={`w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded overflow-hidden flex-shrink-0 ${
+                  lightboxImage === dish.image ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxImage(dish.image);
+                  setZoom(defaultZoom);
+                  setPosition({ x: 0, y: 0 });
+                }}
+              >
+                <img
+                  src={image.src}
+                  alt={`${t["lightbox.thumbnail"]} ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding={image.decoding ?? "async"}
+                  srcSet={image.srcSet}
+                  sizes="64px"
+                  width={image.width}
+                  height={image.height}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     )}

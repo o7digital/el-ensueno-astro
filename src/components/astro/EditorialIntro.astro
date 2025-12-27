@@ -1,6 +1,7 @@
 ---
-import AboutSlider from "@/components/react/AboutSlider";
-import { getLangFromUrl, useTranslations } from "@/i18n/ui";
+import AboutSlider, { aboutImages } from "@/components/react/AboutSlider";
+import { useTranslations } from "@/i18n/ui";
+import { getResponsiveImage } from "@/utils/responsive-images";
 
 interface Props {
   id?: string;
@@ -9,6 +10,18 @@ interface Props {
 
 const { id, lang = 'en' } = Astro.props as Props;
 const t = useTranslations(lang);
+const aboutImageMap = Object.fromEntries(
+  await Promise.all(
+    aboutImages.map(async (path, index) => [
+      path,
+      await getResponsiveImage(path, {
+        widths: [480, 768, 1024, 1280],
+        sizes: "(min-width: 1024px) 66vw, 100vw",
+        priority: index === 0,
+      }),
+    ]),
+  ),
+);
 ---
 
 <section id={id} class="relative overflow-hidden">
@@ -35,7 +48,7 @@ const t = useTranslations(lang);
     
     <!-- Slider en bas avec hauteur fixe -->
     <div class="relative h-[500px] sm:h-[600px]">
-      <AboutSlider lang={lang} client:visible />
+      <AboutSlider lang={lang} images={aboutImageMap} client:visible />
     </div>
   </div>
 
@@ -62,7 +75,7 @@ const t = useTranslations(lang);
 
     <!-- Slider à droite -->
     <div class="relative h-full">
-      <AboutSlider lang={lang} client:visible />
+      <AboutSlider lang={lang} images={aboutImageMap} client:visible />
     </div>
   </div>
 </section>
