@@ -155,8 +155,8 @@ export default function EmbracedBySeaSlider({ lang = 'en', images }: EmbracedByS
             </h2>
             <p className="text-base sm:text-lg text-ink/70 max-w-2xl mx-auto px-4">
               {lang === 'es'
-                ? 'Elegante y accesible directamente desde la villa, nuestro salón privado en la playa ofrece un amplio espacio para el ocio. Disfruta de uno de nuestros cócteles exclusivos mientras tomas el sol o das un paseo por la playa de arena de La Ropa.'
-                : 'Stylish and accessible directly from the villa, our private beach lounge provides an ample space for leisure. Sip one of our signature cocktails while you take a sun bath or take a stroll along the sandy beach of La Ropa.'
+                ? 'Con estilo y acceso directo desde la villa, nuestro lounge privado frente a la playa ofrece un amplio espacio para el descanso. Disfruta uno de nuestros cocteles insignia mientras tomas el sol o da un paseo tranquilo por la arena de Playa La Ropa.'
+                : 'Stylish and directly accessible from the villa, our private beach lounge offers a generous space for relaxation. Enjoy one of our signature cocktails while sunbathing, or take a peaceful walk along the sandy shores of La Ropa Beach.'
               }
             </p>
           </div>
