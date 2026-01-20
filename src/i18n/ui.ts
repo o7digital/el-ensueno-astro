@@ -31,15 +31,15 @@ export const ui = {
     // About Section
     'about.title': 'About El Ensueño',
     'about.intro': 'Haven of peace on the beach',
-    'about.description': 'This stunning oceanfront boutique villa at La Ropa beach offers personalized meal plans, local food prepared by our chef and caring attention to our house guests.',
+    'about.description': 'This oceanfront boutique villa at La Ropa Beach offers a peaceful and intimate atmosphere with personalized meal plans, local cuisine prepared by our chef, and attentive care for our house guests.',
     
     // Palapa Beach Lounge Section
     'palapa.title': 'Palapa Beach Lounge',
     'palapa.description': 'Experience dining by the sea in our beautiful palapa lounge, where fresh ocean breezes complement our exquisite cuisine.',
     
     // Local Kitchen Section
-    'kitchen.title': 'Local Kitchen',
-    'kitchen.description': 'Savor authentic Mexican flavors prepared with fresh, locally-sourced ingredients by our talented chef.',
+    'kitchen.title': 'Local Cuisine',
+    'kitchen.description': 'Begin your day with homemade bread and fresh tropical fruit. Enjoy local specialties and international dishes prepared with carefully selected fresh ingredients, and savor the authentic flavors of Mexican cuisine at sunset.',
     
     // Contact Page
     'contact.title': 'Contact Us',
@@ -108,7 +108,7 @@ export const ui = {
     // About Section
     'about.title': 'Acerca de El Ensueño',
     'about.intro': 'Refugio de paz en la playa',
-    'about.description': 'Esta impresionante villa boutique frente al mar en Playa La Ropa ofrece planes de comida personalizados, comida local preparada por nuestro chef y atención especial a nuestros huéspedes.',
+    'about.description': 'Esta villa boutique frente al mar en Playa La Ropa ofrece un ambiente íntimo y tranquilo, con planes de comida personalizados, cocina local preparada por nuestro chef y una atención cercana para nuestros huéspedes.',
     
     // Palapa Beach Lounge Section
     'palapa.title': 'Palapa Beach Lounge',
@@ -116,7 +116,7 @@ export const ui = {
     
     // Local Kitchen Section
     'kitchen.title': 'Cocina Local',
-    'kitchen.description': 'Saborea auténticos sabores mexicanos preparados con ingredientes frescos de origen local por nuestro talentoso chef.',
+    'kitchen.description': 'Comienza el día con pan casero y fruta tropical fresca. Disfruta especialidades locales y platillos internacionales preparados con ingredientes frescos cuidadosamente seleccionados, y saborea los auténticos sabores de la cocina mexicana al atardecer.',
     
     // Contact Page
     'contact.title': 'Contáctanos',

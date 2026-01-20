@@ -198,9 +198,9 @@ export default function FusionCuisineSlider({ lang = 'en', images }: FusionCuisi
             <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink mb-4 md:mb-6 leading-tight">
               {lang === 'es' ? (
                 <>
-                  Cocina Mexicana
+                  Cocina Mexicana Tradicional
                   <br />
-                  Tradicional
+                  Cocina
                 </>
               ) : (
                 <>
@@ -212,8 +212,8 @@ export default function FusionCuisineSlider({ lang = 'en', images }: FusionCuisi
             </h2>
             <p className="text-sm sm:text-base text-ink/70 leading-relaxed mb-6 md:mb-8">
               {lang === 'es' 
-                ? 'Comienza tu día con pan casero y fruta tropical fresca. Disfruta de especialidades locales y comida internacional preparada con ingredientes frescos seleccionados, y saborea los sabores más cautivadores de México al atardecer.'
-                : 'Begin your day with homemade bread and fresh tropical fruit. Enjoy local specialties and international food cooked with fresh selected ingredients, and savor Mexico\'s most enticing flavors at sunset.'
+                ? 'Comienza el día con pan casero y fruta tropical fresca. Disfruta especialidades locales y platillos internacionales preparados con ingredientes frescos cuidadosamente seleccionados, y saborea los auténticos sabores de la cocina mexicana al atardecer.'
+                : 'Begin your day with homemade bread and fresh tropical fruit. Enjoy local specialties and international dishes prepared with carefully selected fresh ingredients, and savor the authentic flavors of Mexican cuisine at sunset.'
               }
             </p>
           </div>
