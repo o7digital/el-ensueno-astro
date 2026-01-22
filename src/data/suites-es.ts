@@ -58,7 +58,7 @@ export const suitesEs: Suite[] = [
       "Amenidades herbales de lujo",
       "Batas de algodón piqué",
       "Baños con doble lavabo",
-      "TV de pantalla plana, DVD y SKY TV",
+      "TV de pantalla plana y SKY TV",
       "Alberca privada",
       "Terraza de dos niveles",
       "Vista al mar",

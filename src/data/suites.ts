@@ -81,7 +81,7 @@ export const suites: Suite[] = [
       "Luxury herbal toiletries",
       "Cotton piqué bathrobes",
       "Double-sink bathrooms",
-      "Flat screen TV, DVD and SKY TV",
+      "Flat screen TV and SKY TV",
       "Plunge pool",
       "Two level terrace",
       "Ocean view",
