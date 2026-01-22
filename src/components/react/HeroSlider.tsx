@@ -173,11 +173,11 @@ export default function HeroSlider({ lang = 'en', images }: HeroSliderProps) {
           aria-label={lang === "es" ? "Volver al inicio" : "Back to home"}
         >
           <img
-            src="/logo/el-ensueno.jpg"
+            src="/logo/logotipo%20el%20ensueno%20FONDO%20BLANCO.png"
             alt="El Ensueño"
             className="h-12 w-auto object-contain sm:h-14 md:h-16"
-            width={634}
-            height={102}
+            width={7096}
+            height={1761}
             loading="eager"
             decoding="async"
           />
