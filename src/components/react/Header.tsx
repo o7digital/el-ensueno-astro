@@ -168,7 +168,7 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
           </button>
 
           {/* Navigation Desktop */}
-          <div className="flex items-center lg:flex-1">
+          <div className="flex items-center lg:flex-1 lg:ml-24">
             <nav className="hidden items-center gap-8 text-sm font-bold lg:flex">
               {navLinks.map((link) => (
                 <div
@@ -189,7 +189,7 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
                   {/* Megamenu pour Suites */}
                   {link.hasMegamenu && showSuitesMegamenu && (
                     <div
-                      className="fixed left-0 right-0 top-[88px] pt-4 flex justify-center"
+                      className="fixed left-0 right-0 top-[88px] pt-4 flex justify-center lg:justify-start lg:pl-24 lg:pr-8"
                       onMouseEnter={openSuitesMenu}
                       onMouseLeave={scheduleCloseSuitesMenu}
                     >
