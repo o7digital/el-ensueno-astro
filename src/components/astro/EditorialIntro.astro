@@ -22,6 +22,20 @@ const aboutImageMap = Object.fromEntries(
     ]),
   ),
 );
+
+const aboutParagraphs = lang === 'es'
+  ? [
+      t('about.description'),
+      'A su llegada, los huéspedes son recibidos bajo una amplia palapa tradicional con vista a la bahía, donde la gran alberca y las vistas abiertas al mar marcan de inmediato el tono. Cómodos sofás para leer o descansar, un bar discreto y generosas zonas de sombra invitan a bajar el ritmo y sintonizar con la costa.',
+      'Sobre el mar, la terraza con camastros ofrece un sitio privilegiado para relajarse todo el día, mientras que los atardeceres se disfrutan mejor en la palapa lounge frente a la playa. Planes de comida personalizados y cocina local preparada por nuestro chef completan la experiencia, con un esmero cuidadoso en cada detalle para nuestros huéspedes.',
+      'El Ensueño es un lugar para desconectarse, disfrutar largas siestas en una de las suites con plunge pool, cenar junto al mar y vivir la elegante tranquilidad de un hotel boutique diseñado para la intimidad y el descanso.',
+    ]
+  : [
+      t('about.description'),
+      'Upon arrival, guests are welcomed beneath a vast traditional palapa overlooking the bay, where the large swimming pool and the open views of the sea immediately set the tone. Comfortable reading and sleeping sofas, a discreet bar, and generous shaded areas invite guests to slow down and settle into the rhythm of the coast.',
+      'Above the sea, the sunbed terrace provides a privileged spot to relax throughout the day, while sunsets are best enjoyed at the palapa beach lounge. Personalized meal plans and local cuisine prepared by our chef complete the experience, with thoughtful care given to every detail for our house guests.',
+      'El Ensueño is a place to unwind, enjoy long siestas in one of the plunge-pool suites, dine by the sea, and experience the quiet elegance of a boutique hotel designed for tranquility and intimacy.',
+    ];
 ---
 
 <section id={id} class="relative overflow-hidden">
@@ -34,15 +48,11 @@ const aboutImageMap = Object.fromEntries(
         <h2 class="text-3xl leading-[1.05] sm:text-4xl md:text-5xl font-serif text-dusk">
           {t('about.intro')}
         </h2>
-        <p class="text-base sm:text-lg leading-relaxed text-ink/80">
-          {t('about.description')}
-        </p>
-        <p class="text-base sm:text-lg leading-relaxed text-ink/80">
-          {lang === 'es' 
-            ? 'Disfruta de una larga siesta en una de las cuatro suites con plunge pool, cena en la palapa lounge frente a la playa o relájate junto a la alberca infinity. Una villa de lujo de La Casa Que Canta.'
-            : 'Relax with a long siesta in one of the four plunge pool suites, enjoy dinner at the palapa beach lounge, or daydream by the infinity pool. A luxury villa by La Casa Que Canta.'
-          }
-        </p>
+        <div class="space-y-4">
+          {aboutParagraphs.map((paragraph) => (
+            <p class="text-base sm:text-lg leading-relaxed text-ink/80">{paragraph}</p>
+          ))}
+        </div>
       </div>
     </div>
     
@@ -61,15 +71,11 @@ const aboutImageMap = Object.fromEntries(
         <h2 class="text-5xl xl:text-6xl leading-[1.05] font-serif text-dusk">
           {t('about.intro')}
         </h2>
-        <p class="text-lg leading-relaxed text-ink/80">
-          {t('about.description')}
-        </p>
-        <p class="text-lg leading-relaxed text-ink/80">
-          {lang === 'es' 
-            ? 'Disfruta de una larga siesta en una de las cuatro suites con plunge pool, cena en la palapa lounge frente a la playa o relájate junto a la alberca infinity. Una villa de lujo de La Casa Que Canta.'
-            : 'Relax with a long siesta in one of the four plunge pool suites, enjoy dinner at the palapa beach lounge, or daydream by the infinity pool. A luxury villa by La Casa Que Canta.'
-          }
-        </p>
+        <div class="space-y-4">
+          {aboutParagraphs.map((paragraph) => (
+            <p class="text-lg leading-relaxed text-ink/80">{paragraph}</p>
+          ))}
+        </div>
       </div>
     </div>
 
