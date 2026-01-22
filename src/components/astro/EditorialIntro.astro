@@ -36,6 +36,26 @@ const aboutParagraphs = lang === 'es'
       'Above the sea, the sunbed terrace provides a privileged spot to relax throughout the day, while sunsets are best enjoyed at the palapa beach lounge. Personalized meal plans and local cuisine prepared by our chef complete the experience, with thoughtful care given to every detail for our house guests.',
       'El Ensueño is a place to unwind, enjoy long siestas in one of the plunge-pool suites, dine by the sea, and experience the quiet elegance of a boutique hotel designed for tranquility and intimacy.',
     ];
+
+const features = lang === 'es'
+  ? [
+      'Servicio todo incluido',
+      'Bebidas premium',
+      'Chef privado y servicio de mayordomo incluidos',
+      'Alberca infinita de 100 m³',
+      'Bar en la alberca y palapa',
+      'Wi-Fi de cortesía',
+      'Estacionamiento privado',
+    ]
+  : [
+      'All-inclusive service',
+      'Premium drinks',
+      'Private chef and butler service included',
+      '100 m³ infinity pool',
+      'Pool & palapa bar',
+      'Complimentary Wi-Fi',
+      'Private parking',
+    ];
 ---
 
 <section id={id} class="relative overflow-hidden">
@@ -82,6 +102,18 @@ const aboutParagraphs = lang === 'es'
     <!-- Slider à droite -->
     <div class="relative h-full">
       <AboutSlider lang={lang} images={aboutImageMap} client:visible />
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="bg-dusk text-sand py-12 sm:py-14 lg:py-16">
+  <div class="max-w-6xl mx-auto px-6 sm:px-8">
+    <h3 class="text-center text-2xl sm:text-3xl font-serif mb-8">{t('about.featuresTitle')}</h3>
+    <div class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center">
+      {features.map((item) => (
+        <div class="text-center text-base sm:text-lg leading-relaxed">{item}</div>
+      ))}
     </div>
   </div>
 </section>

@@ -32,6 +32,7 @@ export const ui = {
     'about.title': 'About El Ensueño',
     'about.intro': 'Haven of peace on the beach',
     'about.description': 'Like the home of an art collector, El Ensueño is an intimate four-suite boutique hotel set directly on the sandy beach of La Ropa. This oceanfront villa offers a peaceful and refined atmosphere, defined by attentive personal service, privacy, and a relaxed sense of understated luxury.',
+    'about.featuresTitle': 'Features',
     
     // Palapa Beach Lounge Section
     'palapa.title': 'Palapa Beach Lounge',
@@ -109,6 +110,7 @@ export const ui = {
     'about.title': 'Acerca de El Ensueño',
     'about.intro': 'Refugio de paz en la playa',
     'about.description': 'Como la casa de un coleccionista de arte, El Ensueño es un íntimo hotel boutique de cuatro suites ubicado directamente sobre la arena de Playa La Ropa. Esta villa frente al mar ofrece un ambiente tranquilo y refinado, definido por un servicio personal atento, privacidad y un sentido relajado de lujo discreto.',
+    'about.featuresTitle': 'Servicios y amenidades',
     
     // Palapa Beach Lounge Section
     'palapa.title': 'Palapa Beach Lounge',
