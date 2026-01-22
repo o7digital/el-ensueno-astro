@@ -169,13 +169,13 @@ export default function HeroSlider({ lang = 'en', images }: HeroSliderProps) {
       <div className="pointer-events-none absolute left-4 top-20 z-20 sm:left-8 sm:top-24 lg:left-12 lg:top-28">
         <a
           href={lang === "es" ? "/es" : "/"}
-          className="pointer-events-auto inline-flex rounded-2xl bg-white px-3 py-2 shadow-lg ring-1 ring-white"
+          className="pointer-events-auto inline-flex rounded-2xl bg-white px-4 py-3 shadow-lg ring-1 ring-white"
           aria-label={lang === "es" ? "Volver al inicio" : "Back to home"}
         >
           <img
             src="/logo/logotipo%20el%20ensueno%20FONDO%20BLANCO.png"
             alt="El Ensueño"
-            className="h-12 w-auto object-contain sm:h-14 md:h-16"
+            className="h-16 w-auto object-contain sm:h-20 md:h-24"
             width={7096}
             height={1761}
             loading="eager"
