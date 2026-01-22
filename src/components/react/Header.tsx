@@ -189,7 +189,7 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
                   {/* Megamenu pour Suites */}
                   {link.hasMegamenu && showSuitesMegamenu && (
                     <div
-                      className="fixed left-0 right-0 top-[88px] pt-4 flex justify-center lg:justify-start lg:pl-24 lg:pr-8"
+                      className="fixed left-0 right-0 top-[88px] pt-4 flex justify-center lg:translate-x-12 xl:translate-x-16"
                       onMouseEnter={openSuitesMenu}
                       onMouseLeave={scheduleCloseSuitesMenu}
                     >
