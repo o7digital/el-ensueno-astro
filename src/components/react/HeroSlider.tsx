@@ -169,7 +169,7 @@ export default function HeroSlider({ lang = 'en', images }: HeroSliderProps) {
       <div className="pointer-events-none absolute left-4 top-20 z-20 sm:left-8 sm:top-24 lg:left-12 lg:top-28">
         <a
           href={lang === "es" ? "/es" : "/"}
-          className="pointer-events-auto inline-flex rounded-2xl bg-white/80 px-3 py-2 shadow-lg ring-1 ring-white/60 backdrop-blur"
+          className="pointer-events-auto inline-flex rounded-2xl bg-white px-3 py-2 shadow-lg ring-1 ring-white"
           aria-label={lang === "es" ? "Volver al inicio" : "Back to home"}
         >
           <img

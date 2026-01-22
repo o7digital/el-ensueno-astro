@@ -167,20 +167,9 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
             <span className={`w-6 h-0.5 bg-ink transition-all ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
           </button>
 
-          {/* Logo - Centre sur mobile, gauche sur desktop */}
-          <div className="flex items-center gap-10 lg:flex-1">
-            <a href={currentLang === "es" ? "/es" : "/"}>
-              <img 
-                src="/logo/el-ensueno.jpg" 
-                alt="El Ensueño Logo" 
-                className="h-10 sm:h-12 w-auto object-contain"
-                width={634}
-                height={102}
-                decoding="async"
-              />
-            </a>
-            {/* Navigation Desktop */}
-            <nav className="hidden items-center gap-8 text-sm font-bold lg:flex ml-20">
+          {/* Navigation Desktop */}
+          <div className="flex items-center lg:flex-1">
+            <nav className="hidden items-center gap-8 text-sm font-bold lg:flex">
               {navLinks.map((link) => (
                 <div
                   key={link.href}
