@@ -171,7 +171,7 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
           <div className="flex items-center gap-10 lg:flex-1">
             <a href={currentLang === "es" ? "/es" : "/"}>
               <img 
-                src="/logo/el-ensueno-logo.webp" 
+                src="/logo/el-ensueno.jpg" 
                 alt="El Ensueño Logo" 
                 className="h-10 sm:h-12 w-auto object-contain"
                 width={634}
