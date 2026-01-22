@@ -189,9 +189,9 @@ export default function FusionCuisineSlider({ lang = 'en', images }: FusionCuisi
     <section id="local-kitchen" className="relative py-12 md:py-20 lg:py-32 bg-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6">
         {/* Grid Layout: Texte à gauche, Slider à droite */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
           {/* Texte à gauche */}
-          <div className="max-w-xl px-4 sm:px-0 lg:-ml-40">
+          <div className="max-w-xl px-2 sm:px-0 lg:col-span-5 lg:pr-6">
             <span className="font-editorial text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl italic text-ink/20 block mb-2">
               {t['kitchen.title']}
             </span>
@@ -219,7 +219,7 @@ export default function FusionCuisineSlider({ lang = 'en', images }: FusionCuisi
           </div>
 
           {/* Slider horizontal à droite */}
-          <div className="relative -mx-4 sm:-mx-6 md:-ml-12 md:-mr-16 lg:-ml-80 lg:-mr-96 overflow-hidden">
+          <div className="relative -mx-4 sm:-mx-6 lg:mx-0 lg:col-span-7 overflow-hidden">
             <div
               ref={scrollRef}
               className="flex gap-3 sm:gap-4 md:gap-6 will-change-transform"
