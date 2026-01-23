@@ -297,6 +297,7 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
                         : suite.guests === 1
                         ? "guest"
                         : "guests";
+                    const resolvedImage = resolveImage(suite.image);
                     return (
                     <a
                       key={suite.title}
@@ -305,9 +306,15 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
                       className="flex items-center gap-3 p-2 rounded-lg hover:bg-sand/30 transition-colors"
                     >
                       <img
-                        src={suite.image}
+                        src={resolvedImage.src}
+                        srcSet={resolvedImage.srcSet}
+                        sizes="128px"
                         alt={suite.title}
                         className="w-16 h-12 object-cover rounded"
+                        width={resolvedImage.width}
+                        height={resolvedImage.height}
+                        loading="lazy"
+                        decoding={resolvedImage.decoding ?? "async"}
                       />
                       <div>
                         <div className="text-sm font-medium text-ink">{suite.title}</div>
