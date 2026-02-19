@@ -175,7 +175,7 @@ export default function HeroSlider({ lang = 'en', images }: HeroSliderProps) {
           <img
             src="/logo/logotipo%20el%20ensueno%20FONDO%20BLANCO.png"
             alt="El Ensueño"
-            className="w-auto object-contain h-[94px] sm:h-[116px] md:h-[140px]"
+            className="w-auto object-contain h-[86px] sm:h-[106px] md:h-[128px]"
             width={7096}
             height={1761}
             loading="eager"
