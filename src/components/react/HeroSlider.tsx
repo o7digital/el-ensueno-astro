@@ -165,8 +165,8 @@ export default function HeroSlider({ lang = 'en', images }: HeroSliderProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
       </div>
 
-      {/* Logo en overlay sous le menu */}
-      <div className="pointer-events-none absolute left-4 top-20 z-20 sm:left-8 sm:top-24 lg:left-12 lg:top-28">
+      {/* Logo en overlay en bas à droite, au-dessus du bouton Back to Top */}
+      <div className="pointer-events-none absolute bottom-20 right-4 z-20 sm:bottom-24 sm:right-8 lg:bottom-24 lg:right-12">
         <a
           href={lang === "es" ? "/es" : "/"}
           className="pointer-events-auto inline-flex rounded-2xl bg-white px-4 py-3 shadow-lg ring-1 ring-white"

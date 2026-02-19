@@ -3,16 +3,16 @@ import { ui } from "@/i18n/ui";
 import type { ResponsiveImageMap } from "@/types/images";
 
 export const aboutImages = [
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-1.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-2.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-3.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-4.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-5.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-6.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-7.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-9.webp",
-  "/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-10.webp",
+  "/images/hero/1.webp",
+  "/images/hero/2.webp",
+  "/images/hero/3.webp",
+  "/images/hero/4.webp",
+  "/images/hero/5.webp",
+  "/images/hero/6.webp",
+  "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-1.webp",
+  "/images/embraced/palapa-luxury-hotel-beach-lounge-zihuatanejo-ixtapa-2.webp",
+  "/images/suites/Insp/1.webp",
+  "/images/suites/Crep/1.webp",
 ];
 
 const SLIDE_DURATION = 5000;
@@ -160,7 +160,7 @@ export default function AboutSlider({ lang = "en", images }: AboutSliderProps) {
               key={src}
               src={image.src}
               alt={`${slideAlt} ${index + 1}`}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ${
                 index === activeIndex ? "opacity-100" : "opacity-0"
               }`}
               loading={index === 0 ? "eager" : "lazy"}

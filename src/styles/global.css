@@ -41,4 +41,26 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  @keyframes book-now-pulse {
+    0%,
+    100% {
+      box-shadow: 0 8px 18px rgba(254, 171, 91, 0.24);
+    }
+    50% {
+      box-shadow:
+        0 12px 24px rgba(254, 171, 91, 0.36),
+        0 0 0 4px rgba(254, 171, 91, 0.2);
+    }
+  }
+
+  .book-now-flash {
+    animation: book-now-pulse 1.35s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-now-flash {
+    animation: none;
+  }
 }
