@@ -181,13 +181,13 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
                     className={`group relative pb-1 uppercase tracking-wider transition-colors ${
-                      link.hasMegamenu ? "text-[#FEAB5B] hover:text-[#e89e53]" : "text-ink hover:text-ink/70"
+                      link.hasMegamenu ? "text-[#E08A34] hover:text-[#C77930]" : "text-ink hover:text-ink/70"
                     }`}
                   >
                     {link.label}
                     <span
                       className={`absolute inset-x-0 -bottom-1 h-[1px] scale-x-0 transition group-hover:scale-x-100 ${
-                        link.hasMegamenu ? "bg-[#FEAB5B]/70" : "bg-ink/70"
+                        link.hasMegamenu ? "bg-[#E08A34]/70" : "bg-ink/70"
                       }`}
                     ></span>
                   </a>
@@ -288,7 +288,7 @@ export default function Header({ currentLang = "en", suiteImages }: HeaderProps)
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`block py-4 text-lg font-semibold uppercase tracking-wider transition-colors ${
-                  link.hasMegamenu ? "text-[#FEAB5B] hover:text-[#e89e53]" : "text-ink hover:text-ink/70"
+                  link.hasMegamenu ? "text-[#E08A34] hover:text-[#C77930]" : "text-ink hover:text-ink/70"
                 }`}
               >
                 {link.label}
