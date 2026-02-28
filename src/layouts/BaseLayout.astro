@@ -97,6 +97,15 @@ const alternateLocale = currentLang === "es" ? "en_US" : "es_MX";
         {JSON.stringify(structuredData)}
       </script>
     )}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLS0T4T7X6"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-TLS0T4T7X6");
+    </script>
   </head>
   <body class="min-h-screen bg-sand text-ink">
     {showHeader && <Header client:load currentLang={currentLang} suiteImages={suiteImageMap} />}
