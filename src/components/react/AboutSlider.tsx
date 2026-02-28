@@ -25,7 +25,7 @@ interface AboutSliderProps {
 export default function AboutSlider({ lang = "en", images }: AboutSliderProps) {
   const labels = ui[lang];
   const slideAlt = lang === "es" ? "Imagen de El Ensueño" : "El Ensueño image";
-  const defaultZoom = 2.5;
+  const defaultZoom = 1.5;
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -66,7 +66,7 @@ export default function AboutSlider({ lang = "en", images }: AboutSliderProps) {
   };
 
   const handleZoomIn = () => {
-    setZoom(prev => Math.min(prev + 0.5, 4));
+    setZoom(prev => Math.min(prev + 0.5, defaultZoom));
   };
 
   const handleZoomOut = () => {
@@ -84,7 +84,7 @@ export default function AboutSlider({ lang = "en", images }: AboutSliderProps) {
       if (lightboxImage && lightboxRef.current) {
         e.preventDefault();
         if (e.deltaY < 0) {
-          setZoom(prev => Math.min(prev + 0.5, 4));
+          setZoom(prev => Math.min(prev + 0.5, defaultZoom));
         } else {
           setZoom(prev => {
             const newZoom = Math.max(prev - 0.5, 1);
@@ -229,11 +229,11 @@ export default function AboutSlider({ lang = "en", images }: AboutSliderProps) {
             <div className="h-32 w-1 bg-white/20 rounded-full relative">
               <div 
                 className="absolute bottom-0 w-full bg-white rounded-full transition-all"
-                style={{ height: `${((zoom - 1) / 3) * 100}%` }}
+                style={{ height: `${((zoom - 1) / (defaultZoom - 1)) * 100}%` }}
               />
               <div 
                 className="absolute w-4 h-4 bg-white rounded-full -left-1.5 transition-all"
-                style={{ bottom: `calc(${((zoom - 1) / 3) * 100}% - 8px)` }}
+                style={{ bottom: `calc(${((zoom - 1) / (defaultZoom - 1)) * 100}% - 8px)` }}
               />
             </div>
             <div className="text-white text-xs font-semibold bg-white/20 px-2 py-1 rounded">

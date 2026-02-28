@@ -120,7 +120,7 @@ export function buildWebSiteSchema(site?: URL | string): SchemaNode {
     "@id": `${origin}/#website`,
     url: `${origin}/`,
     name: HOTEL_PROFILE.name,
-    description: "Intimate four-suite boutique hotel on La Ropa Beach, Zihuatanejo",
+    description: "Intimate four-suite luxury villa on La Ropa Beach, Zihuatanejo",
     publisher: {
       "@id": `${origin}/#organization`,
     },

@@ -142,7 +142,7 @@ const structuredData = [
       <div class="w-full pb-16 pt-32">
         <div class="max-w-6xl mx-auto px-6 sm:px-10">
           <h1 class="text-5xl sm:text-6xl lg:text-7xl font-serif text-white">{displayTitle}</h1>
-          <p class="mt-4 max-w-2xl text-lg text-white/90">{suite.tagline}</p>
+          <p class="mt-4 max-w-2xl text-lg text-white/90 font-bold">{suite.tagline}</p>
         </div>
       </div>
     </div>
@@ -156,7 +156,7 @@ const structuredData = [
         <div class="lg:sticky lg:top-24 self-start">
           <SuiteGallery 
             client:visible
-            images={galleryImages}
+            images={uniqueImages}
             imageMap={galleryImageMap}
             title={displayTitle}
           />
@@ -175,9 +175,7 @@ const structuredData = [
           </div>
 
           {/* Description principale */}
-          <p class="text-base text-ink/70 leading-relaxed mb-10">
-            Discover the beautiful panoramic view from any corner of this spacious suite. The elegant décor with Mexican handcrafted furniture enhances the ambiance. Relax on the terrace or refresh in the private pool while enjoying breathtaking ocean vistas.
-          </p>
+          <p class="text-base text-ink/70 leading-relaxed mb-10">{suite.description}</p>
           
           {/* Amenities */}
           <div class="mb-10">
