@@ -17,6 +17,7 @@ export type Suite = {
   rateOriginal?: string;
   bookingUrl?: string;
   heroImage: string;
+  featureSummary?: string;
   highlights: string[];
   details: SuiteDetail[];
   gallery: string[];
@@ -86,22 +87,23 @@ export const suites: Suite[] = [
   },
   {
     title: "Romance",
-    tagline: "Bright suite with unique Mexican character and enchanting views.",
+    tagline: "Bright and with a unique Mexican character.",
     description:
       "Bright and with a unique Mexican character. This suite offers an enchanting aura with original chuspata decorations made by Pátzcuaro artisans, cozy furnishings and a wonderful view to the heart of the bay.",
-    size: "165 m² / 1,775 ft²",
-    guests: "2 guests",
-    bed: "King bed",
+    size: "1,775 ft² / 165 m²",
+    guests: "2 persons",
+    bed: "King-size bed",
     view: "Ocean view",
     rate: "$890",
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=RMS&rooms=1&src=24C",
     heroImage: "/images/suites/roma/1.webp",
+    featureSummary: "Plunge pool | Two level terrace | Luxury bathroom",
     highlights: [
-      "Original chuspata decorations by Pátzcuaro artisans",
-      "Wonderful view to the heart of the bay",
-      "Plunge pool on two level terrace",
-      "Authentic Mexican character",
+      "Plunge pool",
+      "Two level terrace",
+      "Luxury bathroom",
+      "Ocean view",
     ],
     details: [
       {
@@ -138,10 +140,7 @@ export const suites: Suite[] = [
       "Luxury herbal toiletries",
       "Cotton piqué bathrobes",
       "Double-sink bathrooms",
-      "Flat screen TV, DVD and SKY TV",
-      "Plunge pool",
-      "Two level terrace",
-      "Ocean view",
+      "Flat screen TV, SKY TV",
     ],
   },
   {
@@ -149,14 +148,15 @@ export const suites: Suite[] = [
     tagline: "Charming suite with Indian design and plunge pool terrace.",
     description:
       "Inspired in traditional Indian design and indigenous Mexican textile patterns, this charming and spacious suite offers great views from its terrace plunge pool. Its large ceilings and original furniture blend with the beautiful surroundings.",
-    size: "125 m² / 1,350 ft²",
-    guests: "2 guests",
+    size: "1,350 ft² / 125 m²",
+    guests: "2 persons",
     bed: "King bed",
     view: "Ocean view",
     rate: "$790",
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=CRE&rooms=1&src=24C",
     heroImage: "/images/suites/Crep/1.webp",
+    featureSummary: "Plunge pool | Two level terrace | Luxury bathroom",
     highlights: [
       "Traditional Indian design inspiration",
       "Indigenous Mexican textile patterns",
@@ -198,27 +198,23 @@ export const suites: Suite[] = [
       "Luxury herbal toiletries",
       "Cotton piqué bathrobes",
       "Double-sink bathrooms",
-      "Flat screen TV, DVD and SKY TV",
-      "Plunge pool",
-      "Two level terrace",
-      "Ocean view",
-      "Safe box",
-      "Room service",
+      "Flat screen TV, SKY TV",
     ],
   },
   {
     title: "Talismán",
-    tagline: "Quiet garden suite with peaceful ambience and ocean views.",
+    tagline: "This quiet garden suite has peaceful ambience and great ocean views.",
     description:
       "This quiet garden suite has peaceful ambience and great ocean views. Its terrace offers a covered plunge pool and a comfortable seating area with plenty of light to enjoy a romantic getaway.",
-    size: "110 m² / 1,170 ft²",
-    guests: "2 guests",
+    size: "1,170 ft² / 110 m²",
+    guests: "2 persons",
     bed: "King bed",
     view: "Ocean view",
     rate: "$690",
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=TAL&rooms=1&src=24C",
     heroImage: "/images/suites/Talis/1.webp",
+    featureSummary: "Plunge pool | Two level terrace | Luxury bathroom",
     highlights: [
       "Quiet garden suite atmosphere",
       "Covered plunge pool on terrace",
@@ -259,13 +255,7 @@ export const suites: Suite[] = [
       "Luxury herbal toiletries",
       "Cotton piqué bathrobes",
       "Double-sink bathrooms",
-      "Flat screen TV, DVD and SKY TV",
-      "Plunge pool",
-      "Covered terrace",
-      "Ocean view",
-      "In-room dining",
-      "Safe box",
-      "Ambient lighting",
+      "Flat screen TV, SKY TV",
     ],
   },
 ];
