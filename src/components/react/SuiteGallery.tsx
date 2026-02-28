@@ -337,37 +337,38 @@ export default function SuiteGallery({ images, imageMap, title, lang = "en" }: S
           </button>
 
           {/* Miniatures en bas */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-          {images.map((image, index) => {
-            const thumbImage = resolveImage(image);
-            return (
-              <div
-                key={index}
-                className={`w-16 h-16 cursor-pointer rounded overflow-hidden ${
-                  selectedImage === image ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedImage(image);
-                  setMainIndex(index);
-                  setZoom(defaultZoom);
-                  setPosition({ x: 0, y: 0 });
-                }}
-              >
-                <img
-                  src={thumbImage.src}
-                  alt={`${labels["lightbox.thumbnail"]} ${index + 1}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding={thumbImage.decoding ?? "async"}
-                  srcSet={thumbImage.srcSet}
-                  sizes="64px"
-                  width={thumbImage.width}
-                  height={thumbImage.height}
-                />
-              </div>
-            );
-          })}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-black/60 backdrop-blur-[2px]" />
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 rounded-xl border border-white/30 bg-slate-900/75 px-3 py-2 shadow-xl backdrop-blur-md">
+            {images.map((image, index) => {
+              const thumbImage = resolveImage(image);
+              return (
+                <div
+                  key={index}
+                  className={`w-16 h-16 cursor-pointer rounded overflow-hidden transition ${
+                    selectedImage === image ? "ring-2 ring-white" : "opacity-100 hover:brightness-110"
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedImage(image);
+                    setMainIndex(index);
+                    setZoom(defaultZoom);
+                    setPosition({ x: 0, y: 0 });
+                  }}
+                >
+                  <img
+                    src={thumbImage.src}
+                    alt={`${labels["lightbox.thumbnail"]} ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding={thumbImage.decoding ?? "async"}
+                    srcSet={thumbImage.srcSet}
+                    sizes="64px"
+                    width={thumbImage.width}
+                    height={thumbImage.height}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
