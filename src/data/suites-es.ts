@@ -5,7 +5,7 @@ export const suitesEs: Suite[] = [
     title: "Inspiración",
     tagline: "Suite principal con magníficas vistas a la bahía y amplios espacios de lujo.",
     description:
-      "Grandes ventanales, un toque de diseño oriental y la calidez de materiales locales dan a nuestra suite principal una atmósfera acogedora y única. Su lujoso baño cuenta con ducha semiabierta con hermosas vistas, lavabos dobles y mucho espacio y luz.",
+      "Grandes ventanales, un toque de diseño oriental y la calidez de materiales locales dan a nuestra suite principal una atmósfera acogedora y única. Su lujoso baño cuenta con ducha semiabierta con hermosas vistas, lavabos dobles y mucho espacio y luz. La terraza de dos niveles cuenta con sala de estar y una alberca privada con magníficas vistas a la bahía.",
     size: "285 m² / 3,045 ft²",
     guests: "2 huéspedes",
     bed: "Cama King",

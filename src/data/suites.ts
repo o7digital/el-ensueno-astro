@@ -29,7 +29,7 @@ export const suites: Suite[] = [
     title: "Inspiración",
     tagline: "Master suite with magnificent bay views and luxurious space.",
     description:
-      "Large windows, a touch of oriental design with the warmth of native building materials gives our master room a cozy and unique atmosphere. Its luxurious bathroom features a semi-open shower with beautiful views, double-sinks, lots of space and light.",
+      "Large windows, a touch of oriental design with the warmth of native building materials gives our master room a cozy and unique atmosphere. Its luxurious bathroom features a semi-open shower with beautiful views, double-sinks, lots of space and light. The double level terrace has a living room and a plunge pool with magnificent bay views.",
     size: "285 m² / 3,045 ft²",
     guests: "2 guests",
     bed: "King bed",
