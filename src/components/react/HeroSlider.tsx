@@ -190,7 +190,7 @@ export default function HeroSlider({ lang = 'en', images }: HeroSliderProps) {
           <h1 className="text-5xl leading-[1.1] sm:text-6xl lg:text-7xl xl:text-8xl font-display font-medium text-white">
             {slides[activeIndex].title}
           </h1>
-          <p className="max-w-xl text-base sm:text-lg text-white/90 font-light leading-relaxed">
+          <p className="max-w-xl text-[1.15rem] sm:text-[1.3rem] text-white/90 font-bold leading-relaxed">
             {slides[activeIndex].caption}
           </p>
         </div>
