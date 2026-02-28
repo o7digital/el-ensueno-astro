@@ -5,6 +5,7 @@ import EditorialIntro from "@/components/astro/EditorialIntro.astro";
 import EmbracedBySeaSlider, { seaFeatures } from "@/components/react/EmbracedBySeaSlider";
 import FusionCuisineSlider, { dishes } from "@/components/react/FusionCuisineSlider";
 import { getResponsiveImage } from "@/utils/responsive-images";
+import { HOTEL_PROFILE, absoluteUrl, buildWebSiteSchema, buildOrganizationSchema } from "@/utils/seo";
 
 const title = "Villa Boutique Hotel El Ensueño en la Playa — Zihuatanejo Ixtapa México | Sitio Oficial";
 const description =
@@ -54,32 +55,45 @@ const preloadImages = [heroImageMap[heroPaths[0]].src];
 const siteUrl = Astro.site ?? "https://www.el-ensueno.com";
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Hotel",
-  name: "El Ensueño",
-  url: siteUrl,
-  description,
-  telephone: "+52 755 554 2222",
-  image: heroPaths.slice(0, 3).map((path) => new URL(heroImageMap[path].src, siteUrl).toString()),
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Playa La Ropa S/N",
-    addressLocality: "Zihuatanejo",
-    addressRegion: "Guerrero",
-    postalCode: "40880",
-    addressCountry: "MX",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 17.6398,
-    longitude: -101.5548,
-  },
-  amenityFeature: [
-    { "@type": "LocationFeatureSpecification", name: "Albercas privadas", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Alberca infinita", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Palapa Beach Lounge", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Planes de comida disponibles", value: true },
+  "@graph": [
+    buildWebSiteSchema(siteUrl),
+    buildOrganizationSchema(siteUrl),
+    {
+      "@type": "Hotel",
+      "@id": `${absoluteUrl("/es", siteUrl)}#hotel`,
+      name: "El Ensueño",
+      url: absoluteUrl("/es", siteUrl),
+      inLanguage: "es-MX",
+      description,
+      telephone: HOTEL_PROFILE.reservationsPhone,
+      image: heroPaths.slice(0, 3).map((path) => absoluteUrl(heroImageMap[path].src, siteUrl)),
+      address: {
+        "@type": "PostalAddress",
+        ...HOTEL_PROFILE.address,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        ...HOTEL_PROFILE.geo,
+      },
+      email: HOTEL_PROFILE.email,
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "reservations",
+          telephone: HOTEL_PROFILE.reservationsPhone,
+          email: HOTEL_PROFILE.email,
+          availableLanguage: ["en", "es"],
+        },
+      ],
+      amenityFeature: [
+        { "@type": "LocationFeatureSpecification", name: "Albercas privadas", value: true },
+        { "@type": "LocationFeatureSpecification", name: "Alberca infinita", value: true },
+        { "@type": "LocationFeatureSpecification", name: "Palapa Beach Lounge", value: true },
+        { "@type": "LocationFeatureSpecification", name: "Planes de comida disponibles", value: true },
+      ],
+      sameAs: [HOTEL_PROFILE.tripAdvisorUrl],
+    },
   ],
-  sameAs: ["https://www.tripadvisor.com/ShowUserReviews-g150795-d152932-r121555894-La_Casa_Que_Canta-Zihuatanejo_Pacific_Coast.html"],
 };
 ---
 

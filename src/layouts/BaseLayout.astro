@@ -12,6 +12,8 @@ interface Props {
   preloadImages?: string[];
   structuredData?: Record<string, unknown>;
   currentLang?: string;
+  noindex?: boolean;
+  showHeader?: boolean;
 }
 
 const {
@@ -21,6 +23,8 @@ const {
   preloadImages = [],
   structuredData,
   currentLang = "en",
+  noindex = false,
+  showHeader = true,
 } = Astro.props as Props;
 
 const suiteImageMap = Object.fromEntries(
@@ -54,6 +58,8 @@ const alternateLocale = currentLang === "es" ? "en_US" : "es_MX";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#0f1411" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -93,7 +99,7 @@ const alternateLocale = currentLang === "es" ? "en_US" : "es_MX";
     )}
   </head>
   <body class="min-h-screen bg-sand text-ink">
-    <Header client:load currentLang={currentLang} suiteImages={suiteImageMap} />
+    {showHeader && <Header client:load currentLang={currentLang} suiteImages={suiteImageMap} />}
     <main id="contenu" class="relative isolate overflow-hidden">
       <slot />
     </main>

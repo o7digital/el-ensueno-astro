@@ -3,11 +3,47 @@ import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import heroImage from "@/assets/images/hero/sous-hero/luxury-beach-villa-boutique-hotel-zihuatanejo-ixtapa-mexico-8.webp";
 import mapImage from "@/assets/images/hero/contact/el-ensueno-map.webp";
+import { HOTEL_PROFILE, absoluteUrl } from "@/utils/seo";
 
 const title = "Contact | El Ensueño";
 const description =
   "Plan your stay at El Ensueño. Reach our reservations team for suites, rates, and bespoke experiences.";
 const preloadImages = [heroImage.src];
+const siteUrl = Astro.site;
+const structuredData = {
+  "@type": "ContactPage",
+  name: title,
+  description,
+  inLanguage: "en-US",
+  url: absoluteUrl("/contact/", siteUrl),
+  mainEntity: {
+    "@type": "LodgingBusiness",
+    "@id": `${absoluteUrl("/", siteUrl)}#hotel`,
+    name: HOTEL_PROFILE.name,
+    telephone: HOTEL_PROFILE.reservationsPhone,
+    email: HOTEL_PROFILE.email,
+    address: {
+      "@type": "PostalAddress",
+      ...HOTEL_PROFILE.address,
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "reservations",
+        telephone: HOTEL_PROFILE.reservationsPhone,
+        email: HOTEL_PROFILE.email,
+        availableLanguage: ["en", "es"],
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        telephone: HOTEL_PROFILE.salesPhone,
+        email: HOTEL_PROFILE.email,
+        availableLanguage: ["en", "es"],
+      },
+    ],
+  },
+};
 ---
 
 <BaseLayout
@@ -15,7 +51,9 @@ const preloadImages = [heroImage.src];
   description={description}
   ogImage={heroImage.src}
   preloadImages={preloadImages}
+  structuredData={structuredData}
   currentLang="en"
+  showHeader={false}
 >
   <div class="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
     <header class="container mx-auto flex items-center justify-between px-6 py-4 sm:px-10 sm:py-5">

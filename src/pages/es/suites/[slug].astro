@@ -4,6 +4,7 @@ import { suitesEs } from "@/data/suites-es";
 import { slugify } from "@/utils/slugify";
 import SuiteGallery from "@/components/react/SuiteGallery";
 import { getResponsiveImage } from "@/utils/responsive-images";
+import { HOTEL_PROFILE, absoluteUrl } from "@/utils/seo";
 
 
 export function getStaticPaths() {
@@ -39,6 +40,77 @@ const galleryImageMap = Object.fromEntries(
   ),
 );
 const heroImage = galleryImageMap[suite.heroImage];
+const slug = Astro.params.slug ?? slugify(suite.title);
+const siteUrl = Astro.site;
+const suiteUrl = absoluteUrl(`/es/suites/${slug}/`, siteUrl);
+const homeUrl = absoluteUrl("/es/", siteUrl);
+const roomImages = uniqueImages
+  .slice(0, 8)
+  .map((path) => absoluteUrl(galleryImageMap[path].src, siteUrl));
+const guestCount = Number.parseInt(suite.guests.match(/\d+/)?.[0] ?? "2", 10);
+const rateNumber = Number.parseInt(suite.rate.replace(/[^\d]/g, ""), 10);
+const structuredData = [
+  {
+    "@type": "HotelRoom",
+    "@id": `${suiteUrl}#room`,
+    name: `Suite ${displayTitle}`,
+    description,
+    url: suiteUrl,
+    inLanguage: "es-MX",
+    image: roomImages,
+    bed: suite.bed,
+    occupancy: {
+      "@type": "QuantitativeValue",
+      value: guestCount,
+      unitText: "huéspedes",
+    },
+    amenityFeature: suite.amenities.map((amenity) => ({
+      "@type": "LocationFeatureSpecification",
+      name: amenity,
+      value: true,
+    })),
+    containedInPlace: {
+      "@type": "LodgingBusiness",
+      "@id": `${homeUrl}#organization`,
+      name: HOTEL_PROFILE.name,
+      url: homeUrl,
+    },
+    ...(Number.isFinite(rateNumber) && rateNumber > 0
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: rateNumber,
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            url: bookingUrl,
+          },
+        }
+      : {}),
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: homeUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Suites",
+        item: `${homeUrl}#suites`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: displayTitle,
+        item: suiteUrl,
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
@@ -46,6 +118,7 @@ const heroImage = galleryImageMap[suite.heroImage];
   description={description}
   ogImage={heroImage.src}
   preloadImages={[heroImage.src]}
+  structuredData={structuredData}
   currentLang="es"
 >
   <!-- Hero Section Full Width -->
