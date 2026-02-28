@@ -120,10 +120,19 @@ const copy = {
           <h3 class="text-lg font-semibold text-dusk">{copy.dealsTitle}</h3>
           <p class="text-sm text-ink/70">{copy.dealsSubtitle}</p>
           <div class="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <form class="flex flex-1 gap-2">
+            <form
+              class="flex flex-1 gap-2"
+              action="https://formspree.io/f/xpqjnkqk"
+              method="POST"
+            >
+              <input type="hidden" name="language" value={isSpanish ? "es" : "en"} />
+              <input type="hidden" name="source" value="website-newsletter" />
               <input
                 type="email"
+                name="email"
                 placeholder={copy.emailPlaceholder}
+                required
+                autocomplete="email"
                 class="flex-1 px-4 py-2 rounded-full border border-dusk/20 focus:outline-none focus:border-dusk/40 bg-white"
               />
               <button

@@ -172,7 +172,14 @@ const structuredData = {
             </p>
           </div>
 
-          <form id="contact-form" class="space-y-8">
+          <form
+            id="contact-form"
+            class="space-y-8"
+            action="https://formspree.io/f/xpqjnkqk"
+            method="POST"
+          >
+            <input type="hidden" name="language" value="en" />
+            <input type="hidden" name="source" value="website-contact-page" />
             <div class="grid gap-8 sm:grid-cols-2">
               <input
                 class="w-full border-b border-ink/30 bg-transparent py-4 text-base text-ink placeholder:text-ink/50 focus:border-ink focus:outline-none"

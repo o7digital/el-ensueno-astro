@@ -93,9 +93,10 @@ const alternateLocale = currentLang === "es" ? "en_US" : "es_MX";
     <meta name="twitter:image" content={ogImageUrl} />
 
     {structuredData && (
-      <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </script>
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(structuredData)}
+      />
     )}
   </head>
   <body class="min-h-screen bg-sand text-ink">
