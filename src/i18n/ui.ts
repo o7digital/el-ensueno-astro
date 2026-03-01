@@ -83,6 +83,9 @@ export const ui = {
     'suite.amenities': 'Amenities',
     'suite.gallery': 'Gallery',
     'suite.viewGallery': 'View gallery',
+    'suite.viewFloorPlan': 'View floor plan',
+    'suite.floorPlanTitle': 'Floor plan',
+    'suite.floorPlanClose': 'Close floor plan',
   },
   es: {
     'nav.home': 'Inicio',
@@ -161,6 +164,9 @@ export const ui = {
     'suite.amenities': 'Amenidades',
     'suite.gallery': 'Galería',
     'suite.viewGallery': 'Ver galería',
+    'suite.viewFloorPlan': 'Ver plano',
+    'suite.floorPlanTitle': 'Plano de la suite',
+    'suite.floorPlanClose': 'Cerrar plano',
   },
 } as const;
 

@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { suites } from "@/data/suites";
 import { slugify } from "@/utils/slugify";
 import SuiteGallery from "@/components/react/SuiteGallery";
+import FloorPlanModal from "@/components/react/FloorPlanModal";
 import { getResponsiveImage } from "@/utils/responsive-images";
 import { HOTEL_PROFILE, absoluteUrl } from "@/utils/seo";
 
@@ -47,6 +48,7 @@ const homeUrl = absoluteUrl("/", siteUrl);
 const roomImages = uniqueImages
   .slice(0, 8)
   .map((path) => absoluteUrl(galleryImageMap[path].src, siteUrl));
+const floorPlanImage = suite.floorPlanImage;
 const guestCount = Number.parseInt(suite.guests.match(/\d+/)?.[0] ?? "2", 10);
 const rateNumber = Number.parseInt(suite.rate.replace(/[^\d]/g, ""), 10);
 const structuredData = [
@@ -176,6 +178,15 @@ const structuredData = [
 
           {/* Description principale */}
           <p class="text-base text-ink/70 leading-relaxed mb-10">{suite.description}</p>
+          {floorPlanImage && (
+            <div class="mb-10">
+              <FloorPlanModal
+                client:idle
+                title={displayTitle}
+                image={floorPlanImage}
+              />
+            </div>
+          )}
           
           {/* Amenities */}
           <div class="mb-10">

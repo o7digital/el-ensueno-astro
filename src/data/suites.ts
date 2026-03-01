@@ -22,6 +22,7 @@ export type Suite = {
   details: SuiteDetail[];
   gallery: string[];
   amenities: string[];
+  floorPlanImage?: string;
 };
 
 export const suites: Suite[] = [
@@ -38,6 +39,7 @@ export const suites: Suite[] = [
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=SNI&rooms=1&src=24C",
     heroImage: "/images/suites/Insp/1.webp",
+    floorPlanImage: "/ensueno-floor-plan/suite-1.jpg",
     highlights: [
       "Two level terrace with living room",
       "Plunge pool with magnificent bay views",
@@ -98,6 +100,7 @@ export const suites: Suite[] = [
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=RMS&rooms=1&src=24C",
     heroImage: "/images/suites/roma/1.webp",
+    floorPlanImage: "/ensueno-floor-plan/roman.jpg",
     featureSummary: "Plunge pool | Two level terrace | Luxury bathroom",
     highlights: [
       "Plunge pool",
@@ -156,6 +159,7 @@ export const suites: Suite[] = [
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=CRE&rooms=1&src=24C",
     heroImage: "/images/suites/Crep/1.webp",
+    floorPlanImage: "/ensueno-floor-plan/crep.jpg",
     featureSummary: "Plunge pool | Two level terrace | Luxury bathroom",
     highlights: [
       "Traditional Indian design inspiration",
@@ -214,6 +218,7 @@ export const suites: Suite[] = [
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=TAL&rooms=1&src=24C",
     heroImage: "/images/suites/Talis/1.webp",
+    floorPlanImage: "/ensueno-floor-plan/tali.jpg",
     featureSummary: "Plunge pool | Two level terrace | Luxury bathroom",
     highlights: [
       "Quiet garden suite atmosphere",

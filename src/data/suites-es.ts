@@ -14,6 +14,7 @@ export const suitesEs: Suite[] = [
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=SNI&rooms=1&src=24C",
     heroImage: "/images/suites/Insp/1.webp",
+    floorPlanImage: "/ensueno-floor-plan/suite-1.jpg",
     highlights: [
       "Terraza de dos niveles con sala de estar",
       "Alberca privada con magníficas vistas a la bahía",
@@ -74,6 +75,7 @@ export const suitesEs: Suite[] = [
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=RMS&rooms=1&src=24C",
     heroImage: "/images/suites/roma/1.webp",
+    floorPlanImage: "/ensueno-floor-plan/roman.jpg",
     featureSummary: "Plunge pool | Terraza privada | Baño de lujo",
     highlights: [
       "Plunge pool",
@@ -132,6 +134,7 @@ export const suitesEs: Suite[] = [
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=en-US&productcurrency=USD&room=CRE&rooms=1&src=24C",
     heroImage: "/images/suites/Crep/1.webp",
+    floorPlanImage: "/ensueno-floor-plan/crep.jpg",
     featureSummary: "Plunge pool | Terraza privada | Baño de lujo",
     highlights: [
       "Inspiración en diseño tradicional indio",
@@ -190,6 +193,7 @@ export const suitesEs: Suite[] = [
     bookingUrl:
       "https://be.synxis.com/?adult=1&arrive=2025-12-26&chain=22402&child=0&currency=USD&depart=2025-12-27&hotel=78821&level=hotel&locale=es-MX&productcurrency=USD&room=TAL&rooms=1&src=24C",
     heroImage: "/images/suites/Talis/1.webp",
+    floorPlanImage: "/ensueno-floor-plan/tali.jpg",
     featureSummary: "Plunge pool | Terraza privada | Baño de lujo",
     highlights: [
       "Ambiente tranquilo de suite con jardín",
